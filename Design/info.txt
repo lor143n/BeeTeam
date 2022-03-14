@@ -1,0 +1,18 @@
+LINGUAGGI E LIBRERIE DA USARE
+
+Ogni progetto dovrà usare i seguenti linguaggi,
+librerie e framework:
+	– HTML, Bootstrap, CSS, JavaScript, e JQuery e/o
+	Vue.js sul lato client
+	– PHP (o altri linguaggi di scripting lato server) e un
+	database relazionale sul lato server
+
+SCHEDULE
+
+1) 1 Aprile: Finire layout HTML di base e studiare le librerie richieste.
+2) 30 Aprile: Finire il progetto.
+
+PROGETTI ESEMPIO
+
+https://github.com/LeonardoEmili/SpendyBudget
+https://github.com/andrea-gasparini/progetto-linguaggi-tecnologie-web
