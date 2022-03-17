@@ -37,3 +37,15 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: 200px;
+  grid-gap: 10px;
+}
+
+.box {
+  background-color: #ff0000;
+}
+
