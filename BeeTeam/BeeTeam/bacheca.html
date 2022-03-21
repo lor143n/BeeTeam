@@ -14,75 +14,69 @@
                 <h1>Bacheca</h1>
             </div>
             <div class="box"> 
-                <div class="mb-3"> </div>
-                <table width="100%" >
-                    <tr>
-                        <td>
-                            <div class="mb-5"></div>
-                            <h2> Crea una nuova attività </h2>
-                            <br>
-                            <form action="" method="post" name="creazioneattivita">
-                            <h3>Numero di partecipanti</h3>
-                            <input type="number" class="border-1 rounded" value="Numero di persone" id="numPers" required style="height:25px;">
-                            <div class="mb-2"></div>
-                            <h3>Regione</h3>
-                            <select size="1" class="border-1 rounded" cols="21" name="Regioni" id="rg" style="height:25px; width: 190px;">
-                            <option selected value="   ">
-                            <option value="Abruzzo"> Abruzzo
-                            <option value="Basilicata"> Basilicata
-                            <option value="Calabria"> Calabria
-                                <option value="Campania"> Campania
-                                    <option value="Emilia-Romagna"> Emilia-Romagna
-                                        <option value="Friuli Venezia Giulia"> Friuli Venezia Giulia
-                                            <option value="Lazio"> Lazio
-                                                <option value="Liguria"> Liguria
-                                                    <option value="Lombardia"> Lombardia
-                                                        <option value="Marche"> Marche
-                                                            <option value="Molise"> Molise
-                                                                <option value="Piemonte"> Piemonte
-                                                                    <option value="Puglia"> Puglia
-                                                                        <option value="Sardegna"> Sardegna
-                                                                            <option value="Sicilia"> Sicilia
-                                                                                <option value="Toscana"> Toscana
-                                                                                    <option value="Trentino-Alto Adige"> Trentino-Alto Adige
-                                                                                        <option value="Umbria"> Umbria
-                                                                                            <option value="Valle D'Aosta"> Valle D'Aosta
-                                                                                                <option value="Veneto"> Veneto
+                <div class="row" style="align-items: center;">
+                    <h1>  Create a project!  </h1>
+                </div>
+                <div class="mb-4"></div>
+                <div class="row" style="align-items: center;">
+                    <div class="col-md-6"> 
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                              <option selected> Select </option>
+                              <option value="1"> Film </option>
+                              <option value="2"> Videogame </option>
+                              <option value="3"> Book </option>
+                              <option value="4"> Journey </option>
+                              <option value="5">Five</option>
                             </select>
-                            <div class="mb-2"></div>
-                            <h3>Citta</h3>
-                            <input type="text" class="border-1 rounded" required style="height:25px;" id="citta" required>
-                            <div class="mb-2"></div>
-                            <h3>Genere</h3>
-                            <input type="text" class="border-1 rounded" list="listagenere" style="height:25px;" required>
-                            <datalist id="listagenere">
-                            <option value="Progetto">Progetto</option>
-                            <option value="Attività all'aperto">Attività all'aperto</option>
-                            <option value="Uscita Serale">Uscita serale</option>
-                            </datalist>
-                            <div class="mb-2"></div>
-                            <h3>Descrizione</h3>
-                            <input type="textarea" class="border-1 rounded" style="height:90px; width: 190px; font-size: small; text-align: center;" required placeholder="Inserire descrizione" id="descrizione">
-                            <div class="mb-2"></div>
-                            <input type="checkbox"  value="Anonimo" id="anon"> Anonimo 
-                            <div class="mb-4"></div>
-                            <button type="submit" class="btn btn-dark" style="font-size: small;" id="c.a" value="Crea"> Invio </button>
-                        </form>
-                        </td>
-                    </tr>
-                </table>
+                            <label for="floatingSelect">Project type</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6"> 
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                              <option selected> Select </option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                              <option value="4">Four</option>
+                              <option value="5">Five</option>
+                            </select>
+                            <label for="floatingSelect">#Members</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-2"></div>
+                <div class="row" style="align-items: center;">
+                    <div class="col-md-6"> 
+                       
+                    </div>    
+                </div>
+                <div class="mb-4"></div>
+                <div class="row" style="align-items:center;">
+                    <label for="description-area" style="text-align: left;"> Description </label>
+                    <div class="mb-2"></div>
+                    <textarea id="description-area" class="md-textarea form-control" rows="4" id="description-area"></textarea> 
+                </div>
+                <div class="mb-4"></div>
+                <div class="row" style="align-items: center;">
+                    <div class="col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-light" style="font-size: small;" id="c.a" value="Crea"> Create </button> 
+                    </div>
+                </div>
             </div>
+
             <div class="box">
-                <h1>EMPTY</h1>
+                <h3>EMPTY</h3>
             </div>
+
             <div class="box-leftside">
-                <table width = 100%>
-                    <tr>
-                        <td>
-                            <h1 style="background-color: aliceblue;">PROGETTI QUI</h1>
-                        </td>
-                    </tr>
-                </table>
+                ciao ale :)
             </div>
         </div>
     <a href="profilo.html"> <p style="margin-right: 20px;">Profilo</p> </a>

@@ -24,10 +24,12 @@ body {
   
 .box {
     background-color: #e6d603;
+    padding: 10%;
 }
   
 .box-leftside {
     grid-column: 2;
     grid-row: 2/4;
     background-color: #e603e6;
+    padding: 2%;
 }
