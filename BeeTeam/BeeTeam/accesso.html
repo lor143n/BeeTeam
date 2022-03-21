@@ -6,6 +6,8 @@
         <link rel=stylesheet href="bootstrap/css/bootstrap.css">
         <link rel=stylesheet href="specifiche.css" type="text/css">
         <link rel=stylesheet href="signin.css">
+        <script type="application/javascript" src="js/functions.js"></script>
+    
         <title>Accesso</title>
     </head>
     <body class="text-center">
@@ -17,12 +19,12 @@
                 <tr>
                     <td>
                         <h2> Accesso </h2>
-                        <form action="" method="post" id="accesso">
+                        <form action="" method="post" id="accesso" onsubmit="Accedi();">
                             <input type="email" class="form-control;text-center; border-1 rounded" name="email" placeholder="Inserire email" style="width: 40%; text-align: center; " required autofocus>
                             <div class="mb-1"></div>
                             <input type="password" class="form-control;text-center; border-1 rounded" name="password" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
                             <div class="mb-2"></div>
-                            <button type="submit" class="btn btn-light" name="submit"onclick="Accedi()" style="font-size: small;"> Accedi </button>
+                            <button type="submit" class="btn btn-light" name="submit"  style="font-size: small;"> Accedi </button>
 
                         </form>
                     </td>
@@ -33,7 +35,7 @@
                     <tr>
                         <td>
                             <h2> Registrazione </h2>
-                            <form action="" method="post" id="registrazione">
+                            <form action="" method="post" id="registrazione" onsubmit="Registrazione()">
                                 <h3>Nome</h3>
                                 <input type="text" class="border-1 rounded" id="nome" required style="width: 40%;text-align: center; "> 
                                 <div class="mb-1"></div>
@@ -49,7 +51,7 @@
                                 <h3>Password</h3>
                                 <input type="password" class="form-control;text-center; border-1 rounded" name="password" style="width: 40%;text-align: center;" required>
                                 <div class="mb-1"></div>
-                                <button type="submit" class="btn btn-light" name="submit" onclick="Registrati()" style="font-size:small;"> Registrati </button>
+                                <button type="submit" class="btn btn-light" name="submit"  style="font-size:small;"> Registrati </button>
                             </form>
                         </td>
                     </tr>
