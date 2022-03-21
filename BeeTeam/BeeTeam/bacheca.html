@@ -5,27 +5,31 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
         <link rel=stylesheet href="specifiche.css" type="text/css">
+        <link rel=stylesheet href="bacheca.css">
         <title>Bacheca</title>
     </head>
     <body class="text-center">
-       <div class="box"> 
-           <div class="mb-3"> </div>
-           <table width="100%" >
-               <tr>
-                   <td width="0.8%"></td>
-                   <td width="30%" style="text-align:left;">
-                       <div class="mb-5"></div>
-                       <h2 style="text-align: left;"> Crea una nuova attività </h2>
-                       <br>
-                       <form action="" method="post" name="creazioneattivita">
-                       <h3>Numero di partecipanti</h3>
-                       <input type="number" class="border-1 rounded" value="Numero di persone" id="numPers" required style="height:25px;">
-                       <div class="mb-2"></div>
-                       <h3>Regione</h3>
-                       <select size="1" class="border-1 rounded" cols="21" name="Regioni" id="rg" style="height:25px; width: 190px;">
-                       <option selected value="   ">
-                       <option value="Abruzzo"> Abruzzo
-                        <option value="Basilicata"> Basilicata
+        <div class="grid-container-bacheca">
+            <div class="box-header">
+                <h1>Bacheca</h1>
+            </div>
+            <div class="box"> 
+                <div class="mb-3"> </div>
+                <table width="100%" >
+                    <tr>
+                        <td>
+                            <div class="mb-5"></div>
+                            <h2> Crea una nuova attività </h2>
+                            <br>
+                            <form action="" method="post" name="creazioneattivita">
+                            <h3>Numero di partecipanti</h3>
+                            <input type="number" class="border-1 rounded" value="Numero di persone" id="numPers" required style="height:25px;">
+                            <div class="mb-2"></div>
+                            <h3>Regione</h3>
+                            <select size="1" class="border-1 rounded" cols="21" name="Regioni" id="rg" style="height:25px; width: 190px;">
+                            <option selected value="   ">
+                            <option value="Abruzzo"> Abruzzo
+                            <option value="Basilicata"> Basilicata
                             <option value="Calabria"> Calabria
                                 <option value="Campania"> Campania
                                     <option value="Emilia-Romagna"> Emilia-Romagna
@@ -44,36 +48,43 @@
                                                                                         <option value="Umbria"> Umbria
                                                                                             <option value="Valle D'Aosta"> Valle D'Aosta
                                                                                                 <option value="Veneto"> Veneto
-                       </select>
-                       <div class="mb-2"></div>
-                       <h3>Citta</h3>
-                       <input type="text" class="border-1 rounded" required style="height:25px;" id="citta" required>
-                       <div class="mb-2"></div>
-                       <h3>Genere</h3>
-                       <input type="text" class="border-1 rounded" list="listagenere" style="height:25px;" required>
-                       <datalist id="listagenere">
-                           <option value="Progetto">Progetto</option>
-                           <option value="Attività all'aperto">Attività all'aperto</option>
-                           <option value="Uscita Serale">Uscita serale</option>
-                       </datalist>
-                       <div class="mb-2"></div>
-                       <h3>Descrizione</h3>
-                       <input type="textarea" class="border-1 rounded" style="height:90px; width: 190px; font-size: small; text-align: center;" required placeholder="Inserire descrizione" id="descrizione">
-                       <div class="mb-2"></div>
-                       <input type="checkbox"  value="Anonimo" id="anon"> Anonimo 
-                       <div class="mb-4"></div>
-                       <button type="submit" class="btn btn-dark" style="font-size: small;" id="c.a" value="Crea"> Invio </button>
-                    </form>
-                   </td>
-                   <td>
-                       Seconda
-                   </td>
-               </tr>
-
-           </table>
-
+                            </select>
+                            <div class="mb-2"></div>
+                            <h3>Citta</h3>
+                            <input type="text" class="border-1 rounded" required style="height:25px;" id="citta" required>
+                            <div class="mb-2"></div>
+                            <h3>Genere</h3>
+                            <input type="text" class="border-1 rounded" list="listagenere" style="height:25px;" required>
+                            <datalist id="listagenere">
+                            <option value="Progetto">Progetto</option>
+                            <option value="Attività all'aperto">Attività all'aperto</option>
+                            <option value="Uscita Serale">Uscita serale</option>
+                            </datalist>
+                            <div class="mb-2"></div>
+                            <h3>Descrizione</h3>
+                            <input type="textarea" class="border-1 rounded" style="height:90px; width: 190px; font-size: small; text-align: center;" required placeholder="Inserire descrizione" id="descrizione">
+                            <div class="mb-2"></div>
+                            <input type="checkbox"  value="Anonimo" id="anon"> Anonimo 
+                            <div class="mb-4"></div>
+                            <button type="submit" class="btn btn-dark" style="font-size: small;" id="c.a" value="Crea"> Invio </button>
+                        </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="box">
+                <h1>EMPTY</h1>
+            </div>
+            <div class="box-leftside">
+                <table width = 100%>
+                    <tr>
+                        <td>
+                            <h1 style="background-color: aliceblue;">PROGETTI QUI</h1>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-       <br><br><br>
     <a href="profilo.html"> <p style="margin-right: 20px;">Profilo</p> </a>
     </body>
 </html>
