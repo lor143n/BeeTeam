@@ -16,3 +16,7 @@ PROGETTI ESEMPIO
 
 https://github.com/LeonardoEmili/SpendyBudget
 https://github.com/andrea-gasparini/progetto-linguaggi-tecnologie-web
+
+Main colors:
+
+Nero e arancione
