@@ -7,6 +7,8 @@
         <link rel=stylesheet href="specifiche.css" type="text/css">
         <link rel=stylesheet href="signin.css">
         <script type="application/javascript" src="js/functions.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+        <script src="./js/functions.js"></script>
         
         <title>Accesso</title>
     </head>
@@ -19,7 +21,7 @@
                 <tr>
                     <td>
                         <h2> Accesso </h2>
-                        <form action="" method="post" id="BeeAccess" onsubmit="Accedi();">
+                        <form action="" method="post" id="Bee" onsubmit="Accedi();">
                             <input type="email" class="form-control;text-center; border-1 rounded" name="email" id='emailacc' placeholder="Inserire email" style="width: 40%; text-align: center; " required autofocus>
                             <div class="mb-1"></div>
                             <input type="password" class="form-control;text-center; border-1 rounded" name="password" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
@@ -35,7 +37,7 @@
                     <tr>
                         <td>
                             <h2> Registrazione </h2>
-                            <form action="" method="post" id="registrazione" onsubmit="Registrazione();">
+                            <form action="" id="BeeReg">
                                 <h3>Nome</h3>
                                 <input type="text" class="border-1 rounded" id="nreg" required style="width: 40%;text-align: center; "> 
                                 <div class="mb-1"></div>
@@ -51,10 +53,9 @@
                                 <h3>Password</h3>
                                 <input type="password" class="form-control;text-center; border-1 rounded" name="password" id="preg" style="width: 40%;text-align: center;" required>
                                 <div class="mb-1"></div>
-                                <button type="submit" class="btn btn-light" id="submit"  style="font-size:small;"> Registrati </button>
+                                <button type="submit" class="btn btn-light" id="sub"  style="font-size:small;"> Registrati </button>
                             </form>
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-                            <script src="./js/functions.js"></script>
+                           
                         </td>
                     </tr>
                 </table>
