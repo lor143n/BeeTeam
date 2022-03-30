@@ -8,8 +8,6 @@
         <link rel=stylesheet href="signin.css">
         <link rel=stylesheet href="./js/functions.js">
         
-        <!--script src="./js/functions.mjs"></script-->
-        
         <title>Accesso</title>
     </head>
     <body class="text-center">
@@ -122,7 +120,7 @@
                      last_login : dt,
                  })
                  alert("User Loged in!");
-                 openProfile(user.uid);
+                 openProfile(user.nome,user.cognome,user.email);
     // ...
            })
            .catch((error) => {
@@ -138,9 +136,6 @@
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
            const uid = user.uid;
-           sessionStorage.setItem('user',uid);
-           alert("Dato "+sessionStorage.getItem('user'));
-           
           } else {
     // User is signed out
     // ...
@@ -149,7 +144,7 @@
       });
      
       //CAPIRE DOVE METTERE 
-       /*  logout.addEventListener('click',(e)=>{
+       
            signOut(auth).then(() => {
               // Sign-out successful.
               alert("User Loged out!")
@@ -159,9 +154,7 @@
              const errorMessage = error.message;
           alert(errorMessage);
            });
-        });
-*/
-
+        
           </script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
           <script src="./js/functions.js"></script>

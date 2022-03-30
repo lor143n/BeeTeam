@@ -35,3 +35,10 @@ body {
 .box-post{
     background-color: blueviolet;
 }
+[name="hidden"]{
+    height: 25px;
+    text-align: center;
+    padding-left: 5px;
+    text-size-adjust: 20px;
+    
+}
