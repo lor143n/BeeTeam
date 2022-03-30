@@ -22,14 +22,14 @@
                 <tr>
                     <td>
                         <h2> Accesso </h2>
-                        <form action="" method="post" id="Bee" onsubmit="Accedi();">
+                        <!--form action="" method="post" id="Bee" onsubmit="Accedi();"-->
                             <input type="email" class="form-control;text-center; border-1 rounded" name="email" id='emailacc' placeholder="Inserire email" style="width: 40%; text-align: center; " required autofocus>
                             <div class="mb-1"></div>
-                            <input type="password" class="form-control;text-center; border-1 rounded" name="password" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
+                            <input type="password" class="form-control;text-center; border-1 rounded" id="pacc" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
                             <div class="mb-2"></div>
-                            <button type="submit" class="btn btn-light" name="submit"  style="font-size: small;"> Accedi </button>
+                            <button type="submit" id="login" class="btn btn-light" name="submit"  style="font-size: small;"> Accedi </button>
 
-                        </form>
+                        <!--/form-->
                     </td>
                 </tr>
             </table></div>
@@ -54,8 +54,6 @@
                                 <input type="password" class="form-control;text-center; border-1 rounded" name="password" id="preg" style="width: 40%;text-align: center;" required>
                                 <div class="mb-1"></div>
                                 <button type="submit" class="btn btn-light" id="sub"  style="font-size:small;"> Registrati </button>
-                    
-                           
                         </td>
                     </tr>
                 </table>
@@ -65,8 +63,8 @@
         <script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-            import { getDatabase } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+            import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
 
             const firebaseConfig = {
               apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -95,8 +93,12 @@
 
             createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
             .then((userCredential) => {
-                 // Signed in 
+                 
                  const user = userCredential.user;
+                 set(ref(database,'users/' + user.uid),{
+                     email : email,
+                     password : password
+                 });
                  alert("user create");
    
   })
@@ -106,7 +108,58 @@
                  alert(errorMessage);
            });
            });
+
+           login.addEventListener('click', (e) => {
+
+            var email=document.getElementById("emailacc").value;
+            var password=document.getElementById("pacc").value;
+
+             signInWithEmailAndPassword(auth, email, password)
+             .then((userCredential) => {
+   
+             const user = userCredential.user;
+             const dt= new Date();
+             update(ref(database,'users/' + user.uid),{
+                     last_login : dt,
+                 })
+                 alert("User Loged in!");
+                
+    // ...
+           })
+           .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorMessage);
+           });
+
+           });
+
+           onAuthStateChanged(auth, (user) => {
+           if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+           const uid = user.uid;
+    // ...
+          } else {
+    // User is signed out
+    // ...
+         }
+      });
      
+      //CAPIRE DOVE METTERE 
+       /*  logout.addEventListener('click',(e)=>{
+           signOut(auth).then(() => {
+              // Sign-out successful.
+              alert("User Loged out!")
+           }).catch((error) => {
+             // An error happened.
+             const errorCode = error.code;
+             const errorMessage = error.message;
+          alert(errorMessage);
+           });
+        });
+*/
+
           </script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     

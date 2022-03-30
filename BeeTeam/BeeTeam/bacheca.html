@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-6"> 
                         <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
                               <option selected> Select </option>
                               <option value="1">One</option>
                               <option value="2">Two</option>
@@ -66,7 +66,7 @@
                         </label>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-light" style="font-size: small;" id="c.a" value="Crea"> Create </button> 
+                        <button type="submit" class="btn btn-light" style="font-size: small;" id="crea" value="Crea"> Create </button> 
                     </div>
                 </div>
             </div>
@@ -80,5 +80,60 @@
             </div>
         </div>
     <a href="profilo.html"> <p style="margin-right: 20px;">Profilo</p> </a>
+
+    <script type="module">
+         // Import the functions you need from the SDKs you need
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+
+
+            const firebaseConfig = {
+              apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
+              authDomain: "beeteam-2a5f7.firebaseapp.com",
+              databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
+              projectId: "beeteam-2a5f7",
+              storageBucket: "beeteam-2a5f7.appspot.com",
+              messagingSenderId: "223479016271",
+              appId: "1:223479016271:web:383e9319470cfaf4bd733a",
+              measurementId: "G-04ERX78GQJ"
+            };
+          
+            // Initialize Firebase
+           const app= initializeApp(firebaseConfig);
+           const database = getDatabase();
+           
+
+
+           crea.addEventListener('click',(e) =>{
+
+            var select=document.getElementById("floatingSelect").value;
+            var description=document.getElementById("description-area").value;
+            var numero=document.getElementById("floatingSelect").value;
+            var anonymous=document.getElementById("inlineRadio1").value;
+            var codice= localStorage.codice+1;
+
+            function writeUserData(select,numero,description,anonymous,codice){
+
+            set(ref(database,'users'+1) ,{
+
+            });
+        }
+
+            createNewAttivity(select,numero,description,anonymous)
+            .then((Attivity) => {
+                 // Signed in 
+                 const attivity = Attivity.attivity;
+                 alert("attivity create");
+   
+  })
+            .catch((error) => {
+                 const errorCode = error.code;
+                 const errorMessage = error.message;
+                 alert(errorMessage);
+           });
+           });
+    </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     </body>
 </html>
