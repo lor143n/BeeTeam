@@ -6,7 +6,7 @@
         <link rel=stylesheet href="bootstrap/css/bootstrap.css">
         <link rel=stylesheet href="specifiche.css" type="text/css">
         <link rel=stylesheet href="signin.css">
-        <link rel=stylesheet href="./js/functions.js">
+        <link rel=stylesheet href="main.js">
         
         <title>Accesso</title>
     </head>
@@ -120,7 +120,7 @@
                      last_login : dt,
                  })
                  alert("User Loged in!");
-                 openProfile(user.nome,user.cognome,user.email);
+                 
     // ...
            })
            .catch((error) => {
@@ -136,6 +136,7 @@
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
            const uid = user.uid;
+           
           } else {
     // User is signed out
     // ...
@@ -157,6 +158,6 @@
         
           </script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-          <script src="./js/functions.js"></script>
+          <script src="main.js"></script>
     </body>
 </html>
