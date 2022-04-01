@@ -14,7 +14,7 @@
         
         <div class="grid-container-accesso">
             <div class="box-header"> 
-                <h2> Descrizione </h2>
+                <h2 id="ds"> Descrizione </h2>
             </div>
             <div class="box"><table width="100%">
                 <tr>
@@ -92,9 +92,12 @@
             .then((userCredential) => {
                  
                  const user = userCredential.user;
-                 set(ref(database,'users/' + user.uid),{
+                 set(ref(database,'dateusers/' + user.uid),{
                      email : email,
-                     password : password
+                     nome: nome,
+                     cognome:cognome,
+                     telefono:numero,
+                     imageURL: "nofoto.jpg"
                  });
                  alert("user create");
    
@@ -121,7 +124,6 @@
                  })
                  alert("User Loged in!");
                  
-    // ...
            })
            .catch((error) => {
           const errorCode = error.code;
@@ -133,13 +135,9 @@
 
            onAuthStateChanged(auth, (user) => {
            if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-           const uid = user.uid;
-           
+   
+          openProfile(user.uid);
           } else {
-    // User is signed out
-    // ...
         sessionStorage.clear('user');
          }
       });
@@ -148,7 +146,7 @@
        
            signOut(auth).then(() => {
               // Sign-out successful.
-              alert("User Loged out!")
+              //alert("User Loged out!")
            }).catch((error) => {
              // An error happened.
              const errorCode = error.code;
@@ -158,6 +156,7 @@
         
           </script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-          <script src="main.js"></script>
+          <script src="./js/functions.js"></script>
+          <script src="profilo.html"></script>
     </body>
 </html>
