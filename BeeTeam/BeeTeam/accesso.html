@@ -7,6 +7,9 @@
         <link rel=stylesheet href="specifiche.css" type="text/css">
         <link rel=stylesheet href="signin.css">
         <link rel=stylesheet href="main.js">
+        <script type= "module" src="./js/functions.js"></script>
+        <script src="profilo.html"></script>
+
         
         <title>Accesso</title>
     </head>
@@ -57,8 +60,8 @@
                 </table>
             </div>
         </div>
-
-        <script type="module">
+        
+        <!--script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
             import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
@@ -79,6 +82,9 @@
            const database = getDatabase(app);
            const auth=getAuth();
 
+           window.localStorage('app',app);
+           window.localStorage('data',database);
+
            
            sub.addEventListener('click',(e) =>{
 
@@ -88,7 +94,7 @@
             var email=document.getElementById("ereg").value;
             var password=document.getElementById("preg").value;
 
-            createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
+        createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
             .then((userCredential) => {
                  
                  const user = userCredential.user;
@@ -114,7 +120,7 @@
             var email=document.getElementById("emailacc").value;
             var password=document.getElementById("pacc").value;
 
-             signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
              .then((userCredential) => {
    
              const user = userCredential.user;
@@ -123,6 +129,7 @@
                      last_login : dt,
                  })
                  alert("User Loged in!");
+
                  
            })
            .catch((error) => {
@@ -133,10 +140,9 @@
 
            });
 
-           onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
            if (user) {
-   
-          openProfile(user.uid);
+               
           } else {
         sessionStorage.clear('user');
          }
@@ -153,10 +159,12 @@
              const errorMessage = error.message;
           alert(errorMessage);
            });
+
+           function newProfile(){
+
+           }
         
-          </script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-          <script src="./js/functions.js"></script>
-          <script src="profilo.html"></script>
+          </script-->
+          <!--script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script-->
     </body>
 </html>
