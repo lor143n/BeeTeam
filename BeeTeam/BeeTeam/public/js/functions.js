@@ -1,5 +1,5 @@
 
-/*
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
@@ -19,7 +19,9 @@ const firebaseConfig = {
  const app= initializeApp(firebaseConfig);
  const database = getDatabase(app);
  const auth=getAuth();
- 
+
+ window.onload=
+
  document.getElementById("sub").addEventListener('click',(e) =>{
 
   var nome=document.getElementById("nreg").value;
@@ -64,6 +66,11 @@ signInWithEmailAndPassword(auth, email, password)
        })
        alert("User Loged in!");
 
+       window.location.href="profilo.html";
+       
+       document.getElementById("c1").textContent="CIAOOOOO"
+        
+     
        
  })
  .catch((error) => {
@@ -74,9 +81,12 @@ alert(errorMessage);
 
  });
 
+
+
+
 onAuthStateChanged(auth, (user) => {
  if (user) {
-     
+
 } else {
 sessionStorage.clear('user');
 }
@@ -94,18 +104,4 @@ sessionStorage.clear('user');
 alert(errorMessage);
  });
 
- function newProfile(){
-
- }
-*/
-function openProfile(){
-    document.getElementById("c1").textContent="CIAOOOOO"
-   
-}
-
-function changeText(){
-    document.getElementById("c1").textContent="CIAOOOOO"
-    alert("ok");
-}
-
-
+ 
