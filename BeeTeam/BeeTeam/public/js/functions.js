@@ -20,7 +20,8 @@ const firebaseConfig = {
  const database = getDatabase(app);
  const auth=getAuth();
 
- window.onload=
+ window.onload = function() {
+   alert("Dom connesso");
 
  document.getElementById("sub").addEventListener('click',(e) =>{
 
@@ -67,9 +68,9 @@ signInWithEmailAndPassword(auth, email, password)
        alert("User Loged in!");
 
        window.location.href="profilo.html";
-       
+    
        document.getElementById("c1").textContent="CIAOOOOO"
-        
+       
      
        
  })
@@ -86,7 +87,7 @@ alert(errorMessage);
 
 onAuthStateChanged(auth, (user) => {
  if (user) {
-
+   document.getElementById("login").innerHTML="EseguitoL'accesso"
 } else {
 sessionStorage.clear('user');
 }
@@ -104,4 +105,4 @@ sessionStorage.clear('user');
 alert(errorMessage);
  });
 
- 
+});
