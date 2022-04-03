@@ -1,67 +1,89 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-<title> Profilo </title>
-<meta charset="UTF-8">
+	<head>
+		<title> Profilo </title>
+		<meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-<link rel=stylesheet href="specifiche.css" type="text/css">
-<link rel=stylesheet href="profilo.css" type="text/css">
-<script type="module" src="./js/functions.js"></script>
-<script type="text/javascript" src="./js/func2.js"></script>
-
-</head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+		<link rel=stylesheet href="main_styles.css" type="text/css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+		<script type="module" src="./js/functions.js"></script>
+		<script type="text/javascript" src="./js/func2.js"></script>
+	</head>
+	
 <body class="text-center">
 
-	<div class="grid-container">
-		<div class="box-header">
+	<div class="grid-main-container">
 
-			<div class="row" style="align-items: center;">
-				<div class="col-md-4"> </div>
-				<div class="col-md-4"> <h1>Profile</h1> </div>
-				<div class="col-md-4"> <button onclick="location.href='bacheca.html'" class="btn btn-light" style="font-size: small;" id="linkb"> Bacheca Link </button> </div>
+		<div class="box-header">
+			<div class="box-header-left">{
+				<a href="accesso.html" class="logo">BeeTeam</a>
+			</div>
+			<div class="box-header-center">
+				<a href="accesso.html" class="image-logo">
+					<img alt="Qries" src="Logoproject.png" width="65" height="65">
+				</a>
+			</div>
+			<div class="box-header-right">
+			  <a href="bacheca.html">Bacheca</a>
+			  <a class="active" href="profilo.html">Profilo</a>
 			</div>
 		</div>
-		<div class="box-profile">
-			<table width="100%" height="40%" border=black>
-				<tr>
-					<td width="30%" valign="middle" align="center"> 
-						Foto Profilo
-						<br>
-					   <img src="nofoto.jpg" name="FotoUtente" width="60%" border=black>
-						<br>
-						<button class="btn btn-light" onclick="edit()">Edit</button>
-		
-					</td>
-		
-					<td> 
-						<div class="table" width="100%">
-						   <div class="row-mb-4" id="c1"> Nome </div>  
-						   <div class="row-mb-4">Cognome</div>
-						   <div class="row-mb-4">Citta di residenza</div>
-						   <div class="row-mb-4">Numero di telefono</div>
-						   <div class="row-mb-4">Email</div>
-					   </div>
-					</td>
-				</tr>
-		   </table>
-		</div>
-		<div class="box-miniheader">
-			<h2>Aderiti</h2>
-		</div>
-		<div class="box-miniheader">
-			<h2>Creati</h2>
-		</div>
-		<div class="box-post">
-			<h2>Aderiti</h2>
-		</div>
-		<div class="box-post">
-			<h2>Creati</h2>
-		</div>
 
+		<div class="box-main-profile">
+			<div class="box-profile">
+				<table width="100%" height="100%">
+					<tr>
+						<td width="30%" valign="middle" align="center"> 
+							Foto Profilo
+							<br>
+						   <img src="nofoto.jpg" name="FotoUtente" width="60%">
+							<br>
+							<button class="btn btn-light" onclick="edit()">Edit</button>
+			
+						</td>
+			
+						<td> 
+							<div class="table" width="100%">
+							   <div class="row-mb-4" id="c1"> Nome </div>  
+							   <div class="row-mb-4">Cognome</div>
+							   <div class="row-mb-4">Citta di residenza</div>
+							   <div class="row-mb-4">Numero di telefono</div>
+							   <div class="row-mb-4">Email</div>
+						   </div>
+						</td>
+					</tr>
+			   </table>
+			</div>
+
+			<div class="box-post">
+				<div class="box-post-header">
+					<table width="100%" height="100%">
+						<tr>
+							<td>
+								<h1>Creati</h1>
+							</td>
+							<td>
+								<h1>Aderiti</h1>
+							</td>
+						<tr>
+					</table>
+				</div>
+
+				<div class="box-post-content-left">
+
+				</div>
+
+				<div class="box-post-content-right">
+
+				</div>
+			</div>
+		</div>
+		<!---<button type="submit" id="logout" onclick="changeText()">Logout</button>--->
 	</div>
-	<button type="submit" id="logout" onclick="changeText()">Logout</button>
 	
 	
 </body>

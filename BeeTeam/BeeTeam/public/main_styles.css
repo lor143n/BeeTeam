@@ -1,0 +1,230 @@
+p {text-align:right; font-style:none}
+h3 {font-size:12px; font-family:arial; color:black;margin-block-end: 0.5px;} 
+h2 {font-size:18px; text-align:center}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+body {
+    height: 100%;
+}
+  
+body {
+    align-items: center;
+    padding-bottom: 40px;
+    background-color: #191919;
+}
+
+/*Main page division*/
+
+.grid-main-container {
+  display: grid;
+  grid-auto-rows: auto auto;
+}
+
+/*Header*/
+
+.box-header {
+    display: grid;
+    grid-column: 1/3;
+    align-items: center;
+    overflow: hidden;
+    background-color: #191919;
+    padding: 10px 10px;
+    height: 90px;
+  }
+  
+  .box-header a {
+    align-content: center;
+    color: #ff8400;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 20px;
+  }
+  
+  .box-header a.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    font-weight: lighter;
+  }
+  .box-header a.image-logo {
+    padding: 100%;
+  }
+  
+  .box-header a:hover {
+    background-color: #ff8400a2;
+    color: #191919;
+    border-radius: 30px;
+  }
+  
+  .box-header a.logo:hover {
+    background-color: #ff840000;
+    background-image: linear-gradient(to top, #ff840000 0%, #ff8400 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .box-header a.image-logo:hover {
+    background-color: #ff840000;
+  }
+  
+  
+  .box-header a.active {
+    background-color: #ff8400;
+    color: #191919;
+  }
+  
+  .box-header-left {
+    align-items: center;
+    grid-column: 1;
+    text-align: left;
+  }
+  
+  .box-header-center {
+    grid-column: 2;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 0;
+  }
+  
+  .box-header-right {
+    align-items: center;
+    text-align: right;
+    grid-column: 3;
+    float: right;
+  }
+
+  /* Bacheca division */
+
+  .box-main-bacheca {
+    display: grid;
+    grid-column: 1/3;
+    padding-left: 2%;
+    padding-right: 2%;
+    grid-template-columns: minmax(auto, 30%) minmax(auto,70%);
+    background-color: #242424;
+  }
+  
+  .box-rightside-bacheca {
+    margin: 2%;
+    background-color: #272727;
+    border-radius: 20px;
+  }
+  
+  .box-leftside-bacheca {
+    margin: 10%;
+    background-color: #ff8400;
+    padding: 10%;
+    border-radius: 20px;
+  }
+
+  /* Profile division */
+
+.box-main-profile {
+    display: grid;
+    grid-column: 1/3;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: #242424;
+}
+
+.box-profile{
+  grid-row: 1;
+  background-color: #272727;
+  border-radius: 20px;
+  margin: 1%;
+}
+
+.box-post {
+  display: grid;
+  grid-row: 2;
+  background-color: #ff8400;;
+  grid-template-columns: minmax(auto, 50%) minmax(auto,50%);
+  border-radius: 20px;
+}
+
+.box-post-header {
+  display: grid;
+  grid-column: 1/3;
+  align-items: center;
+  overflow: hidden;
+  background-color: #242424;
+  padding: 10px 10px;
+  height: 60px;
+  border-radius: 20px 20px 0px 0px;
+  margin: 1% 1% 0% 1%;
+}
+
+.box-post-header h1{
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+  text-align: center;
+  color: #ff8400;
+}
+
+
+.box-post-content-left {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: #242424;
+  background-image: linear-gradient(to bottom, #ff840000 0%, #ff8400 100%);
+  height: 600px;
+  margin-right: 0.2%;
+  margin-left: 2%;
+}
+
+.box-post-content-right {
+  grid-row: 2;
+  grid-column: 2;
+  background-color: #242424;
+  background-image: linear-gradient(to bottom, #ff840000 0%, #ff8400 100%);
+  height: 600px;
+  margin-left: 0.2%;
+  margin-right: 2%;
+}
+
+/* Access division */
+
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.grid-container-accesso{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 2fr 1fr;
+  gap: 10px;
+}
+
+.box{
+  background-color: #e6d603;
+}
