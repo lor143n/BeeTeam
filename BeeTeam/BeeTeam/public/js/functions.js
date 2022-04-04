@@ -3,6 +3,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+import { openProfile } from "./func2.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -35,14 +36,16 @@ createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
   .then((userCredential) => {
        
        const user = userCredential.user;
-       set(ref(database,'dateusers/' + user.uid),{
+       set(ref(database,'users/' + user.uid),{
            email : email,
+           password:password,
            nome: nome,
            cognome:cognome,
            telefono:numero,
            imageURL: "nofoto.jpg"
        });
-       alert("user create");
+       alert("User Create! Now Log in");
+
 
 })
   .catch((error) => {
@@ -66,10 +69,9 @@ signInWithEmailAndPassword(auth, email, password)
            last_login : dt,
        })
        alert("User Loged in!");
-
        window.location.href="profilo.html";
-    
-       document.getElementById("c1").textContent="CIAOOOOO"
+       openProfile();
+       //document.getElementById("c1").textContent="CIAOOOOO"
        
      
        
@@ -87,7 +89,7 @@ alert(errorMessage);
 
 onAuthStateChanged(auth, (user) => {
  if (user) {
-   document.getElementById("login").innerHTML="EseguitoL'accesso"
+  // document.getElementById("login").innerHTML="EseguitoL'accesso"
 } else {
 sessionStorage.clear('user');
 }
@@ -105,4 +107,4 @@ sessionStorage.clear('user');
 alert(errorMessage);
  });
 
-});
+};

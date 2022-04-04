@@ -1,9 +1,4 @@
-function changeText() {
-    document.getElementById("c1").textContent="CIAOOOOO"
+export function openProfile(){
     alert("ok");
 }
-
-
-function checkDom(){
-    console.log(document.readyState);
-}
+export {openProfile};
