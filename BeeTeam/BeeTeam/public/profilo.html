@@ -43,20 +43,16 @@
 							<br>
 							<button class="btn btn-light" onclick="edit()">Edit</button>
 
-							<script>
-								//import {app} from "./js/functions.js";
-								
-							</script>
 			
 						</td>
 			
 						<td> 
 							<div class="table" width="100%">
-							   <div class="row-mb-4" id="c1"> Nome </div>  
-							   <div class="row-mb-4">Cognome</div>
-							   <div class="row-mb-4">Citta di residenza</div>
-							   <div class="row-mb-4">Numero di telefono</div>
-							   <div class="row-mb-4">Email</div>
+							   <div class="row-mb-4" id="nprof" > Nome </div>  
+							   <div class="row-mb-4" id="cprof">Cognome</div>
+							   <div class="row-mb-4" id="userprofil"> Username </div>
+							   <div class="row-mb-4" id="numprof">Numero di telefono</div>
+							   <div class="row-mb-4" id="eprof">Email</div>
 						   </div>
 						</td>
 					</tr>
@@ -86,9 +82,63 @@
 				</div>
 			</div>
 		</div>
-		<!---<button type="submit" id="logout" onclick="changeText()">Logout</button>--->
+		<button type="submit" id="logout" href="">Logout</button>
 	</div>
 	
-	<script type="module" src="./js/func2.js"></script>
+	<script>
+
+		let nprof=document.getElementById("nprof");
+		let cprof=document.getElementById("cprof");
+		let userprof=document.getElementById("userprofil");
+		let numprof=document.getElementById("numprof");
+		let eprof=document.getElementById("eprof");
+
+		const out=document.getElementById("logout");
+		var CurrentUser=null;
+
+		function getUser(){
+			let keepLog=localStorage.getItem('KeepLog');
+
+			if(keepLog == "yes"){
+				CurrentUser=JSON.parse(localStorage.getItem('user'));
+			}
+			else{
+				CurrentUser=JSON.parse(sessionStorage.getItem('user'));
+			}
+		}
+
+		function signOut(){
+			sessionStorage.removeItem('user');
+			localStorage.removeItem('user');
+			localStorage.removeItem('KeepLog');
+			window.location="accesso.html";
+
+		}
+
+		window.onload=function() {
+			getUser();
+			if(CurrentUser==null){
+				alert("Non hai effettuato l'accesso!");
+				window.location="accesso.html";
+
+			}
+			else{
+				nprof.innerText= CurrentUser.nome;
+				nprof.style="color: white";
+				cprof.innerText= CurrentUser.cognome;
+				cprof.style="color: white";
+				userprof.innerText= CurrentUser.user;
+				userprof.style="color: white";
+				numprof.innerText= CurrentUser.numero;
+				numprof.style="color: white";
+				eprof.innerText= CurrentUser.email;
+				eprof.style="color: white";
+
+			}
+		}
+		  
+		
+		out.addEventListener('click',signOut);
+	</script>
 </body>
 </html>

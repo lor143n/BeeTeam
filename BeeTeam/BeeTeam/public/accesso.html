@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <script type="module" src="./js/functions.js"></script>
         <script type="module" src="./js/func2.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
         <title>Accesso</title>
     </head>
     <body class="text-center">
@@ -20,11 +21,15 @@
                     <td>
                         <h2> Accesso </h2>
                         <!--form action="" method="post" id="Bee" onsubmit="Accedi();"-->
-                            <input type="email" class="form-control;text-center; border-1 rounded" name="email" id='emailacc' placeholder="Inserire email" style="width: 40%; text-align: center; " required autofocus>
+                            <input type="text" class="form-control;text-center; border-1 rounded" name="userlog" id='userlog' placeholder="Inserire username" style="width: 40%; text-align: center; " required autofocus>
                             <div class="mb-1"></div>
-                            <input type="password" class="form-control;text-center; border-1 rounded" id="pacc" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
+                            <input type="password" class="form-control;text-center; border-1 rounded" id="passlog" placeholder="Inserire password"  style="width: 40%;text-align: center;" required>
                             <div class="mb-2"></div>
                             <button type="submit" id="login" class="btn btn-light" name="submit"  style="font-size: small;" > Accedi </button>
+                            <div class="custom-control custom-switch mb-3">
+                                <input type="checkbox" class="custom-control-input" id="stay">
+                                <label class="custom-control-label" for="stay"> Keep me Logged In </label>
+                            </div>
 
                         <!--/form-->
                     </td>
@@ -47,6 +52,9 @@
                                 <h3>Email</h3>
                                 <input type="email" class="form-control; border-1 rounded" name="email" id="ereg" style="width: 40%; text-align: center;" required >
                                 <div class="mb-1"></div>
+                                <h3>Username</h3>
+                                <input type="text" class="form-control; border-1 rounded" name="user" id="user" style="width: 40%; text-align: center;" required >
+                                <div class="mb-1"></div>
                                 <h3>Password</h3>
                                 <input type="password" class="form-control;text-center; border-1 rounded" name="password" id="preg" style="width: 40%;text-align: center;" required>
                                 <div class="mb-1"></div>
@@ -59,10 +67,10 @@
 
         <script type="module">
             // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-            import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-            import * as func2 from "./js/func2.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+           // import * as func2 from "./js/func2.js";
 
             const firebaseConfig = {
               apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -78,91 +86,104 @@
             // Initialize Firebase
            export const app= initializeApp(firebaseConfig);
            const database = getDatabase(app);
-           const auth=getAuth();
+           //const auth=getAuth();
 
-           
-           sub.addEventListener('click',(e) =>{
+     //REGISTRATION 
+            const nome=document.getElementById("nreg");
+            const cognome=document.getElementById("creg");
+            const numero=document.getElementById("numreg");
+            const email=document.getElementById("ereg");
+            const user=document.getElementById("user");
+            const password=document.getElementById("preg");
+            const sub=document.getElementById("sub");
 
-            var nome=document.getElementById("nreg").value;
-            var cognome=document.getElementById("creg").value;
-            var numero=document.getElementById("numreg").value;
-            var email=document.getElementById("ereg").value;
-            var password=document.getElementById("preg").value;
+            function RegisterUser(){
+                const db = ref(database);
 
-            createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
-            .then((userCredential) => {
-                 
-                 const user = userCredential.user;
-                 set(ref(database,'users/' + user.uid),{
-                     email : email,
-                     password : password
-                 });
-                 alert("user create");
-   
-  })
-            .catch((error) => {
-                 const errorCode = error.code;
-                 const errorMessage = error.message;
-                 alert(errorMessage);
-           });
-           });
+                get(child(db,"Users/"+ user.value )).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        alert("Account already exists!");
+                    }
+                    else{
+                        set(ref(database, "Users/"+user.value),
+                        {
+                            nome:nome.value,
+                            cognome: cognome.value,
+                            numero: numero.value,
+                            user:user.value,
+                            email:email.value,
+                            password: encPass()
+                        })
+                       .then(()=>{
+                           alert("User created");
+                       })
+                       .catch((error)=>{
+                           allert("error: "+error);
+                       })
+                    }
+                });
+            }
 
-           login.addEventListener('click', (e) => {
+            //ENCRYPTION
 
-            var email=document.getElementById("emailacc").value;
-            var password=document.getElementById("pacc").value;
+            function encPass(){
+                var pass12 = CryptoJS.AES.encrypt(password.value, password.value);
+                //password and key we are providing 
+                return pass12.toString();
+            }
 
-             signInWithEmailAndPassword(auth, email, password)
-             .then((userCredential) => {
-   
-             const user = userCredential.user;
-             const dt= new Date();
-             update(ref(database,'users/' + user.uid),{
-                     last_login : dt,
-                 })
-                 alert("User Loged in!");
-                 
-                 alert(window.onload);
-                document.addEventListener("DOMContentLoaded",func2.openProfile);
-                    
-                  
-    // ...
-           })
-           .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          alert(errorMessage);
-           });
+            // EVENT HENDLER
+            sub.addEventListener('click',RegisterUser);
 
-           });
 
-           onAuthStateChanged(auth, (user) => {
-           if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-           const uid = user.uid;
-           
-          } else {
-    // User is signed out
-    // ...
-        sessionStorage.clear('user');
-         }
-      });
-     
-      //CAPIRE DOVE METTERE 
-       
-           signOut(auth).then(() => {
-              // Sign-out successful.
-              alert("User Loged out!")
-           }).catch((error) => {
-             // An error happened.
-             const errorCode = error.code;
-             const errorMessage = error.message;
-          alert(errorMessage);
-           });
+            //LOGIN!
+
+            //costant
+            const userlog=document.getElementById("userlog");
+            const passlog=document.getElementById("passlog");
+            const login=document.getElementById("login");
+
+            //AUTHENTICATION
+            function Authentication(){
+                const db2=ref(database);
+                get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        let dbpass = decPass(snapshot.val().password);
+                        if(dbpass==passlog.value){
+                            LoginUser(snapshot.val());
+                        }
+                    }
+                    else{
+                           allert("User doesn't exist! ");
+                    }
+                });
+            }
+            function decPass(dbpass){
+                var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
+                return pass12.toString(CryptoJS.enc.Utf8);
+            }
+
+            function LoginUser(userinfo){
+                let keepLog=document.getElementById("stay").checked;
+
+                if(!keepLog){
+                    sessionStorage.setItem('user', JSON.stringify(userinfo));
+                    localStorage.setItem('KeepLog','no');
+                    window.location="profilo.html";
+                }
+                else{
+
+                    localStorage.setItem('KeepLog','yes');
+                    localStorage.setItem('user', JSON.stringify(userinfo));
+                    window.location="profilo.html";
+                }
+
+            }
+
+            login.addEventListener('click',Authentication);
         
           </script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+          <!--script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script-->
             
     </body>
 </html>
