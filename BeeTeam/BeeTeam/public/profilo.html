@@ -10,8 +10,7 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
     	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-		<script type="module" src="./js/functions.js"></script>
-		<script type="module" src="./js/func2.js"></script>
+		
 	</head>
 	
 <body class="text-center" >
@@ -40,9 +39,14 @@
 						<td width="30%" valign="middle" align="center"> 
 							Foto Profilo
 							<br>
-						   <img src="nofoto.jpg" name="FotoUtente" width="60%">
+						   <img src="nofoto.jpg" name="FotoUtente" width="60%" class="border-1 rounded ;">
 							<br>
 							<button class="btn btn-light" onclick="edit()">Edit</button>
+
+							<script>
+								//import {app} from "./js/functions.js";
+								
+							</script>
 			
 						</td>
 			
@@ -85,6 +89,6 @@
 		<!---<button type="submit" id="logout" onclick="changeText()">Logout</button>--->
 	</div>
 	
-	
+	<script type="module" src="./js/func2.js"></script>
 </body>
 </html>

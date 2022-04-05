@@ -1,9 +1,9 @@
 
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+/*import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
 import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
-import { openProfile } from "./func2.js";
+import * as func2 from "./func2.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -17,14 +17,16 @@ const firebaseConfig = {
   };
 
   // Initialize Firebase
- const app= initializeApp(firebaseConfig);
+ export const app= initializeApp(firebaseConfig);
  const database = getDatabase(app);
  const auth=getAuth();
 
- window.onload = function() {
-   alert("Dom connesso");
+   let sub=document.getElementById("sub");
+   let log=document.getElementById("login");
+   let out=document.getElementById("logout");
 
- document.getElementById("sub").addEventListener('click',(e) =>{
+
+  sub.addEventListener('click', (e) =>{
 
   var nome=document.getElementById("nreg").value;
   var cognome=document.getElementById("creg").value;
@@ -32,7 +34,7 @@ const firebaseConfig = {
   var email=document.getElementById("ereg").value;
   var password=document.getElementById("preg").value;
 
-createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
+ createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
   .then((userCredential) => {
        
        const user = userCredential.user;
@@ -55,7 +57,7 @@ createUserWithEmailAndPassword(auth, email, password,nome,cognome,numero)
  });
  });
 
- document.getElementById("login").addEventListener('click', (e) => {
+ log.addEventListener('click', (e) => {
 
   var email=document.getElementById("emailacc").value;
   var password=document.getElementById("pacc").value;
@@ -69,8 +71,11 @@ signInWithEmailAndPassword(auth, email, password)
            last_login : dt,
        })
        alert("User Loged in!");
-       window.location.href="profilo.html";
-       openProfile();
+      
+      
+       window.onloadstart= window.location.href="profilo.html";
+       func2.openProfile();
+       
        //document.getElementById("c1").textContent="CIAOOOOO"
        
      
@@ -106,5 +111,4 @@ sessionStorage.clear('user');
    const errorMessage = error.message;
 alert(errorMessage);
  });
-
-};
+*/
