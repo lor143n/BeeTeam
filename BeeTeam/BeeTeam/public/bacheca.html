@@ -94,10 +94,26 @@
             </div>
         </div>
         <script type="module">
-            import {database} from "/accesso.html"; //C APIRE COME ESPORTARE!
-            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           
+           import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+           import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+           // import * as func2 from "./js/func2.js";
 
-            localStorage.setItem('attivity',0);
+            const firebaseConfig = {
+              apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
+              authDomain: "beeteam-2a5f7.firebaseapp.com",
+              databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
+              projectId: "beeteam-2a5f7",
+              storageBucket: "beeteam-2a5f7.appspot.com",
+              messagingSenderId: "223479016271",
+              appId: "1:223479016271:web:383e9319470cfaf4bd733a",
+              measurementId: "G-04ERX78GQJ"
+            };
+          
+            // Initialize Firebase
+           export const app= initializeApp(firebaseConfig);
+           export const database = getDatabase(app);
 
 
             let crea=document.getElementById("crea");
@@ -118,27 +134,27 @@
             }
         }
             function NewAttivity(){
-                localStorage.setItem('attivity',localStorage.getItem('attivity')+1);
+                localStorage.setItem('post',localStorage.getItem('post')+1);
 
-                const num=localStorage.getItem('attivity');
+                const post=localStorage.getItem('post');
                 const db=ref(database);
 
-                get(child(db,"Attivity/"+ attivity)).then((snapshot)=>{
+                get(child(db,"Attivita/"+ post)).then((snapshot)=>{
                     if(snapshot.exists()){
-                        alert("Attyvity already exists!");
+                        alert("Attivity already exists!");
                     }
                     else{
-                        set(ref(database, "Attivity/"+attivity),
+                        set(ref(database, "Attivita/"+post),
                         {
                             anonymous: anonymous.checked,
                             member: member.value,
                             type: type.value,
                             description: description.value,
                             user: CurrentUser.user,
-                            id:attivity
+                            id:post
                         })
                        .then(()=>{
-                           alert("User created");
+                           alert("Attivity created");
                        })
                        .catch((error)=>{
                            allert("error: "+error);
