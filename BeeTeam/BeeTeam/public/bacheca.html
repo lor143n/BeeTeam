@@ -83,10 +83,7 @@
                         </div>
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-light" style="font-size: small;" id="crea" value="Crea"> Create </button> 
-                            <script type="module">
-                                //import {app} from "./js/func2.js";
-
-                            </script>
+                           
                         </div>
                     </div>
                 </div>
@@ -96,5 +93,67 @@
                 </div>
             </div>
         </div>
+        <script type="module">
+            import {database} from "/accesso.html"; //C APIRE COME ESPORTARE!
+            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+
+            localStorage.setItem('attivity',0);
+
+
+            let crea=document.getElementById("crea");
+            let anonymous=document.getElementById("inlineRadio1");
+            let description=document.getElementById("description-area");
+            let member =document.getElementById("floatingSelect2");
+            let type=document.getElementById("floatingSelect");
+            var CurrentUser=null;
+
+            function getUser(){
+                let keepLog=localStorage.getItem('KeepLog');
+
+                if(keepLog == "yes"){
+                      CurrentUser=JSON.parse(localStorage.getItem('user'));
+                 }
+                 else{
+                CurrentUser=JSON.parse(sessionStorage.getItem('user'));
+            }
+        }
+            function NewAttivity(){
+                localStorage.setItem('attivity',localStorage.getItem('attivity')+1);
+
+                const num=localStorage.getItem('attivity');
+                const db=ref(database);
+
+                get(child(db,"Attivity/"+ attivity)).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        alert("Attyvity already exists!");
+                    }
+                    else{
+                        set(ref(database, "Attivity/"+attivity),
+                        {
+                            anonymous: anonymous.checked,
+                            member: member.value,
+                            type: type.value,
+                            description: description.value,
+                            user: CurrentUser.user,
+                            id:attivity
+                        })
+                       .then(()=>{
+                           alert("User created");
+                       })
+                       .catch((error)=>{
+                           allert("error: "+error);
+                       })
+                    }
+                });
+
+            }
+
+            crea.addEventListener('click',NewAttivity);
+
+            window.onload=function(){
+                getUser();
+            }
+
+        </script>
     </body>
 </html>
