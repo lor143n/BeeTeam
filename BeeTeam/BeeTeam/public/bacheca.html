@@ -134,7 +134,7 @@
             }
         }
             function NewAttivity(){
-                localStorage.setItem('post',localStorage.getItem('post')+1);
+                localStorage.setItem('post',parseInt(localStorage.getItem('post'))+1);
 
                 const post=localStorage.getItem('post');
                 const db=ref(database);
