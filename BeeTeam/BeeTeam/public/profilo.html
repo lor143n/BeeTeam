@@ -42,20 +42,27 @@
 						   <img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
 						    <input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg" >
 							<br>
-							<button id="editbutton" class="btn btn-light" onclick="document.getElementById('sourcefoto').click()">Edit</button>
-							<button id="subedit" class="btn btn-light">Invia</button>
+							<div class="row-mb-4" style="padding-bottom: 3px;">
+							<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
+							<button id="subedit" class="btn btn-light btn-sm">Invia</button>
+							</div>
 
 			
 						</td>
 			
 						<td> 
-							<div class="table" width="100%">
-							   <div class="row-mb-4" id="nprof" > Nome </div>  
+							<div class="table" width="100%" >
+							   <div class="row-mb-4" id="nprof" > Nome 
+								   <input type="text" id="n2" style="background-color: transparent; width: 100%; border-color: transparent; visibility: hidden;" class="text-warning bg-dark; text-center" >
+							   </div>  
 							   <div class="row-mb-4" id="cprof">Cognome</div>
 							   <div class="row-mb-4" id="userprofil"> Username </div>
 							   <div class="row-mb-4" id="numprof">Numero di telefono</div>
 							   <div class="row-mb-4" id="eprof">Email</div>
-						   </div>
+							   <div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
+							   <button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
+							   </div>
+							</div>
 						</td>
 					</tr>
 			   </table>
@@ -116,9 +123,12 @@
 		let eprof=document.getElementById("eprof");
 		let foto=document.getElementById("fotoprofilo");
 
+		var n=document.getElementById("n2");
+
 		const out=document.getElementById("logout");
 		const edit=document.getElementById("editbutton");
 		const sub=document.getElementById("subedit");
+		const info=document.getElementById("editinfo")
 		var percorso=null;
 		
 		var storage=getStorage(app);
@@ -168,8 +178,6 @@
                xhr.open('GET', url);
                xhr.send();
 			   foto.setAttribute("src",url);
-
-			   
 			   update(ref(database, "Users/"+CurrentUser.user),{
 						foto:url,
 			   })
@@ -179,9 +187,55 @@
 			})
 
 		};
+		
+		var btnsub=null,c=null;
+
+		function editInfo(){
+
+			
+			//n.setAttribute("type","text");
+			//n.setAttribute("id","n2");
+			nprof.innerText="";
+			n.setAttribute("style"," visibility: visible;");
+			//n.setAttribute("class","text-warning bg-dark; text-center");
+			n.setAttribute("value",CurrentUser.nome);
+			//nprof.appendChild(n);
+
+			c=document.createElement("input");
+			c.setAttribute("type","text");
+			c.setAttribute("id","c2");
+			c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
+			c.setAttribute("class","text-warning bg-dark; text-center");
+			c.setAttribute("value",CurrentUser.cognome);
+			cprof.innerText="";
+			cprof.appendChild(c);
+
+
+
+			info.setAttribute("style","display:none");
+			btnsub=document.createElement("button");
+			btnsub.setAttribute("type","submit");
+			btnsub.setAttribute("id","btnsub");
+			btnsub.setAttribute("class","btn btn-light btn-sm");
+			btnsub.innerHTML="Save";
+			document.getElementById("inviamodifica").appendChild(btnsub);
+			alert("Modify your info");
+			btnsub.addEventListener('click',saveInfo);
+		}
+
+		function saveInfo(){
+			btnsub.setAttribute("style","display:none");
+			info.setAttribute("style","display:inline");
+			update(ref(database, "Users/"+ CurrentUser.user),{
+						nome:n.value,
+			   })
+			n.setAttribute("style","display:none");
+			nprof.innerText=CurrentUser.nome;
+		}
 
 		out.addEventListener('click',signout);
 		sub.addEventListener('click',updatePhoto);
+		info.addEventListener('click',editInfo);
 
 		window.onload=function() {
 			getUser();
@@ -201,7 +255,7 @@
 				numprof.style="color: white";
 				eprof.innerText= CurrentUser.email;
 				eprof.style="color: white";
-				alert(CurrentUser.foto);
+				//alert(CurrentUser.foto);
 				foto.setAttribute("src",CurrentUser.foto);
 
 			}

@@ -159,10 +159,12 @@
                             description: description.value,
                             user: CurrentUser.user,
                             id: post,
-                            data : data
+                            data : data,
+                            sub: []
                         })
                        .then(()=>{
                            alert("Attivity created");
+                           
                        })
                        .catch((error)=>{
                            allert("error: "+error);
