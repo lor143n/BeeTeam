@@ -39,9 +39,11 @@
 						<td width="30%" valign="middle" align="center"> 
 							Foto Profilo
 							<br>
-						   <img src="nofoto.jpg" name="FotoUtente" width="60%" class="border-1 rounded ;">
+						   <img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
+						    <input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg" >
 							<br>
-							<button class="btn btn-light" onclick="edit()">Edit</button>
+							<button id="editbutton" class="btn btn-light" onclick="document.getElementById('sourcefoto').click()">Edit</button>
+							<button id="subedit" class="btn btn-light">Invia</button>
 
 			
 						</td>
@@ -85,15 +87,42 @@
 		<button type="submit" id="logout" href="">Logout</button>
 	</div>
 	
-	<script>
+	<script type="module">
+	        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+			import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
+           // import * as func2 from "./js/func2.js";
+
+            const firebaseConfig = {
+              apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
+              authDomain: "beeteam-2a5f7.firebaseapp.com",
+              databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
+              projectId: "beeteam-2a5f7",
+              storageBucket: "beeteam-2a5f7.appspot.com",
+              messagingSenderId: "223479016271",
+              appId: "1:223479016271:web:383e9319470cfaf4bd733a",
+              measurementId: "G-04ERX78GQJ"
+            };
+          
+            // Initialize Firebase
+           export const app= initializeApp(firebaseConfig);
+           export const database = getDatabase(app);
 
 		let nprof=document.getElementById("nprof");
 		let cprof=document.getElementById("cprof");
 		let userprof=document.getElementById("userprofil");
 		let numprof=document.getElementById("numprof");
 		let eprof=document.getElementById("eprof");
+		let foto=document.getElementById("fotoprofilo");
 
 		const out=document.getElementById("logout");
+		const edit=document.getElementById("editbutton");
+		const sub=document.getElementById("subedit");
+		var percorso=null;
+		
+		var storage=getStorage(app);
+
 		var CurrentUser=null;
 
 		function getUser(){
@@ -105,15 +134,54 @@
 			else{
 				CurrentUser=JSON.parse(sessionStorage.getItem('user'));
 			}
-		}
+		};
 
-		function signOut(){
+		function signout(){
 			sessionStorage.removeItem('user');
 			localStorage.removeItem('user');
 			localStorage.removeItem('KeepLog');
 			window.location="accesso.html";
 
-		}
+		};
+
+		
+
+		function updatePhoto(){
+			const f=document.getElementById("sourcefoto").files[0];
+			
+			const metadata = {
+                  contentType: 'image/'+f.type,
+             };
+			
+			var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
+			var uploadTask= uploadBytesResumable(storageRef,f,metadata)
+				alert("Update Succesfully");
+		
+
+			getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+               console.log('File available at', url);
+			   const xhr = new XMLHttpRequest();
+               xhr.responseType = 'blob';
+               xhr.onload = (event) => {
+                   const blob = xhr.response;
+               };
+               xhr.open('GET', url);
+               xhr.send();
+			   foto.setAttribute("src",url);
+
+			   
+			   update(ref(database, "Users/"+CurrentUser.user),{
+						foto:url,
+			   })
+			})
+			.catch((error)=>{
+				alert(error);
+			})
+
+		};
+
+		out.addEventListener('click',signout);
+		sub.addEventListener('click',updatePhoto);
 
 		window.onload=function() {
 			getUser();
@@ -133,12 +201,13 @@
 				numprof.style="color: white";
 				eprof.innerText= CurrentUser.email;
 				eprof.style="color: white";
+				alert(CurrentUser.foto);
+				foto.setAttribute("src",CurrentUser.foto);
 
 			}
 		}
 		  
 		
-		out.addEventListener('click',signOut);
 	</script>
 </body>
 </html>

@@ -119,9 +119,15 @@
             let crea=document.getElementById("crea");
             let anonymous=document.getElementById("inlineRadio1");
             let description=document.getElementById("description-area");
-            let member =document.getElementById("floatingSelect2");
+            let member =document.getElementById("floatingSelect2").value;
             let type=document.getElementById("floatingSelect");
-            var CurrentUser=null;
+            var CurrentUser=null,membri=0;
+
+            if(member=="One") membri=1;
+            else if(member=="Two") membri=2;
+            else if(member=="Three") membri=3;
+            else if(member=="Four") membri=4;
+            else membri=5;
 
             function getUser(){
                 let keepLog=localStorage.getItem('KeepLog');
@@ -144,14 +150,16 @@
                         alert("Attivity already exists!");
                     }
                     else{
+                        let data= new Date();
                         set(ref(database, "Attivita/"+post),
                         {
                             anonymous: anonymous.checked,
-                            member: member.value,
+                            member: membri,
                             type: type.value,
                             description: description.value,
                             user: CurrentUser.user,
-                            id:post
+                            id: post,
+                            data : data
                         })
                        .then(()=>{
                            alert("Attivity created");
