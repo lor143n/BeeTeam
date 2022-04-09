@@ -147,9 +147,10 @@
                         })
                        .then(()=>{
                            alert("User created");
+                           window.location="accesso.html";
                        })
                        .catch((error)=>{
-                           allert("error: "+error);
+                           alert("error: "+error);
                        })
                     }
                 });
@@ -209,6 +210,9 @@
             else{
                 alert("Incorrect password or username");
             }
+        }
+        else{
+            alert("Incorrect password or username");
         }
     });
             

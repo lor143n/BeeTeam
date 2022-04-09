@@ -39,11 +39,11 @@
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                   <option selected> Select </option>
-                                  <option value="1"> Film </option>
-                                  <option value="2"> Videogame </option>
-                                  <option value="3"> Book </option>
-                                  <option value="4"> Journey </option>
-                                  <option value="5">Five</option>
+                                  <option value="Film"> Film </option>
+                                  <option value="Videogame"> Videogame </option>
+                                  <option value="Book"> Book </option>
+                                  <option value="Journey"> Journey </option>
+                                  <option value="Five">Five</option>
                                 </select>
                                 <label for="floatingSelect">Project type</label>
                             </div>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="box-rightside-bacheca" id="post">
+                <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" data-bs-offset="0" tabindex="0" id="post">
                     
                 </div>
             </div>
@@ -115,8 +115,8 @@
            export const app= initializeApp(firebaseConfig);
            export const database = getDatabase(app);
 
-            let new_post = null;
-            let spazio_post = document.getElementById("post");
+            var new_post = null;
+            var spazio_post = document.getElementById("post");
 
             let crea=document.getElementById("crea");
             let anonymous=document.getElementById("inlineRadio1");
@@ -166,11 +166,12 @@
                         })
                        .then(()=>{
                            alert("Attivity created"); 
-                           new_post = att(idpost,spazio_post, new_post);
+                           new_post = att(idpost, spazio_post, new_post, type.value, membri,anonymous.checked);
+                           
                            
                        })
                        .catch((error)=>{
-                           allert("error: "+error);
+                           alert("error: "+error);
                        })
                     }
                 });
@@ -187,13 +188,36 @@
                 return result;
             }
 
-            function att(id,parent,c){
+            function createElem(id,text,parent){
+                var cat=document.createElement("div");
+                cat.setAttribute("class","row-mb-1");
+                cat.setAttribute("id","cat"+id);
+                cat.innerHTML=text;
+                parent.appendChild(cat);
+            }
+
+            function att(id,parent,c,categoria,numero_persone,check){
                 c=document.createElement("div");
-                //c.setAttribute("type",type);
                 c.setAttribute("id",id);
-                //c.setAttribute("placeholder",place);
                 c.setAttribute("class","box-post-bacheca");
-                parent.innerText="CIAO";
+
+                var user_space=document.createElement("div");
+                user_space.setAttribute("class","row");
+                user_space.setAttribute("style","padding-bottom: 0.5px");
+                if(!check) user_space.innerHTML="<b>User: </b>"+CurrentUser.user;
+                else user_space.innerHTML="<b>Anonymous </b><br>";
+                c.appendChild(user_space);
+
+                const space=document.createElement("div");
+                space.setAttribute("class","mb-1");
+
+                createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+                c.appendChild(space);
+                createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+                c.appendChild(space);
+                createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ description.value, c);
+                //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
+                c.appendChild(space);
                 parent.appendChild(c);
                 return c;   
             }

@@ -122,9 +122,9 @@ body {
     padding: 10%;
     border-radius: 20px;
   }
-
+   /*MODIFICATO MARGIN PER FAR SI CHE NON FOSSERO ATTACCATI I BLOCCHI*/
   .box-post-bacheca {
-    margin: 10%;
+    margin: 3%; 
     background-color: #ff8400;
     padding: 10%;
     border-radius: 20px;
