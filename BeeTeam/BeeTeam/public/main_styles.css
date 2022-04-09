@@ -123,6 +123,13 @@ body {
     border-radius: 20px;
   }
 
+  .box-post-bacheca {
+    margin: 10%;
+    background-color: #ff8400;
+    padding: 10%;
+    border-radius: 20px;
+  }
+
   /* Profile division */
 
 .box-main-profile {
