@@ -88,8 +88,8 @@
                     </div>
                 </div>
 
-                <div class="box-rightside-bacheca">
-
+                <div class="box-rightside-bacheca" id="post">
+                    
                 </div>
             </div>
         </div>
@@ -115,6 +115,8 @@
            export const app= initializeApp(firebaseConfig);
            export const database = getDatabase(app);
 
+            let new_post = null;
+            let spazio_post = document.getElementById("post");
 
             let crea=document.getElementById("crea");
             let anonymous=document.getElementById("inlineRadio1");
@@ -141,29 +143,30 @@
         }
             function NewAttivity(){
                 localStorage.setItem('post',parseInt(localStorage.getItem('post'))+1);
-
+                var idpost = makeid(5);
                 const post=localStorage.getItem('post');
                 const db=ref(database);
 
-                get(child(db,"Attivita/"+ post)).then((snapshot)=>{
+                get(child(db,"Attivita/"+ idpost)).then((snapshot)=>{
                     if(snapshot.exists()){
                         alert("Attivity already exists!");
                     }
                     else{
                         let data= new Date();
-                        set(ref(database, "Attivita/"+post),
+                        set(ref(database, "Attivita/"+idpost),
                         {
                             anonymous: anonymous.checked,
                             member: membri,
                             type: type.value,
                             description: description.value,
                             user: CurrentUser.user,
-                            id: post,
+                            id: idpost,
                             data : data,
                             sub: []
                         })
                        .then(()=>{
-                           alert("Attivity created");
+                           alert("Attivity created"); 
+                           new_post = att(idpost,spazio_post, new_post);
                            
                        })
                        .catch((error)=>{
@@ -174,14 +177,23 @@
 
             }
 
-            function att(id,parent,type,c,place){
+            function makeid(length) {
+                var result           = '';
+                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+
+            function att(id,parent,c){
                 c=document.createElement("div");
-                c.setAttribute("type",type);
+                //c.setAttribute("type",type);
                 c.setAttribute("id",id);
-                c.setAttribute("placeholder",place);
-                c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
-                c.setAttribute("class","text-warning bg-dark; text-center");
-                parent.innerText="";
+                //c.setAttribute("placeholder",place);
+                c.setAttribute("class","box-post-bacheca");
+                parent.innerText="CIAO";
                 parent.appendChild(c);
                 return c;   
             }
