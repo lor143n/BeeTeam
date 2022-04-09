@@ -40,7 +40,7 @@
 							Foto Profilo
 							<br>
 						   <img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
-						    <input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg" >
+						    <input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 							<br>
 							<div class="row-mb-4" style="padding-bottom: 3px;">
 							<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
@@ -52,9 +52,7 @@
 			
 						<td> 
 							<div class="table" width="100%" >
-							   <div class="row-mb-4" id="nprof" > Nome 
-								   <input type="text" id="n2" style="background-color: transparent; width: 100%; border-color: transparent; visibility: hidden;" class="text-warning bg-dark; text-center" >
-							   </div>  
+							   <div class="row-mb-4" id="nprof" > Nome </div>  
 							   <div class="row-mb-4" id="cprof">Cognome</div>
 							   <div class="row-mb-4" id="userprofil"> Username </div>
 							   <div class="row-mb-4" id="numprof">Numero di telefono</div>
@@ -82,7 +80,7 @@
 					</table>
 				</div>
 
-				<div class="box-post-content-left">
+				<div class="box-post-content-left" >
 
 				</div>
 
@@ -90,8 +88,8 @@
 
 				</div>
 			</div>
-		</div>
-		<button type="submit" id="logout" href="">Logout</button>
+		</div class="row" style="align-items: center">
+		<button type="submit" id="logout" class="btn btn-light">Logout</button>
 	</div>
 	
 	<script type="module">
@@ -123,7 +121,8 @@
 		let eprof=document.getElementById("eprof");
 		let foto=document.getElementById("fotoprofilo");
 
-		var n=document.getElementById("n2");
+		let inviamodifica=document.getElementById("inviamodifica");
+
 
 		const out=document.getElementById("logout");
 		const edit=document.getElementById("editbutton");
@@ -188,49 +187,65 @@
 
 		};
 		
-		var btnsub=null,c=null;
+		var btnsub=null,c2=null,n2=null, num2=null;
 
-		function editInfo(){
-
-			
-			//n.setAttribute("type","text");
-			//n.setAttribute("id","n2");
-			nprof.innerText="";
-			n.setAttribute("style"," visibility: visible;");
-			//n.setAttribute("class","text-warning bg-dark; text-center");
-			n.setAttribute("value",CurrentUser.nome);
-			//nprof.appendChild(n);
-
+		function getElem(id,parent,type,c,place){
 			c=document.createElement("input");
-			c.setAttribute("type","text");
-			c.setAttribute("id","c2");
+			c.setAttribute("type",type);
+			c.setAttribute("id",id);
+			c.setAttribute("placeholder",place);
 			c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
 			c.setAttribute("class","text-warning bg-dark; text-center");
-			c.setAttribute("value",CurrentUser.cognome);
-			cprof.innerText="";
-			cprof.appendChild(c);
+			parent.innerText="";
+			parent.appendChild(c);
+			return c;
+		}
 
-
+		function editInfo(){
+			n2=getElem("n2",nprof,"text",n2,CurrentUser.nome);
+			c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
+			num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
 
 			info.setAttribute("style","display:none");
+
 			btnsub=document.createElement("button");
 			btnsub.setAttribute("type","submit");
 			btnsub.setAttribute("id","btnsub");
 			btnsub.setAttribute("class","btn btn-light btn-sm");
 			btnsub.innerHTML="Save";
-			document.getElementById("inviamodifica").appendChild(btnsub);
+			inviamodifica.appendChild(btnsub);
 			alert("Modify your info");
+
 			btnsub.addEventListener('click',saveInfo);
 		}
 
 		function saveInfo(){
+			var i=0;
 			btnsub.setAttribute("style","display:none");
 			info.setAttribute("style","display:inline");
+
+			var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
+			if(n2.value != novalue && n2.value != "") novalue=n2.value; i++;
+			if(c2.value != cvalue && c2.value != "") cvalue=c2.value; i++;
+			if(num2.value != nvalue && num2.value != "") nvalue=num2.value; i++;
+
+		if(i>0){
 			update(ref(database, "Users/"+ CurrentUser.user),{
-						nome:n.value,
+						nome:novalue,
+						cognome:cvalue,
+						numero:nvalue
 			   })
-			n.setAttribute("style","display:none");
-			nprof.innerText=CurrentUser.nome;
+			nprof.removeChild(n2); n2=null;
+			cprof.removeChild(c2); c2=null;
+			numprof.removeChild(num2); num2=null;
+			nprof.innerText=novalue;
+			cprof.innerText=cvalue;
+			numprof.innerText=nvalue;
+			i=0;
+			}
+		else{
+				alert("Nessuna modifica");
+		   }
 		}
 
 		out.addEventListener('click',signout);

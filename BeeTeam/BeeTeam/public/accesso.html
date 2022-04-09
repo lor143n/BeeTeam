@@ -84,9 +84,9 @@
             };
           
             // Initialize Firebase
-           export const app= initializeApp(firebaseConfig);
-           export const database = getDatabase(app);
-           //const auth=getAuth();
+           const app= initializeApp(firebaseConfig);
+           const database = getDatabase(app);
+           const auth=getAuth();
 
      //REGISTRATION 
             const nome=document.getElementById("nreg");
@@ -123,7 +123,45 @@
                        })
                     }
                 });
+
+                 
+            /*createUserWithEmailAndPassword(auth, email.value, password.value)
+                 .then((userCredential) => {
+                 const u = userCredential.user;
+
+                 get(child(db,"Users/"+ user.value )).then((snapshot)=>{
+                    if(snapshot.exists()){
+                        alert("Account already exists!");
+                    }
+                    else{
+                        set(ref(database, "Users/"+user.value),
+                        {
+                            nome:nome.value,
+                            cognome: cognome.value,
+                            numero: numero.value,
+                            user:user.value,
+                            email:u.email,
+                            foto:"nofoto.jpg",
+                            password: encPass()
+                        })
+                       .then(()=>{
+                           alert("User created");
+                       })
+                       .catch((error)=>{
+                           allert("error: "+error);
+                       })
+                    }
+                });
+
+                 })
+                  .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                  alert(errorMessage);
+              });*/
+                
             }
+           
 
             //ENCRYPTION
 
@@ -147,6 +185,23 @@
             //AUTHENTICATION
             function Authentication(){
                 const db2=ref(database);
+
+
+               /* signInWithEmailAndPassword(auth, userlog.value, passlog.value)
+                   .then((userCredential) => {
+                // Signed in 
+                const u = userCredential.user;
+                let dbpass = decPass(u.password);
+                        if(dbpass==passlog.value){
+                            LoginUser(snapshot.val());
+                        }
+                // ...
+               })
+               .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+                });*/
                 get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
                     if(snapshot.exists()){
                         let dbpass = decPass(snapshot.val().password);
@@ -159,6 +214,8 @@
                     }
                 });
             }
+
+
             function decPass(dbpass){
                 var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
                 return pass12.toString(CryptoJS.enc.Utf8);
