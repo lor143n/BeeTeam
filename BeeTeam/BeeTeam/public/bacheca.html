@@ -88,6 +88,8 @@
                     </div>
                 </div>
 
+                <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button>
+
                 <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" data-bs-offset="0" tabindex="0" id="post">
                     
                 </div>
@@ -221,6 +223,15 @@
                 parent.appendChild(c);
                 return c;   
             }
+
+            //Da connettere con il buttone update
+
+            function updateBacheca(){
+                //prendi ogni tupla dal database, usa la informazioni della tupla per creare il post con att
+                att(/*info da tupla*/)
+            }
+
+
 
             crea.addEventListener('click',NewAttivity);
 
