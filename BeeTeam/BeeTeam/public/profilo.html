@@ -1,281 +1,302 @@
-<!DOCTYPE html>
-<html lang="it">
-	<head>
-		<title> Profilo </title>
-		<meta charset="UTF-8">
+	<!DOCTYPE html>
+	<html lang="it">
+		<head>
+			<title> Profilo </title>
+			<meta charset="UTF-8">
 
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-		<link rel=stylesheet href="main_styles.css" type="text/css">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    	<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+			<meta name="viewport" content="width=device-width,initial-scale=1.0">
+			<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+			<link rel=stylesheet href="main_styles.css" type="text/css">
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+			<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+			
+		</head>
 		
-	</head>
-	
-<body class="text-center" >
+	<body class="text-center" >
 
-	<div class="grid-main-container">
+		<div class="grid-main-container">
 
-		<div class="box-header">
-			<div class="box-header-left">{
-				<a href="accesso.html" class="logo">BeeTeam</a>
-			</div>
-			<div class="box-header-center">
-				<a href="accesso.html" class="image-logo">
-					<img alt="Qries" src="Logoproject.png" width="65" height="65">
-				</a>
-			</div>
-			<div class="box-header-right">
-			  <a href="bacheca.html">Bacheca</a>
-			  <a class="active" href="profilo.html">Profilo</a>
-			</div>
-		</div>
-
-		<div class="box-main-profile">
-			<div class="box-profile">
-				<table width="100%" height="100%">
-					<tr>
-						<td width="30%" valign="middle" align="center"> 
-							Foto Profilo
-							<br>
-						   <img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
-						    <input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
-							<br>
-							<div class="row-mb-4" style="padding-bottom: 3px;">
-							<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
-							<button id="subedit" class="btn btn-light btn-sm">Invia</button>
-							</div>
-
-			
-						</td>
-			
-						<td> 
-							<div class="table" width="100%" >
-							   <div class="row-mb-4" id="nprof" > Nome </div>  
-							   <div class="row-mb-4" id="cprof">Cognome</div>
-							   <div class="row-mb-4" id="userprofil"> Username </div>
-							   <div class="row-mb-4" id="numprof">Numero di telefono</div>
-							   <div class="row-mb-4" id="eprof">Email</div>
-							   <div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
-							   <button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
-							   </div>
-							</div>
-						</td>
-					</tr>
-			   </table>
+			<div class="box-header">
+				<div class="box-header-left">{
+					<a href="accesso.html" class="logo">BeeTeam</a>
+				</div>
+				<div class="box-header-center">
+					<a href="accesso.html" class="image-logo">
+						<img alt="Qries" src="Logoproject.png" width="65" height="65">
+					</a>
+				</div>
+				<div class="box-header-right">
+				<a href="bacheca.html">Bacheca</a>
+				<a class="active" href="profilo.html">Profilo</a>
+				</div>
 			</div>
 
-			<div class="box-post">
-				<div class="box-post-header">
+			<div class="box-main-profile">
+				<div class="box-profile">
 					<table width="100%" height="100%">
 						<tr>
-							<td>
-								<h1>Creati</h1>
+							<td width="30%" valign="middle" align="center"> 
+								Foto Profilo
+								<br>
+							<img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
+								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
+								<br>
+								<div class="row-mb-4" style="padding-bottom: 3px;">
+								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
+								<button id="subedit" class="btn btn-light btn-sm">Invia</button>
+								</div>
+
+				
 							</td>
-							<td>
-								<h1>Aderiti</h1>
+				
+							<td> 
+								<div class="table" width="100%" >
+								<div class="row-mb-4" id="nprof" > Nome </div>  
+								<div class="row-mb-4" id="cprof">Cognome</div>
+								<div class="row-mb-4" id="userprofil"> Username </div>
+								<div class="row-mb-4" id="numprof">Numero di telefono</div>
+								<div class="row-mb-4" id="eprof">Email</div>
+								<div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
+								<button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
+								</div>
+								</div>
 							</td>
-						<tr>
-					</table>
+						</tr>
+				</table>
 				</div>
 
-				<div class="box-post-content-left" >
+				<div class="box-post">
+					<div class="box-post-header">
+						<table width="100%" height="100%">
+							<tr>
+								<td>
+									<h1>Creati</h1>
+								</td>
+								<td>
+									<h1>Aderiti</h1>
+								</td>
+							<tr>
+						</table>
+					</div>
 
+					<div class="box-post-content-left" >
+
+					</div>
+
+					<div class="box-post-content-right">
+
+					</div>
 				</div>
-
-				<div class="box-post-content-right">
-
-				</div>
-			</div>
-		</div class="row" style="align-items: center">
-		<button type="submit" id="logout" class="btn btn-light">Logout</button>
-	</div>
-	
-	<script type="module">
-	        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
-			import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
-           // import * as func2 from "./js/func2.js";
-
-            const firebaseConfig = {
-              apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
-              authDomain: "beeteam-2a5f7.firebaseapp.com",
-              databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
-              projectId: "beeteam-2a5f7",
-              storageBucket: "beeteam-2a5f7.appspot.com",
-              messagingSenderId: "223479016271",
-              appId: "1:223479016271:web:383e9319470cfaf4bd733a",
-              measurementId: "G-04ERX78GQJ"
-            };
-          
-            // Initialize Firebase
-           export const app= initializeApp(firebaseConfig);
-           export const database = getDatabase(app);
-
-		let nprof=document.getElementById("nprof");
-		let cprof=document.getElementById("cprof");
-		let userprof=document.getElementById("userprofil");
-		let numprof=document.getElementById("numprof");
-		let eprof=document.getElementById("eprof");
-		let foto=document.getElementById("fotoprofilo");
-
-		let inviamodifica=document.getElementById("inviamodifica");
-
-
-		const out=document.getElementById("logout");
-		const edit=document.getElementById("editbutton");
-		const sub=document.getElementById("subedit");
-		const info=document.getElementById("editinfo")
-		var percorso=null;
+			</div class="row" style="align-items: center">
+			<button type="submit" id="logout" class="btn btn-light">Logout</button>
+		</div>
 		
-		var storage=getStorage(app);
+		<script type="module">
+				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+				import { getDatabase, set, ref, update , get, child,onValue } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+				import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+				import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
+			// import * as func2 from "./js/func2.js";
+			   //import {att} from "./js/functions.js";
 
-		var CurrentUser=null;
-
-		function getUser(){
-			let keepLog=localStorage.getItem('KeepLog');
-
-			if(keepLog == "yes"){
-				CurrentUser=JSON.parse(localStorage.getItem('user'));
-			}
-			else{
-				CurrentUser=JSON.parse(sessionStorage.getItem('user'));
-			}
-		};
-
-		function signout(){
-			sessionStorage.removeItem('user');
-			localStorage.removeItem('user');
-			localStorage.removeItem('KeepLog');
-			window.location="accesso.html";
-
-		};
-
-		
-
-		function updatePhoto(){
-			const f=document.getElementById("sourcefoto").files[0];
+				const firebaseConfig = {
+				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
+				authDomain: "beeteam-2a5f7.firebaseapp.com",
+				databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
+				projectId: "beeteam-2a5f7",
+				storageBucket: "beeteam-2a5f7.appspot.com",
+				messagingSenderId: "223479016271",
+				appId: "1:223479016271:web:383e9319470cfaf4bd733a",
+				measurementId: "G-04ERX78GQJ"
+				};
 			
-			const metadata = {
-                  contentType: 'image/'+f.type,
-             };
+				// Initialize Firebase
+			export const app= initializeApp(firebaseConfig);
+			export const database = getDatabase(app);
+
+			let nprof=document.getElementById("nprof");
+			let cprof=document.getElementById("cprof");
+			let userprof=document.getElementById("userprofil");
+			let numprof=document.getElementById("numprof");
+			let eprof=document.getElementById("eprof");
+			let foto=document.getElementById("fotoprofilo");
+
+			let inviamodifica=document.getElementById("inviamodifica");
+
+
+			const out=document.getElementById("logout");
+			const edit=document.getElementById("editbutton");
+			const sub=document.getElementById("subedit");
+			const info=document.getElementById("editinfo")
+			var percorso=null;
 			
-			var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
-			var uploadTask= uploadBytesResumable(storageRef,f,metadata)
-				alert("Update Succesfully");
-		
+			var storage=getStorage(app);
 
-			getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-               console.log('File available at', url);
-			   const xhr = new XMLHttpRequest();
-               xhr.responseType = 'blob';
-               xhr.onload = (event) => {
-                   const blob = xhr.response;
-               };
-               xhr.open('GET', url);
-               xhr.send();
-			   foto.setAttribute("src",url);
-			   update(ref(database, "Users/"+CurrentUser.user),{
-						foto:url,
-			   })
-			})
-			.catch((error)=>{
-				alert(error);
-			})
+			var CurrentUser=null;
 
-		};
-		
-		var btnsub=null,c2=null,n2=null, num2=null;
+			function getUser(){
+				let keepLog=localStorage.getItem('KeepLog');
 
-		function getElem(id,parent,type,c,place){
-			c=document.createElement("input");
-			c.setAttribute("type",type);
-			c.setAttribute("id",id);
-			c.setAttribute("placeholder",place);
-			c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
-			c.setAttribute("class","text-warning bg-dark; text-center");
-			parent.innerText="";
-			parent.appendChild(c);
-			return c;
-		}
+				if(keepLog == "yes"){
+					CurrentUser=JSON.parse(localStorage.getItem('user'));
+				}
+				else{
+					CurrentUser=JSON.parse(sessionStorage.getItem('user'));
+				}
+			};
 
-		function editInfo(){
-			n2=getElem("n2",nprof,"text",n2,CurrentUser.nome);
-			c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
-			num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
-
-			info.setAttribute("style","display:none");
-
-			btnsub=document.createElement("button");
-			btnsub.setAttribute("type","submit");
-			btnsub.setAttribute("id","btnsub");
-			btnsub.setAttribute("class","btn btn-light btn-sm");
-			btnsub.innerHTML="Save";
-			inviamodifica.appendChild(btnsub);
-			alert("Modify your info");
-
-			btnsub.addEventListener('click',saveInfo);
-		}
-
-		function saveInfo(){
-			var i=0;
-			btnsub.setAttribute("style","display:none");
-			info.setAttribute("style","display:inline");
-
-			var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
-			if(n2.value != novalue && n2.value != "") novalue=n2.value; i++;
-			if(c2.value != cvalue && c2.value != "") cvalue=c2.value; i++;
-			if(num2.value != nvalue && num2.value != "") nvalue=num2.value; i++;
-
-		if(i>0){
-			update(ref(database, "Users/"+ CurrentUser.user),{
-						nome:novalue,
-						cognome:cvalue,
-						numero:nvalue
-			   })
-			nprof.removeChild(n2); n2=null;
-			cprof.removeChild(c2); c2=null;
-			numprof.removeChild(num2); num2=null;
-			nprof.innerText=novalue;
-			cprof.innerText=cvalue;
-			numprof.innerText=nvalue;
-			i=0;
-			}
-		else{
-				alert("Nessuna modifica");
-		   }
-		}
-
-		out.addEventListener('click',signout);
-		sub.addEventListener('click',updatePhoto);
-		info.addEventListener('click',editInfo);
-
-		window.onload=function() {
-			getUser();
-			if(CurrentUser==null){
-				alert("Non hai effettuato l'accesso!");
+			function signout(){
+				sessionStorage.removeItem('user');
+				localStorage.removeItem('user');
+				localStorage.removeItem('KeepLog');
 				window.location="accesso.html";
 
-			}
-			else{
-				nprof.innerText= CurrentUser.nome;
-				nprof.style="color: white";
-				cprof.innerText= CurrentUser.cognome;
-				cprof.style="color: white";
-				userprof.innerText= CurrentUser.user;
-				userprof.style="color: white";
-				numprof.innerText= CurrentUser.numero;
-				numprof.style="color: white";
-				eprof.innerText= CurrentUser.email;
-				eprof.style="color: white";
-				//alert(CurrentUser.foto);
-				foto.setAttribute("src",CurrentUser.foto);
+			};
 
+			
+
+			function updatePhoto(){
+				const f=document.getElementById("sourcefoto").files[0];
+				
+				const metadata = {
+					contentType: 'image/'+f.type,
+				};
+				
+				var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
+				var uploadTask= uploadBytesResumable(storageRef,f,metadata)
+					alert("Update Succesfully");
+			
+
+				getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+				console.log('File available at', url);
+				const xhr = new XMLHttpRequest();
+				xhr.responseType = 'blob';
+				xhr.onload = (event) => {
+					const blob = xhr.response;
+				};
+				xhr.open('GET', url);
+				xhr.send();
+				foto.setAttribute("src",url);
+				update(ref(database, "Users/"+CurrentUser.user),{
+							foto:url,
+				})
+				})
+				.catch((error)=>{
+					alert(error);
+				})
+
+			};
+			
+			var btnsub=null,c2=null,n2=null, num2=null;
+
+			function getElem(id,parent,type,c,place){
+				c=document.createElement("input");
+				c.setAttribute("type",type);
+				c.setAttribute("id",id);
+				c.setAttribute("placeholder",place);
+				c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
+				c.setAttribute("class","text-warning bg-dark; text-center");
+				parent.innerText="";
+				parent.appendChild(c);
+				return c;
 			}
-		}
-		  
+
+			function editInfo(){
+				n2=getElem("n2",nprof,"text",n2,CurrentUser.nome);
+				c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
+				num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
+
+				info.setAttribute("style","display:none");
+
+				btnsub=document.createElement("button");
+				btnsub.setAttribute("type","submit");
+				btnsub.setAttribute("id","btnsub");
+				btnsub.setAttribute("class","btn btn-light btn-sm");
+				btnsub.innerHTML="Save";
+				inviamodifica.appendChild(btnsub);
+				alert("Modify your info");
+
+				btnsub.addEventListener('click',saveInfo);
+			}
+
+			function saveInfo(){
+				var i=0;
+				btnsub.setAttribute("style","display:none");
+				info.setAttribute("style","display:inline");
+
+				var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
+				if(n2.value != novalue && n2.value != "") novalue=n2.value; i++;
+				if(c2.value != cvalue && c2.value != "") cvalue=c2.value; i++;
+				if(num2.value != nvalue && num2.value != "") nvalue=num2.value; i++;
+
+			if(i>0){
+				update(ref(database, "Users/"+ CurrentUser.user),{
+							nome:novalue,
+							cognome:cvalue,
+							numero:nvalue
+				})
+				nprof.removeChild(n2); n2=null;
+				cprof.removeChild(c2); c2=null;
+				numprof.removeChild(num2); num2=null;
+				nprof.innerText=novalue;
+				cprof.innerText=cvalue;
+				numprof.innerText=nvalue;
+				i=0;
+				}
+			else{
+					alert("Nessuna modifica");
+			}
+			}
+
+			out.addEventListener('click',signout);
+			sub.addEventListener('click',updatePhoto);
+			info.addEventListener('click',editInfo);
+
+			const dbRef = ref(database, "Attivity"+"nonso");
+
+			onValue(dbRef, (snapshot) => {
+			    snapshot.forEach((childSnapshot) => {
+					const childKey = childSnapshot.key;
+					const childData = childSnapshot.val();
+
+					alert(childData.member);
+
+						
+					});
+				}, {
+				onlyOnce: true
+			});
+
+			window.onload=function() {
+				getUser();
+				if(CurrentUser==null){
+					alert("Non hai effettuato l'accesso!");
+					window.location="accesso.html";
+
+				}
+				else{
+					nprof.innerText= CurrentUser.nome;
+					nprof.style="color: white";
+					cprof.innerText= CurrentUser.cognome;
+					cprof.style="color: white";
+					userprof.innerText= CurrentUser.user;
+					userprof.style="color: white";
+					numprof.innerText= CurrentUser.numero;
+					numprof.style="color: white";
+					eprof.innerText= CurrentUser.email;
+					eprof.style="color: white";
+					//alert(CurrentUser.foto);
+					foto.setAttribute("src",CurrentUser.foto);
+					
+
+				}
+			}
+
+				
+
+				
+			
 		
 	</script>
 </body>

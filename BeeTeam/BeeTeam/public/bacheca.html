@@ -90,7 +90,7 @@
 
                 <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button>
 
-                <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" data-bs-offset="0" tabindex="0" id="post">
+                <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" id="post">
                     
                 </div>
             </div>
@@ -98,7 +98,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
 
@@ -126,6 +126,7 @@
             let member =document.getElementById("floatingSelect2").value;
             let type=document.getElementById("floatingSelect");
             var CurrentUser=null,membri=0;
+            let key=null;
 
             if(member=="One") membri=1;
             else if(member=="Two") membri=2;
@@ -143,13 +144,34 @@
                 CurrentUser=JSON.parse(sessionStorage.getItem('user'));
             }
         }
+
             function NewAttivity(){
                 localStorage.setItem('post',parseInt(localStorage.getItem('post'))+1);
                 var idpost = makeid(5);
+                let data=new Date();
                 const post=localStorage.getItem('post');
-                const db=ref(database);
+                const Post=ref(database,"Attivity");
+                var newpost=push(Post);
+                key=newpost.key;
+                set(newpost,{
 
-                get(child(db,"Attivita/"+ idpost)).then((snapshot)=>{
+                            anonymous: anonymous.checked,
+                            member: membri,
+                            type: type.value,
+                            description: description.value,
+                            user: CurrentUser.user,
+                            id: newpost.key,
+                            data : data,
+                            sub: new Array()
+                })
+                   update(ref(database, "Users/"+ CurrentUser.user), {
+                          attivity: newpost.key 
+                          //MI SERVE UN ARRAY DOVE CONCATENARE TUTTI I CODICI DEI POST
+                        })
+
+                    alert("Success!");
+
+                /*get(child(db,"Attivita/"+ idpost)).then((snapshot)=>{
                     if(snapshot.exists()){
                         alert("Attivity already exists!");
                     }
@@ -164,11 +186,15 @@
                             user: CurrentUser.user,
                             id: idpost,
                             data : data,
-                            sub: []
+                            sub:[]
                         })
                        .then(()=>{
                            alert("Attivity created"); 
                            new_post = att(idpost, spazio_post, new_post, type.value, membri,anonymous.checked);
+                           update(ref(database, "Users/"+ CurrentUser.user),{
+							attivity:CurrentUser.attivity+=idpost,
+				        })
+
                            
                            
                        })
@@ -176,9 +202,18 @@
                            alert("error: "+error);
                        })
                     }
-                });
+                });*/
 
             }
+           
+            const commentsRef = ref(database, "Attivity");
+            onChildAdded(commentsRef, (date) => {
+                let c=null;
+                let data=date.val();
+                alert(data.description);
+                att(data.key, spazio_post, c ,data.type, data.member, data.anonymous,data.user );
+            }
+        );
 
             function makeid(length) {
                 var result           = '';
@@ -198,7 +233,7 @@
                 parent.appendChild(cat);
             }
 
-            function att(id,parent,c,categoria,numero_persone,check){
+          export function att(id,parent,c,categoria,numero_persone,check, user){
                 c=document.createElement("div");
                 c.setAttribute("id",id);
                 c.setAttribute("class","box-post-bacheca");
@@ -206,8 +241,8 @@
                 var user_space=document.createElement("div");
                 user_space.setAttribute("class","row");
                 user_space.setAttribute("style","padding-bottom: 0.5px");
-                if(!check) user_space.innerHTML="<b>User: </b>"+CurrentUser.user;
-                else user_space.innerHTML="<b>Anonymous </b><br>";
+                if(!check) user_space.innerHTML="<b>User: </b>"+user;
+                else user_space.innerHTML="<b> Anonymous </b><br>";
                 c.appendChild(user_space);
 
                 const space=document.createElement("div");
@@ -228,7 +263,16 @@
 
             function updateBacheca(){
                 //prendi ogni tupla dal database, usa la informazioni della tupla per creare il post con att
-                att(/*info da tupla*/)
+                  //  att(/*info da tupla*/)
+                  const db=ref(database);
+                   /* const starCountRef = get(child(db,"Attivita/"))
+                onValue(starCountRef, (snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                    const data = childSnapshot.val();
+                    att(data.id,spazio_post,new_post,data.type,data.member,data.anonymous);
+                    });
+               });*/
+                    
             }
 
 
@@ -237,6 +281,8 @@
 
             window.onload=function(){
                 getUser();
+               // updateBacheca();
+
             }
 
         </script>

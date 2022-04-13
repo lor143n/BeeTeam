@@ -128,6 +128,7 @@
             createUserWithEmailAndPassword(auth, email.value, password.value)
                  .then((userCredential) => {
                  const u = userCredential.user;
+                 let array=[];
 
                  get(child(db,"Users/"+ user.value )).then((snapshot)=>{
                     if(snapshot.exists()){
@@ -142,8 +143,8 @@
                             user:user.value,
                             email:u.email,
                             foto:"nofoto.jpg",
-                            password: encPass()
-                            //password:password.value
+                            password: encPass(),
+                            attivity: " "
                         })
                        .then(()=>{
                            alert("User created");
