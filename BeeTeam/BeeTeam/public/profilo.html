@@ -80,11 +80,11 @@
 						</table>
 					</div>
 
-					<div class="box-post-content-left" >
+					<div class="box-post-content-left; scroll" data-bs-spy="scroll" id="spazio_creati">
 
 					</div>
 
-					<div class="box-post-content-right">
+					<div class="box-post-content-right; scroll" data-bs-spy="scroll" id="spazio_aderiti">
 
 					</div>
 				</div>
@@ -94,11 +94,11 @@
 		
 		<script type="module">
 				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-				import { getDatabase, set, ref, update , get, child,onValue } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+				import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 				import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 				import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
 			// import * as func2 from "./js/func2.js";
-			   //import {att} from "./js/functions.js";
+			   import {att} from "./js/functions.js";
 
 				const firebaseConfig = {
 				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -253,21 +253,21 @@
 			sub.addEventListener('click',updatePhoto);
 			info.addEventListener('click',editInfo);
 
-			const dbRef = ref(database, "Attivity"+"nonso");
-
-			onValue(dbRef, (snapshot) => {
-			    snapshot.forEach((childSnapshot) => {
-					const childKey = childSnapshot.key;
-					const childData = childSnapshot.val();
-
-					alert(childData.member);
-
-						
-					});
-				}, {
-				onlyOnce: true
-			});
-
+			let spazio_post=null;
+			const commentsRef = ref(database, "Attivity");
+            onChildAdded(commentsRef, (date) => {
+                let c=null;
+                let data=date.val();
+				
+				if(data.user==CurrentUser.user) spazio_post=document.getElementById("spazio_creati");
+				else {
+					if(data.sub==CurrentUser.user){
+					spazio_post=document.getElementById("spazio_aderiti");
+					}
+				}
+                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description, data.user );
+            }
+        );
 			window.onload=function() {
 				getUser();
 				if(CurrentUser==null){

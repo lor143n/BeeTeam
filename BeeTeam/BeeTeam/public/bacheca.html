@@ -101,6 +101,7 @@
            import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
+           import {att, createElem} from "./js/functions.js";
 
             const firebaseConfig = {
               apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -146,8 +147,6 @@
         }
 
             function NewAttivity(){
-                localStorage.setItem('post',parseInt(localStorage.getItem('post'))+1);
-                var idpost = makeid(5);
                 let data=new Date();
                 const post=localStorage.getItem('post');
                 const Post=ref(database,"Attivity");
@@ -210,22 +209,11 @@
             onChildAdded(commentsRef, (date) => {
                 let c=null;
                 let data=date.val();
-                alert(data.description);
-                att(data.key, spazio_post, c ,data.type, data.member, data.anonymous,data.user );
+                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.user,data.description);
             }
         );
 
-            function makeid(length) {
-                var result           = '';
-                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                var charactersLength = characters.length;
-                for ( var i = 0; i < length; i++ ) {
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                }
-                return result;
-            }
-
-            function createElem(id,text,parent){
+        /*    function createElem(id,text,parent){
                 var cat=document.createElement("div");
                 cat.setAttribute("class","row-mb-1");
                 cat.setAttribute("id","cat"+id);
@@ -233,7 +221,7 @@
                 parent.appendChild(cat);
             }
 
-          export function att(id,parent,c,categoria,numero_persone,check, user){
+          export function att(id,parent,c,categoria,numero_persone,check,descrizione, user){
                 c=document.createElement("div");
                 c.setAttribute("id",id);
                 c.setAttribute("class","box-post-bacheca");
@@ -252,13 +240,13 @@
                 c.appendChild(space);
                 createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
                 c.appendChild(space);
-                createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ description.value, c);
+                createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
                 //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
                 c.appendChild(space);
                 parent.appendChild(c);
                 return c;   
             }
-
+*/
             //Da connettere con il buttone update
 
             function updateBacheca(){
