@@ -9,7 +9,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
         <script type="module" src="./js/functions.js"></script>
-        <script type="module" src="./js/func2.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
         <title>Accesso</title>
     </head>
@@ -70,6 +69,7 @@
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
             import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
             import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+            import { collection, query, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            // import * as func2 from "./js/func2.js";
 
             const firebaseConfig = {
@@ -87,6 +87,7 @@
            const app= initializeApp(firebaseConfig);
            const database = getDatabase(app);
            const auth=getAuth();
+          const fire=getFirestore(app);
 
      //REGISTRATION 
             const nome=document.getElementById("nreg");
@@ -124,11 +125,17 @@
                     }
                 });*/
 
+           //const ref_sub=collection(fire,"users");
                  
             createUserWithEmailAndPassword(auth, email.value, password.value)
                  .then((userCredential) => {
                  const u = userCredential.user;
-                 let array=[];
+
+                 setDoc(doc(fire, "users", user.value), {
+                    creati:[" "],
+                    aderiti:[" "],
+                    numero_creati:0
+                })
 
                  get(child(db,"Users/"+ user.value )).then((snapshot)=>{
                     if(snapshot.exists()){
@@ -143,15 +150,11 @@
                             user:user.value,
                             email:u.email,
                             foto:"nofoto.jpg",
-                            password: encPass(),
-                            attivity: " "
+                            password: encPass()
                         })
                        .then(()=>{
                            alert("User created");
                            window.location="accesso.html";
-                       })
-                       .catch((error)=>{
-                           alert("error: "+error);
                        })
                     }
                 });

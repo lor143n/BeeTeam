@@ -52,10 +52,10 @@
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
                                   <option selected> Select </option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                  <option value="4">Four</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
                                   <option value="5">Five</option>
                                 </select>
                                 <label for="floatingSelect">#Members</label>
@@ -99,6 +99,7 @@
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
            import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
            import {att, createElem} from "./js/functions.js";
@@ -115,8 +116,11 @@
             };
           
             // Initialize Firebase
-           export const app= initializeApp(firebaseConfig);
-           export const database = getDatabase(app);
+            const app= initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const fire=getFirestore(app);
+
+
 
             var new_post = null;
             var spazio_post = document.getElementById("post");
@@ -124,16 +128,10 @@
             let crea=document.getElementById("crea");
             let anonymous=document.getElementById("inlineRadio1");
             let description=document.getElementById("description-area");
-            let member =document.getElementById("floatingSelect2").value;
+            let member =document.getElementById("floatingSelect2");
             let type=document.getElementById("floatingSelect");
-            var CurrentUser=null,membri=0;
+            var CurrentUser=null;
             let key=null;
-
-            if(member=="One") membri=1;
-            else if(member=="Two") membri=2;
-            else if(member=="Three") membri=3;
-            else if(member=="Four") membri=4;
-            else membri=5;
 
             function getUser(){
                 let keepLog=localStorage.getItem('KeepLog');
@@ -152,6 +150,16 @@
                 const Post=ref(database,"Attivity");
                 var newpost=push(Post);
                 key=newpost.key;
+                var membri=parseInt(member.value);
+
+            alert(membri);
+                 
+                setDoc(doc(fire, "post",key ), {
+                       sub:[" "],
+                       sub_restanti: membri,
+                });
+                   
+                
                 set(newpost,{
 
                             anonymous: anonymous.checked,
@@ -159,17 +167,15 @@
                             type: type.value,
                             description: description.value,
                             user: CurrentUser.user,
-                            id: newpost.key,
+                            id: key,
                             data : data,
-                            sub: new Array()
+                            
                 })
-                   update(ref(database, "Users/"+ CurrentUser.user), {
-                          attivity: newpost.key 
-                          //MI SERVE UN ARRAY DOVE CONCATENARE TUTTI I CODICI DEI POST
-                        })
-
+                 updateDoc(doc(fire, "users", CurrentUser.user), {
+                    creati: arrayUnion(key),
+                    numero_creati: increment(1),
+                });
                     alert("Success!");
-
                 /*get(child(db,"Attivita/"+ idpost)).then((snapshot)=>{
                     if(snapshot.exists()){
                         alert("Attivity already exists!");
@@ -209,7 +215,7 @@
             onChildAdded(commentsRef, (date) => {
                 let c=null;
                 let data=date.val();
-                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.user,data.description);
+                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user,key);
             }
         );
 

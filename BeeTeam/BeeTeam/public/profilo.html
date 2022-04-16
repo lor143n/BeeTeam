@@ -10,7 +10,7 @@
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 			<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-			
+			<script type="module" src="./js/functions.js"></script>
 		</head>
 		
 	<body class="text-center" >
@@ -97,8 +97,10 @@
 				import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 				import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 				import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
+				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+
 			// import * as func2 from "./js/func2.js";
-			   import {att} from "./js/functions.js";
+			   import {att,att2,att_sub} from "./js/functions.js";
 
 				const firebaseConfig = {
 				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -114,6 +116,7 @@
 				// Initialize Firebase
 			export const app= initializeApp(firebaseConfig);
 			export const database = getDatabase(app);
+			const fire=getFirestore(app);
 
 			let nprof=document.getElementById("nprof");
 			let cprof=document.getElementById("cprof");
@@ -255,19 +258,34 @@
 
 			let spazio_post=null;
 			const commentsRef = ref(database, "Attivity");
+
             onChildAdded(commentsRef, (date) => {
                 let c=null;
-                let data=date.val();
-				
-				if(data.user==CurrentUser.user) spazio_post=document.getElementById("spazio_creati");
-				else {
-					if(data.sub==CurrentUser.user){
-					spazio_post=document.getElementById("spazio_aderiti");
-					}
+                let dati_utente=date.val();
+				const docRef = doc(fire, "post",date.key);
+				const docSnap =  getDoc(docRef).then((item) =>{
+					const items=item.data();
+				if(dati_utente.user==CurrentUser.user) {
+					spazio_post=document.getElementById("spazio_creati");
+					att2(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+
+					/*if (docSnap.exists()) {
+						//const dati_post=docSnap.data();
+						alert(docSnap.data().sub_restanti);
+					} else {
+					// doc.data() will be undefined in this case
+					console.log("No such document!");
+					}*/
+					//const dati_post=getDoc(doc(fire,"post",date.key)).data();
+					//att(date.key, spazio_post, c ,data.type, data.member,data.description,dati_post.membri);
 				}
-                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description, data.user );
-            }
+				else if(items.sub.includes(CurrentUser.user)){
+					spazio_post=document.getElementById("spazio_aderiti");
+					att_sub(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
+				}
+			}
         );
+			});
 			window.onload=function() {
 				getUser();
 				if(CurrentUser==null){
