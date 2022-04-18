@@ -25,7 +25,7 @@
                     <td>
                         <h1> Accesso </h1>
                         <!--form action="" method="post" id="Bee" onsubmit="Accedi();"-->
-                            <input type="text" class="form-control;text-center; border-1 rounded" name="userlog" id='userlog' placeholder="Username" style="width: 40%; text-align: center; " required autofocus>
+                            <input type="text" class="form-control;text-center; border-1 rounded" name="userlog" id='userlog' placeholder="Email" style="width: 40%; text-align: center; " required autofocus>
                             <div class="mb-1"></div>
                             <input type="password" class="form-control;text-center; border-1 rounded" id="passlog" placeholder="Password"  style="width: 40%;text-align: center;" required>
                             <div class="mb-2"></div>
@@ -67,9 +67,9 @@
         <script type="module">
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-            import { getDatabase, set, ref, update , get, child } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+            import { getDatabase, set, ref, update , get, child,orderByChild, equalTo,query } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
             import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
-            import { collection, query, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+            import { collection, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            // import * as func2 from "./js/func2.js";
 
             const firebaseConfig = {
@@ -87,7 +87,7 @@
            const app= initializeApp(firebaseConfig);
            const database = getDatabase(app);
            const auth=getAuth();
-          const fire=getFirestore(app);
+           const fire=getFirestore(app);
 
      //REGISTRATION 
             const nome=document.getElementById("nreg");
@@ -100,6 +100,7 @@
 
             function RegisterUser(){
                 const db = ref(database);
+                
 
                 /*get(child(db,"Users/"+ user.value )).then((snapshot)=>{
                     if(snapshot.exists()){
@@ -125,48 +126,54 @@
                     }
                 });*/
 
+        
            //const ref_sub=collection(fire,"users");
-                 
-            createUserWithEmailAndPassword(auth, email.value, password.value)
+
+           get(child(db,"Users/")).then((snapshot)=>{
+               var duplicato=false;
+
+                     snapshot.forEach((snapchild)=>{
+                        if(snapchild.val().user==user.value ){
+                             alert("Account already exists!");
+                             duplicato=true;
+                        }
+                     })
+
+                if(duplicato==false){
+                            setDoc(doc(fire, "users", user.value), {
+                                creati:[" "],
+                                aderiti:[" "],
+                                numero_creati: 0
+                            });
+                            
+             createUserWithEmailAndPassword(auth, email.value, password.value)
                  .then((userCredential) => {
+
                  const u = userCredential.user;
+                 alert("User created");
+                 window.location="accesso.html";
 
-                 setDoc(doc(fire, "users", user.value), {
-                    creati:[" "],
-                    aderiti:[" "],
-                    numero_creati:0
-                })
-
-                 get(child(db,"Users/"+ user.value )).then((snapshot)=>{
-                    if(snapshot.exists()){
-                        alert("Account already exists!");
-                    }
-                    else{
-                        set(ref(database, "Users/"+user.value),
-                        {
+                        set(ref(database, "Users/"+u.uid),{
                             nome:nome.value,
                             cognome: cognome.value,
                             numero: numero.value,
                             user:user.value,
+                            uid:u.uid,
                             email:u.email,
                             foto:"nofoto.jpg",
-                            password: encPass()
+                            password: password.value
                         })
-                       .then(()=>{
-                           alert("User created");
-                           window.location="accesso.html";
-                       })
-                    }
-                });
+                   })
 
-                 })
                   .catch((error) => {
                   const errorCode = error.code;
                   const errorMessage = error.message;
                   alert(errorMessage);
               });
-                
+
             }
+           })
+        }
            
 
             //ENCRYPTION
@@ -192,33 +199,39 @@
             function Authentication(){
                 const db2=ref(database);
 
-           get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
-                    if(snapshot.exists()){
-                        let dbpass = decPass(snapshot.val().password);
-                        if(dbpass==passlog.value){
+           //get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
+                    //if(snapshot.exists()){
+                      //  let dbpass = decPass(snapshot.val().password);
+                        //if(dbpass==passlog.value){ 
+           // alert(encPass(passlog.value));
 
-            signInWithEmailAndPassword(auth, snapshot.val().email, passlog.value)
+            signInWithEmailAndPassword(auth, userlog.value, passlog.value)
                    .then((userCredential) => {
                 // Signed in 
+
                 const u = userCredential.user;
                // alert(u.uid);
+
+               get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
                 LoginUser(snapshot.val());
+               })
                 // ...
                })
                .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 alert(errorMessage);
+                window.location="accesso.html";
                 });
-            }
-            else{
-                alert("Incorrect password or username");
-            }
-        }
-        else{
-            alert("Incorrect password or username");
-        }
-    });
+           }
+            //else{
+           //     alert("Incorrect password or username");
+           // }
+        //}
+        //else{
+          //  alert("Incorrect password or username");
+        //}
+  //  });
             
                 /*get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
                     if(snapshot.exists()){
@@ -231,7 +244,7 @@
                            allert("User doesn't exist! ");
                     }
                 });*/
-            }
+           // }
 
 
             function decPass(dbpass){

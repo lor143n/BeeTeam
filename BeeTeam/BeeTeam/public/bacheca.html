@@ -78,7 +78,7 @@
                     <div class="row" style="align-items: center;">
                         <div class="col-md-6">
                             <label class="radio-inline">
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
+                                <input type="checkbox" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
                             </label>
                         </div>
                         <div class="col-md-6">
@@ -88,12 +88,33 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button>
-
-                <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" id="post">
-                    
+            <div class="box-main-bacheca">
+                <div class="box-leftside-bacheca">
+                    <div class="row mb-2" style="align-items: center;">
+                        <label for="description-area" style="text-align: center;"> Ricerca </label>
+                    </div>
+                    <div class="row mb-2" style="align-items: center;">
+                        <select class="form-select" id="floatingSearch" aria-label="Floating label select example">
+                            <option selected> Select </option>
+                            <option value="Film"> Film </option>
+                            <option value="Videogame"> Videogame </option>
+                            <option value="Book"> Book </option>
+                            <option value="Journey"> Journey </option>
+                            <option value="Five">Five</option>
+                        </select>
+                    </div>
+                    <div class="row mb-1">
+                        <button type="submit" class="btn btn-light" style="font-size: small;" id="cerca_post" value="cerca"> Cerca </button> 
+                    </div> 
                 </div>
             </div>
+
+             <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button>
+
+            <div class="box-rightside-bacheca; scroll" data-bs-spy="scroll" id="post">
+                    
+            </div>
+
         </div>
         <script type="module">
            
@@ -176,39 +197,6 @@
                     numero_creati: increment(1),
                 });
                     alert("Success!");
-                /*get(child(db,"Attivita/"+ idpost)).then((snapshot)=>{
-                    if(snapshot.exists()){
-                        alert("Attivity already exists!");
-                    }
-                    else{
-                        let data= new Date();
-                        set(ref(database, "Attivita/"+idpost),
-                        {
-                            anonymous: anonymous.checked,
-                            member: membri,
-                            type: type.value,
-                            description: description.value,
-                            user: CurrentUser.user,
-                            id: idpost,
-                            data : data,
-                            sub:[]
-                        })
-                       .then(()=>{
-                           alert("Attivity created"); 
-                           new_post = att(idpost, spazio_post, new_post, type.value, membri,anonymous.checked);
-                           update(ref(database, "Users/"+ CurrentUser.user),{
-							attivity:CurrentUser.attivity+=idpost,
-				        })
-
-                           
-                           
-                       })
-                       .catch((error)=>{
-                           alert("error: "+error);
-                       })
-                    }
-                });*/
-
             }
            
             const commentsRef = ref(database, "Attivity");
@@ -219,63 +207,13 @@
             }
         );
 
-        /*    function createElem(id,text,parent){
-                var cat=document.createElement("div");
-                cat.setAttribute("class","row-mb-1");
-                cat.setAttribute("id","cat"+id);
-                cat.innerHTML=text;
-                parent.appendChild(cat);
-            }
-
-          export function att(id,parent,c,categoria,numero_persone,check,descrizione, user){
-                c=document.createElement("div");
-                c.setAttribute("id",id);
-                c.setAttribute("class","box-post-bacheca");
-
-                var user_space=document.createElement("div");
-                user_space.setAttribute("class","row");
-                user_space.setAttribute("style","padding-bottom: 0.5px");
-                if(!check) user_space.innerHTML="<b>User: </b>"+user;
-                else user_space.innerHTML="<b> Anonymous </b><br>";
-                c.appendChild(user_space);
-
-                const space=document.createElement("div");
-                space.setAttribute("class","mb-1");
-
-                createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
-                c.appendChild(space);
-                createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
-                c.appendChild(space);
-                createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
-                //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
-                c.appendChild(space);
-                parent.appendChild(c);
-                return c;   
-            }
-*/
-            //Da connettere con il buttone update
-
-            function updateBacheca(){
-                //prendi ogni tupla dal database, usa la informazioni della tupla per creare il post con att
-                  //  att(/*info da tupla*/)
-                  const db=ref(database);
-                   /* const starCountRef = get(child(db,"Attivita/"))
-                onValue(starCountRef, (snapshot) => {
-                    snapshot.forEach((childSnapshot) => {
-                    const data = childSnapshot.val();
-                    att(data.id,spazio_post,new_post,data.type,data.member,data.anonymous);
-                    });
-               });*/
-                    
-            }
-
-
+       
 
             crea.addEventListener('click',NewAttivity);
 
             window.onload=function(){
                 getUser();
-               // updateBacheca();
+              
 
             }
 

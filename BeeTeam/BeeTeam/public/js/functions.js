@@ -61,7 +61,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     parent.appendChild(c);
     return c;   
 }
-
+//pressione del load e aggiornamento delle caselle relative a post e utente
 function loadInfoSub(key){
     var CurrentUser=null;
 
@@ -90,7 +90,7 @@ function loadInfoSub(key){
 
     updateDoc(doc(fire, "post", key), {
         sub_restanti: increment(-1),
-        sub: arrayUnion(CurrentUser.user)
+        sub: arrayUnion(CurrentUser.email)
     });
     alert("Success!");
     };
@@ -99,6 +99,8 @@ function loadInfoSub(key){
         alert(e);
     }
     }
+
+    //format per post creati in profilo
 
 export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     c=document.createElement("div");
@@ -127,7 +129,7 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     parent.appendChild(c);
     return c;   
 }
-
+//post aderiti in profilo
 export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
