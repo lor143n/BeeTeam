@@ -1,6 +1,6 @@
 import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-
+import * as email from "https://smtpjs.com/v3/smtp.js";
 
 
 const firebaseConfig = {
@@ -164,4 +164,44 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
 
     parent.appendChild(c);
     return c;   
+}
+
+export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,sub){
+    c=document.createElement("div");
+    c.setAttribute("id",id);
+    c.setAttribute("class","box-post-bacheca");
+
+    const space=document.createElement("div");
+    space.setAttribute("class","mb-1");
+
+    createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+    c.appendChild(space);
+    createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+    c.appendChild(space);
+    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
+    c.appendChild(space);
+
+    var sub_space=document.createElement("div");
+    sub_space.setAttribute("class","row");
+    sub_space.setAttribute("style","padding-bottom: 0.5px");
+    sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
+    c.appendChild(sub_space);
+
+    var button=document.createElement("button");
+    button.setAttribute("class","btn btn-primary");
+    button.setAttribute("style","text-align:center");
+    button.innerText="Generate Email";
+    c.appendChild(button);
+    
+    button.addEventListener('click',function(){GenerateEmail(id)});
+
+
+
+    parent.appendChild(c);
+    return c;   
+}
+
+
+function GenerateEmail(id){
+    window.location="email.html";
 }

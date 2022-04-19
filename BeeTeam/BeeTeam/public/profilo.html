@@ -100,7 +100,7 @@
 				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 
 			// import * as func2 from "./js/func2.js";
-			   import {att,att2,att_sub} from "./js/functions.js";
+			   import {att,att2,att_sub,att_richiesta} from "./js/functions.js";
 
 				const firebaseConfig = {
 				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -264,10 +264,11 @@
                 let dati_utente=date.val();
 				const docRef = doc(fire, "post",date.key);
 				const docSnap =  getDoc(docRef).then((item) =>{
-					const items=item.data();
-				if(dati_utente.user==CurrentUser.user) {
+				const items=item.data();
+				if(items.creator==CurrentUser.user) {
 					spazio_post=document.getElementById("spazio_creati");
-					att2(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+					if(items.sub_restanti!=0) att2(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+					else att_richiesta(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
 				}
 				else if(items.sub.includes(CurrentUser.email)){
 					spazio_post=document.getElementById("spazio_aderiti");

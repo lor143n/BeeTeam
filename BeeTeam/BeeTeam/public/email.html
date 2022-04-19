@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+        <link rel=stylesheet href="bootstrap/css/bootstrap.css">
+        <title>Send Email</title>
+    </head>
+    <body class="text-center">
+        <div class="row-mb-5;" style="padding-top: 10% ;" >
+            <h1>Send email</h1>
+        </div>
+         <div class="row-mb-3" style="padding-bottom: 2px;">
+            <input type="text" placeholder="Subject" style="width: 20%; height: fit-content; text-align: center ;" id="sub_email" class="border-1 rounded">
+         </div>
+         <div class="row-mb-3" style="padding-bottom: 4px;">
+            <input type="textarea" placeholder="body" style="width: 20%; height: fit-content; text-align:center; height: 120px;" id="body_email" class="border-1 rounded">
+         </div>
+        <div class="row-mb-4">
+            <button type="submit" class="btn btn-primary btn-sm" id="invia_email"> Invia </button>
+        </div>
+
+        <script type="module">
+            let invia=document.getElementById("invia_email");
+            let body=document.getElementById("body_email").value;
+            let subject=document.getElementById("sub_email").value;
+            
+
+
+        </script>
+
+
+    </body>
+</html>
