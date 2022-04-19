@@ -14,14 +14,28 @@ body {
 body {
     align-items: center;
     padding-bottom: 40px;
-    background-color: #191919;
+    background-color: #000000;
 }
 
 /*Main page division*/
 
 .grid-main-container {
   display: grid;
-  grid-auto-rows: auto auto;
+  grid-auto-rows: auto auto 90px;
+  background-color: #191919;
+}
+
+.grid-main-container-access {
+  display: grid;
+  grid-auto-rows: 10% 50% 50% 7%;
+  grid-auto-columns: 1fr 1fr;
+  background-color: #0b0b0b;
+}
+
+.box-footer{
+  grid-column: 1/3;
+  height: 100px;
+  background-color: #000000;
 }
 
 /*Simple Header*/
@@ -30,33 +44,37 @@ body {
     display: grid;
     grid-column: 1/3;
     align-items: center;
-    overflow: hidden;
-    background-color: #191919;
-    padding: 10px 10px;
-    height: 90px;
+    background-color: #000000;
+    height: 1fr;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+    box-shadow: 0px 10px 30px rgb(0, 0, 0);
   }
   
   .box-header a {
     align-content: center;
-    color: #ff8400;
+    color: #ffbf00;
     padding: 12px;
     text-decoration: none;
     font-size: 18px;
     line-height: 25px;
     border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
   }
-  
-  .box-header a.logo {
-    font-family: 'Pacifico', cursive;
-    font-size: 40px;
-    font-weight: lighter;
+
+  .box-header img.written-logo{
+    width: 200px;
+    height: auto;
   }
-  .box-header a.image-logo {
-    padding: 100%;
+
+  .box-header img.image-logo{
+    width: 65px;
+    height: auto;
+    margin: 2%;
   }
   
   .box-header a:hover {
-    background-color: #ff8400a2;
+    background-color: #ffbf00;
     color: #191919;
     border-radius: 30px;
   }
@@ -74,29 +92,24 @@ body {
   
   
   .box-header a.active {
-    background-color: #ff8400;
+    background-color: #ffbf00;
     color: #191919;
   }
   
   .box-header-left {
-    align-items: center;
-    grid-column: 1;
     text-align: left;
+    grid-column: 1;
   }
   
   .box-header-center {
     grid-column: 2;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 0;
+    text-align: center;
   }
   
   .box-header-right {
-    align-items: center;
     text-align: right;
     grid-column: 3;
-    float: right;
+    margin-right: 5%;
   }
 
   /* Bacheca division */
@@ -227,35 +240,106 @@ body {
 
 .box-description {
   grid-column: 1/3;
+  display: grid;
+  grid-auto-columns: 3fr 2fr 1fr 2fr 1fr 2fr 3fr;
   align-items: center;
   overflow: hidden;
-  background-color: #191919;
   padding: 10px 10px;
   height: 350px;
 }
 
-.box-access{
-  background-color: #191919;
-  margin: 15%;
+.box-description h1{
+  font-family: 'Poppins', sans-serif;
+  font-weight:200;
+  color: #ffbf00;
+  margin: 5%;
 }
 
-.box-access h1{
+.box-description-emptyobj1{
+  grid-column: 1;
+}
+
+.box-description-emptyobj2{
+  grid-column: 7;
+}
+
+.box-description-lineobj1{
+  grid-column: 3;
+  border-color:#ffbf00;
+  border-style: solid;
+  border: 10%;
+}
+
+.box-description-lineobj2{
+  grid-column: 5;
+  border-color:#ffbf00;
+  border-style: solid;
+  border: 10%;
+}
+
+.box-description-postobj{
+  grid-column: 2;
+  border-color:#ffbf00;
+  border-style: dotted;
+  border: 10%;
+  border-radius: 20%;
+  margin: 10%;
+  margin-left: 20%;
+  margin-right: 0%;
+}
+.box-description-chooseobj{
+  grid-column: 4;
+  border-color:#ffbf00;
+  border-style: dotted;
+  border: 10%;
+  border-radius: 20%;
+  margin: 10%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+.box-description-createobj{
+  grid-column: 6;
+  border-color:#ffbf00;
+  border-style: dotted;
+  border: 10%;
+  border-radius: 20%;
+  margin: 10%;
+  margin-left: 0%;
+  margin-right: 20%;
+}
+
+.box-access-left {
+  display: grid;
+  text-align: center;
+  background-color:#0b0b0b;
+}
+
+.box-access-left table{
+  margin: auto;
+}
+
+.box-access-left h1{
   font-size: 30px;
-  font-family: 'Pacifico', cursive;
+  font-family:'Poppins', sans-serif;
+  font-weight: 700;
   color: #ff8400;
   padding: 10px;
 }
-.box-access h2{
+.box-access-left h2{
+  font-family:'Poppins', sans-serif;
+  font-weight: 300;
   color: #ff8400;
 }
-.box-access h3{
+.box-access-left h3{
+  font-family:'Poppins', sans-serif;
   color: #ff8400;
 }
-.box-access label{
+.box-access-left label{
+  font-family:'Poppins', sans-serif;
   color: #ff8400;
 }
-.box-access button{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.box-access-left button{
+  font-family:'Poppins', sans-serif;
   font-size: 15px;
   color: #191919;
   border-radius: 20px;
@@ -266,28 +350,33 @@ body {
 }
 
 
-.box-registration{
-  
-  background-color: #ff8400;
-  margin: 10%;
-  border-radius: 20px;
+.box-access-right {
+  background-color: #ffbf00;
+  clip-path: polygon(20% 0%, 100% 0%, 100% 100%, -5% 100%);
 }
 
-.box-registration h1{
+.box-access-right table{
+  margin: auto;
+}
+
+.box-access-right h1{
   font-size: 30px;
-  font-family: 'Pacifico', cursive;
+  font-family:'Poppins', sans-serif;
+  font-weight: 700;
   color: #191919;
   padding: 10px;
 }
-.box-registration h2{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.box-access-right h2{
+  font-family:'Poppins', sans-serif;
+  font-weight: 300;
   color: #191919;
 }
-.box-registration h3{
+.box-access-right h3{
+  font-family:'Poppins', sans-serif;
   color: #191919;
 }
-.box-registration button{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.box-access-right button{
+  font-family:'Poppins', sans-serif;
   font-size: 15px;
   color: #ff8400;
   border-radius: 20px;
