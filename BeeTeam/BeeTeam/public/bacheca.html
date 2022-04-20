@@ -151,6 +151,8 @@
             let description=document.getElementById("description-area");
             let member =document.getElementById("floatingSelect2");
             let type=document.getElementById("floatingSelect");
+            let cerca_post=document.getElementById("cerca_post");
+            let toSearch=document.getElementById("floatingSearch");
             var CurrentUser=null;
             let key=null;
 
@@ -173,12 +175,13 @@
                 key=newpost.key;
                 var membri=parseInt(member.value);
 
-            alert(membri);
+            //alert(membri);
                  
                 setDoc(doc(fire, "post",key ), {
                        sub:[" "],
                        sub_restanti: membri,
-                       creator: CurrentUser.user
+                       creator: CurrentUser.user,
+                       category: type.value
                 });
                    
                 
@@ -208,8 +211,33 @@
             }
         );
 
-       
+             function OnSearch(){
+                 const search=toSearch.value;
+                 const q=query(collection(fire,"post"),where("category","==", search) );
+                 const db2=ref(database);
 
+                 while(spazio_post.hasChildNodes()){
+                        spazio_post.removeChild(spazio_post.firstChild);
+                     }
+                        
+                 getDocs(q).then((doc) => {
+                     doc.forEach((item)=>{ 
+                     var data_key=item.id;
+                     
+                     get(child(db2,"Attivity/"+data_key)).then((snap)=>{
+                        var post_data=snap.val();
+                        var l=spazio_post.childNodes.length;
+                        let c=null;
+                        att(data_key,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user,data_key);
+                     })
+                     
+                    })
+                 })
+               
+
+            }
+
+            cerca_post.addEventListener('click',OnSearch);
             crea.addEventListener('click',NewAttivity);
 
             window.onload=function(){

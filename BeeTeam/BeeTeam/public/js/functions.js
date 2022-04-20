@@ -190,10 +190,10 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     var button=document.createElement("button");
     button.setAttribute("class","btn btn-primary");
     button.setAttribute("style","text-align:center");
-    button.innerText="Generate Email";
+    button.innerText="Show Contact";
     c.appendChild(button);
     
-    button.addEventListener('click',function(){GenerateEmail(id)});
+    button.addEventListener('click',function(){show_sub(id,parent,c)});
 
 
 
@@ -202,6 +202,46 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 }
 
 
-function GenerateEmail(id){
-    window.location="email.html";
+function GenerateEmail(id,parent,c){
+    show_sub(id,parent,c);
+}
+
+export function show_sub(id,parent,c){
+    var child=c;
+    parent.removeChild(c);
+    c=document.createElement("div");
+    c.setAttribute("class","box-post-bacheca; scroll");
+    var inserito=false;
+    const docRef = doc(fire, "post",id);
+	getDoc(docRef).then((item) =>{
+        var items=item.data()
+        var array_sub=items.sub;
+         var x;
+         for(let elem of array_sub){
+             x=document.createElement("div");
+             x.setAttribute("class","row-mb-3");
+             x.innerText=elem;
+             c.appendChild(x);
+             x=null;
+         }
+         inserito=true;
+
+    })
+    while(!inserito){}
+    
+    var button=document.createElement("button");
+    button.setAttribute("class","btn btn-primary btn-sm");
+    button.setAttribute("style","text-align:center");
+    button.innerText="Hide";
+    c.appendChild(button);
+    
+    button.addEventListener('click',function(){hideContact(child,c,parent)});
+
+    parent.appendChild(c);
+    return c;   
+}
+
+function hideContact(child,c,parent){
+    parent.removeChild(c);
+    parent.appendChild(child);
 }
