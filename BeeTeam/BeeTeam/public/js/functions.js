@@ -64,7 +64,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
 //pressione del load e aggiornamento delle caselle relative a post e utente
 function loadInfoSub(key){
     var CurrentUser=null;
-
+    var bool=false;
     let keepLog=localStorage.getItem('KeepLog');
 
 	    if(keepLog == "yes"){
@@ -84,8 +84,15 @@ function loadInfoSub(key){
             }
         })
     if(value){
+    	const docRef = doc(fire, "post",key);
+		getDoc(docRef).then((item) =>{
+            var sub_restanti= item.data().sub_restanti;
+            if(sub_restanti-1==0)  bool=true;
+
+        })
     updateDoc(doc(fire, "users", CurrentUser.user), {
         aderiti: arrayUnion(key),
+        complete:bool,
     });
 
     updateDoc(doc(fire, "post", key), {
@@ -202,10 +209,6 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 }
 
 
-function GenerateEmail(id,parent,c){
-    show_sub(id,parent,c);
-}
-
 export function show_sub(id,parent,c){
     var child=c;
     parent.removeChild(c);
@@ -227,7 +230,7 @@ export function show_sub(id,parent,c){
          inserito=true;
 
     })
-    while(!inserito){}
+    //while(!inserito){}
     
     var button=document.createElement("button");
     button.setAttribute("class","btn btn-primary btn-sm");

@@ -194,6 +194,7 @@
                             user: CurrentUser.user,
                             id: key,
                             data : data,
+                            complete: false,
                             
                 })
                  updateDoc(doc(fire, "users", CurrentUser.user), {
@@ -207,7 +208,7 @@
             onChildAdded(commentsRef, (date) => {
                 let c=null;
                 let data=date.val();
-                att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user,key);
+                if(data.complete==false) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user,key);
             }
         );
 
