@@ -1,12 +1,3 @@
-p {text-align:right; font-style:none}
-h3 {font-size:12px; font-family:arial; color:black;margin-block-end: 0.5px;} 
-h2 {font-size:18px; text-align:center}
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    text-align: center;
-}
-
 body {
     height: 100%;
 }
@@ -27,15 +18,31 @@ body {
 
 .grid-main-container-access {
   display: grid;
-  grid-auto-rows: 10% 50% 50% 7%;
+  grid-auto-rows: auto 50% 50% 30%;
   grid-auto-columns: 1fr 1fr;
   background-color: #0b0b0b;
 }
 
-.box-footer{
+.grid-main-container-intro {
+  display: grid;
+  grid-auto-rows: auto 50% 50% auto;
+  grid-auto-columns: 1fr 1fr;
+  background-color: #0b0b0b;
+}
+
+/*Simple footer*/
+
+.box-footer {
   grid-column: 1/3;
-  height: 100px;
   background-color: #000000;
+  height: 150px;
+}
+
+.box-footer h3 {
+  font-family:'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: small;
+  color: #4d4d4d;
 }
 
 /*Simple Header*/
@@ -45,10 +52,10 @@ body {
     grid-column: 1/3;
     align-items: center;
     background-color: #000000;
-    height: 1fr;
     border-bottom-left-radius: 20%;
     border-bottom-right-radius: 20%;
     box-shadow: 0px 10px 30px rgb(0, 0, 0);
+    height: 90px;
   }
   
   .box-header a {
@@ -65,6 +72,7 @@ body {
   .box-header img.written-logo{
     width: 200px;
     height: auto;
+    margin-left: 38%;
   }
 
   .box-header img.image-logo{
@@ -339,11 +347,13 @@ body {
   padding: 10px;
 }
 .box-access-left h2{
+  font-size: 20px;
   font-family:'Poppins', sans-serif;
   font-weight: 300;
   color: #ffbf00;
 }
 .box-access-left h3{
+  font-size: 10px;
   font-family:'Poppins', sans-serif;
   color: #ffbf00;
 }
@@ -382,11 +392,13 @@ body {
   padding: 10px;
 }
 .box-access-right h2{
+  font-size: 10px;
   font-family:'Poppins', sans-serif;
   font-weight: 300;
   color: #191919;
 }
 .box-access-right h3{
+  font-size: 10px;
   font-family:'Poppins', sans-serif;
   color: #191919;
 }
@@ -398,4 +410,27 @@ body {
   background-color: #191919;
   border-color: #191919;
   margin: 10px;
+}
+
+/* Intro division */
+
+.box-intro-up {
+  grid-column: 1/3;
+  grid-row: 2;
+  display: grid;
+  background-color: #000000;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px 10px;
+  height: 350px;
+}
+
+.box-intro-down {
+  grid-column: 1/3;
+  grid-row: 3;
+  background-color: #0b0b0b;
+  align-items: center;
+  overflow: hidden;
+  background-image: url('trasferimento.jpg');
+  background-size:contain;
 }
