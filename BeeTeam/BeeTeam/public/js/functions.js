@@ -117,6 +117,16 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
+    const dele =document.createElement("button");
+    dele.setAttribute("class","btn btn-light btn-sm");
+    dele.setAttribute("style","font-size:small; background-image : 'rubbish.png' ");
+    c.appendChild(dele);
+    c.appendChild(space);
+    c.appendChild(space);
+
+    dele.addEventListener('click',function(){onDelete(id)});
+
+
     createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
     c.appendChild(space);
     createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
@@ -195,7 +205,7 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     c.appendChild(sub_space);
 
     var button=document.createElement("button");
-    button.setAttribute("class","btn btn-primary");
+    button.setAttribute("class","btn btn-light btn-sm");
     button.setAttribute("style","text-align:center");
     button.innerText="Show Contact";
     c.appendChild(button);
@@ -210,11 +220,10 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 
 
 export function show_sub(id,parent,c){
-    var child=c;
-    parent.removeChild(c);
-    c=document.createElement("div");
-    c.setAttribute("class","box-post-bacheca; scroll");
-    var inserito=false;
+    var child=document.createElement("box-post-bacheca");
+    child.setAttribute("class","scroll");
+    var box=document.createElement("box-post");
+    child.appendChild(box);
     const docRef = doc(fire, "post",id);
 	getDoc(docRef).then((item) =>{
         var items=item.data()
@@ -224,27 +233,25 @@ export function show_sub(id,parent,c){
              x=document.createElement("div");
              x.setAttribute("class","row-mb-3");
              x.innerText=elem;
-             c.appendChild(x);
+             box.appendChild(x);
              x=null;
          }
-         inserito=true;
-
     })
-    //while(!inserito){}
-    
     var button=document.createElement("button");
     button.setAttribute("class","btn btn-primary btn-sm");
     button.setAttribute("style","text-align:center");
     button.innerText="Hide";
-    c.appendChild(button);
-    
+    child.appendChild(button);
     button.addEventListener('click',function(){hideContact(child,c,parent)});
-
-    parent.appendChild(c);
+    parent.replaceChild(child,c);
     return c;   
 }
 
 function hideContact(child,c,parent){
-    parent.removeChild(c);
-    parent.appendChild(child);
+    parent.replaceChild(c,child);
+}
+
+
+function onDelete(id){
+
 }

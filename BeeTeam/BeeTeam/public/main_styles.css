@@ -216,6 +216,14 @@ body {
   margin-right: 2%;
 }
 
+box-sub{
+  margin: 3%; 
+  background-color: transparent;
+  padding: 10%;
+  border: black;
+  border-radius: 20px;
+}
+
 /* Access division */
 
 
