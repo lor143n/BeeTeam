@@ -11,25 +11,26 @@
         <title>Bacheca</title>
     </head>
     <body class="text-center">
-        <div class="grid-main-container">
+        <div class="grid-main-container-bacheca">
 
             <div class="box-header">
-                <div class="box-header-left">{
-                    <a href="accesso.html" class="logo">BeeTeam</a>
-                </div>
-                <div class="box-header-center">
-                    <a href="accesso.html" class="image-logo">
-                        <img alt="Qries" src="Logoproject.png" width="65" height="65">
+				<div class="box-header-left">{
+					<a href="bacheca.html" class="logo">
+                        <img class="written-logo" alt="Qries" src="written_logo.png">
                     </a>
-                </div>
-                <div class="box-header-right">
-                  <a class="active" href="#home">Bacheca</a>
-                  <a href="profilo.html" >Profilo</a>
-                </div>
-            </div>
+				</div>
+				<div class="box-header-center">
+					<img class="image-logo" alt="Qries" src="Logoproject.png" width="65" height="65">
+				</div>
+				<div class="box-header-right">
+				<a class="active" href="bacheca.html">Bacheca</a>
+				<a style="margin-right: 38%;" href="profilo.html">Profilo</a>
+				</div>
+			</div>
 
             <div class="box-main-bacheca">
                 <div class="box-leftside-bacheca"> 
+
                     <div class="row" style="align-items: center;">
                         <h1>  Create a project!  </h1>
                     </div>
@@ -82,16 +83,18 @@
                             </label>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-light" style="font-size: small; " id="crea" value="Crea"> Create </button> 
-                           
+                            <button type="submit" class="btn btn-light" style="font-size: medium" id="crea" value="Crea"> Create </button>  
                         </div>
                     </div>
+                </div> 
+
+                <div class="box-post-bacheca">
+                   <h2>Projects</h2>
                 </div>
 
-            <div class="box-main-bacheca">
-                <div class="box-leftside-bacheca">
+                <div class="box-rightside-bacheca">
                     <div class="row mb-2" style="align-items: center;">
-                        <label for="description-area" style="text-align: center;"> Ricerca </label>
+                        <h1>Ricerca</h1>
                     </div>
                     <div class="row mb-2" style="align-items: center;">
                         <select class="form-select" id="floatingSearch" aria-label="Floating label select example">
@@ -103,16 +106,16 @@
                             <option value="Five">Five</option>
                         </select>
                     </div>
+
                     <div class="row mb-1">
                         <button type="submit" class="btn btn-light" style="font-size:small; " id="cerca_post" value="cerca"> Cerca </button> 
                     </div> 
+                    <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button> 
                 </div>
             </div>
 
-             <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button>
-
-            <div class="box-rightside-bacheca; scroll; " data-bs-spy="scroll" id="post">
-                    
+            <div class="box-footer">
+                <h3>@BeeTea inc.</h3>
             </div>
 
         </div>
