@@ -51,7 +51,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     c.appendChild(space);
 
     var button=document.createElement("button");
-    button.setAttribute("class","btn btn-primary");
+    button.setAttribute("class","btn btn-light btn-sm");
     button.setAttribute("style","text-align:center");
     button.innerText="SUB";
     c.appendChild(button);
@@ -119,12 +119,13 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
 
     const dele =document.createElement("button");
     dele.setAttribute("class","btn btn-light btn-sm");
-    dele.setAttribute("style","font-size:small; background-image : 'rubbish.png' ");
+    dele.setAttribute("style","font-size:small;");
+    dele.innerText="Delect";
     c.appendChild(dele);
     c.appendChild(space);
     c.appendChild(space);
 
-    dele.addEventListener('click',function(){onDelete(id)});
+    dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
 
     createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
@@ -252,6 +253,9 @@ function hideContact(child,c,parent){
 }
 
 
-function onDelete(id){
-
+function onDelete(id,parent,c){
+    parent.removeChild(c);
+    const updates={};
+    updates['/post'+id]=null;
+    return update(ref(fire),updates);
 }
