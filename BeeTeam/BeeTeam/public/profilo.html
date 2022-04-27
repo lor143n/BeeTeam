@@ -9,17 +9,19 @@
 			<link rel=stylesheet href="main_styles.css" type="text/css">
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+	        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;1,100;1,700&display=swap" rel="stylesheet">
 			<script type="module" src="./js/functions.js"></script>
 		</head>
 		
 	<body class="text-center" >
 
-		<div class="grid-main-container">
+		<div class="grid-main-container-profile">
 
 			<div class="box-header">
 				<div class="box-header-left">{
-					<a href="accesso.html" class="logo">BeeTeam</a>
+					<a href="accesso.html" class="logo">
+                        <img class="written-logo" alt="Qries" src="written_logo.png">
+                    </a>
 				</div>
 				<div class="box-header-center">
 					<a href="accesso.html" class="image-logo">
@@ -33,23 +35,21 @@
 			</div>
 
 			<div class="box-main-profile">
-				<div class="box-profile">
+				<div class="box-left-profile">
 					<table width="100%" height="100%">
 						<tr>
-							<td width="30%" valign="middle" align="center"> 
-								Foto Profilo
+							<td width="30%" valign="middle"> 
 								<br>
-							<img name="FotoUtente" src="nofoto.jpg" width="60%" class="border-1 rounded ;" id="fotoprofilo"  >
+								<img name="FotoUtente" src="nofoto.jpg" width="60%" style="border-radius: 100%;" id="fotoprofilo"  >
 								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 								<br>
 								<div class="row-mb-4" style="padding-bottom: 3px;">
 								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
 								<button id="subedit" class="btn btn-light btn-sm">Invia</button>
 								</div>
-
-				
 							</td>
-				
+						</tr>
+						<tr>
 							<td> 
 								<div class="table" width="100%" >
 								<div class="row-mb-4" id="nprof" > Nome </div>  
@@ -57,39 +57,35 @@
 								<div class="row-mb-4" id="userprofil"> Username </div>
 								<div class="row-mb-4" id="numprof">Numero di telefono</div>
 								<div class="row-mb-4" id="eprof">Email</div>
-								<div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
-								<button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
-								</div>
+									<div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
+										<button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
+									</div>
 								</div>
 							</td>
+						</tr>
+						<tr>
+							<button type="submit" id="logout" class="btn btn-light">Logout</button>
 						</tr>
 				</table>
 				</div>
 
-				<div class="box-post">
-					<div class="box-post-header">
-						<table width="100%" height="100%">
-							<tr>
-								<td>
-									<h1>Creati</h1>
-								</td>
-								<td>
-									<h1>Aderiti</h1>
-								</td>
-							<tr>
-						</table>
-					</div>
-
-					<div class="box-post-content-left; scroll" data-bs-spy="scroll" id="spazio_creati">
-
-					</div>
-
-					<div class="box-post-content-right; scroll" data-bs-spy="scroll" id="spazio_aderiti">
-
-					</div>
+				<div class="box-right-profile">
+					<table width="100%" height="10%">
+						<tr>
+							<td>
+								<h1>Creati</h1>
+							</td>
+							<td>
+								<h1>Aderiti</h1>
+							</td>
+						<tr>
+					</table>		
 				</div>
 			</div class="row" style="align-items: center">
-			<button type="submit" id="logout" class="btn btn-light">Logout</button>
+
+			<div class="box-footer">
+                <h3>@BeeTea inc.</h3>
+            </div>
 		</div>
 		
 		<script type="module">
