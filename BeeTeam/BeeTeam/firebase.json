@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "public": "bt",
-    "root":"accesso.html",
+    "public": "public",
+    "root":"intro.html",
     "ignore": [
       "firebase.json",
       "**/.*",
