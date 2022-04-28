@@ -1,4 +1,4 @@
-import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByKey,remove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import * as email from "https://smtpjs.com/v3/smtp.js";
@@ -29,7 +29,7 @@ const firebaseConfig = {
     cat.innerHTML=text;
     parent.appendChild(cat);
     }
-
+//bacheca
 export function att(id,parent,c,categoria,numero_persone,check,descrizione,user, key_post){
     c=document.createElement("div");
     c.setAttribute("id",id);
@@ -181,10 +181,41 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
     sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
     c.appendChild(sub_space);
 
-
+    var button=document.createElement("button");
+    button.setAttribute("class","btn btn-light btn-sm");
+    button.setAttribute("style","text-align:center");
+    button.innerText="Remove sub";
+    c.appendChild(button);
+    button.addEventListener('click',function(){deleteSub(id,parent,c)});
 
     parent.appendChild(c);
     return c;   
+}
+
+function deleteSub(id,parent,c){
+   const richiesta= window.confirm("Sicuro di voler eliminare l'adesione");
+   if(richiesta){
+    let keepLog=localStorage.getItem('KeepLog');
+    var CurrentUser=null;
+
+	    if(keepLog == "yes"){
+			CurrentUser=JSON.parse(localStorage.getItem('user'));
+		}
+		else{
+			CurrentUser=JSON.parse(sessionStorage.getItem('user'));
+		}
+    try{
+    updateDoc(doc(fire, "post", id), {
+        sub_restanti: increment(+1),
+        sub: arrayRemove(CurrentUser.email)
+    });
+    parent.removeChild(c);
+
+  }
+  catch(e){
+      alert(e);
+  }
+}
 }
 
 
@@ -239,7 +270,6 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 
 export function show_sub(id,parent,c){
     var child=document.createElement("box-post-bacheca");
-    child.setAttribute("class","scroll");
     var box=document.createElement("box-post");
     child.appendChild(box);
     const docRef = doc(fire, "post",id);

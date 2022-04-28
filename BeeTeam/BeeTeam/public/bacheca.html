@@ -29,7 +29,7 @@
 			</div>
 
             <div class="box-main-bacheca">
-                <div class="box-leftside-bacheca"> 
+                <div class="box-leftside-bacheca" > 
 
                     <div class="row" style="align-items: center;">
                         <h1>  Create a project!  </h1>
@@ -88,7 +88,7 @@
                     </div>
                 </div> 
 
-                <div class="box-post-bacheca" id ="post" data-bs-spy="scroll">
+                <div class="box-post-bacheca" id ="post" >
                 </div>
 
                 <div class="box-rightside-bacheca">
@@ -123,7 +123,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
@@ -206,7 +206,7 @@
                 });
             }
            
-            const commentsRef = query(ref(database, "Attivity"),orderByChild('data'));
+            const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToLast(3));
             onChildAdded(commentsRef, (date) => {
                 let c=null;
                 let data=date.val();
@@ -245,8 +245,6 @@
 
             window.onload=function(){
                 getUser();
-              
-
             }
 
         </script>
