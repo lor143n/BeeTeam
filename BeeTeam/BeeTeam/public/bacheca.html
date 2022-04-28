@@ -7,7 +7,7 @@
         <link rel=stylesheet href="main_styles.css" type="text/css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;1,100;1,700&display=swap" rel="stylesheet">
         <title>Bacheca</title>
     </head>
     <body class="text-center">
@@ -23,8 +23,8 @@
 					<img class="image-logo" alt="Qries" src="Logoproject.png" width="65" height="65">
 				</div>
 				<div class="box-header-right">
-				<a class="active" href="bacheca.html">Bacheca</a>
-				<a style="margin-right: 38%;" href="profilo.html">Profilo</a>
+				    <a class="active" href="bacheca.html">Bacheca</a>
+				    <a href="profilo.html">Profilo</a>
 				</div>
 			</div>
 
@@ -89,7 +89,6 @@
                 </div> 
 
                 <div class="box-post-bacheca" id ="post" data-bs-spy="scroll">
-                   <h2>Projects</h2>
                 </div>
 
                 <div class="box-rightside-bacheca">
@@ -119,6 +118,8 @@
             </div>
 
         </div>
+
+
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
@@ -180,7 +181,7 @@
 
             //alert(membri);
                  
-                setDoc(doc(fire, "post",key ), {
+                setDoc(doc(fire, "post", key), {
                        sub:[" "],
                        sub_restanti: membri,
                        creator: CurrentUser.user,

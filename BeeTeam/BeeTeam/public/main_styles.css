@@ -12,34 +12,34 @@ body {
 
 .grid-main-container {
   display: grid;
-  grid-auto-rows: auto auto 90px;
+  grid-auto-rows: 10% 150% 10%;
   background-color: #191919;
 }
 
 .grid-main-container-access {
   display: grid;
-  grid-auto-rows: auto 33% 50% 30%;
+  grid-auto-rows: 8% 110% 60% 10%;
   grid-auto-columns: 1fr 1fr;
   background-color: #0b0b0b;
 }
 
 .grid-main-container-intro {
   display: grid;
-  grid-auto-rows: 1fr 8fr 2fr;
+  grid-auto-rows: 0.95fr 9fr 2fr;
   grid-auto-columns: 1fr 1fr;
   background-color: #000000;
 }
 
 .grid-main-container-bacheca {
   display: grid;
-  grid-auto-rows: auto minmax(100px, 1000px) auto;
-  background-color: #0b0b0b;
+  grid-auto-rows: 10% 150% 10%;
 }
 
 .grid-main-container-profile {
   display: grid;
-  grid-auto-rows: auto minmax(100px, 500px) auto;
+  grid-auto-rows: 10% 100% 10%;
   background-color: #0b0b0b;
+
 }
 
 /*Simple footer*/
@@ -65,46 +65,32 @@ body {
     grid-auto-columns: 1fr 1fr 1fr;
     align-items: center;
     background-color: #000000;
-    border-bottom-left-radius: 20%;
-    border-bottom-right-radius: 20%;
-    box-shadow: 0px 10px 30px rgb(0, 0, 0);
-    height: 90px;
+    box-shadow: 0px 10px 40px rgb(0, 0, 0);
   }
   
   .box-header a {
     align-content: center;
     color: #ffbf00;
-    padding: 12px;
+    padding: 2%;
     text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 1vw;
     border-radius: 20px;
     font-family: 'Poppins', sans-serif;
   }
 
   .box-header img.written-logo{
-    width: 200px;
+    width: 25%;
     height: auto;
-    margin-left: 38%;
   }
 
   .box-header img.image-logo{
-    width: 65px;
+    width: 10%;
     height: auto;
-    margin: 2%;
   }
   
   .box-header a:hover {
-    background-color: #ffbf00;
-    color: #191919;
-    border-radius: 30px;
-  }
-  
-  .box-header a.logo:hover {
-    background-color: #ff840000;
-    background-image: linear-gradient(to top, #ff840000 0%, #ff8400 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-color: #ffbf00c1;
+    color: #000000;
   }
   
   .box-header a.image-logo:hover {
@@ -114,7 +100,7 @@ body {
   
   .box-header a.active {
     background-color: #ffbf00;
-    color: #191919;
+    color: #000000;
   }
   
   .box-header-left {
@@ -123,14 +109,13 @@ body {
   }
   
   .box-header-center {
-    grid-column: 2;
     text-align: center;
+    grid-column: 2;
   }
   
   .box-header-right {
     text-align: right;
     grid-column: 3;
-    margin-right: 5%;
   }
 
   /* Bacheca division */
@@ -139,8 +124,9 @@ body {
     display: grid;
     grid-column: 1/3;
     grid-auto-columns: 1fr 2fr 1fr;
-    padding-left: 2%;
-    padding-right: 2%;
+    background-color: #0b0b0b;
+    /*background-image: url("1063.jpg");
+    background-size: cover;*/
   }
 
   .box-main-bacheca h1{
@@ -160,24 +146,28 @@ body {
   .box-rightside-bacheca {
     height: 30%;
     grid-column: 3;
-    margin: 10%;
-    background-color:#ffbf00;
+    margin: 10% 0% 10% 10%;
+    background-color:#ffbf00e1;
     padding: 10%;
-    border-radius: 20px;
-
+    border-radius: 20px 0% 0% 20px;
   }
   
   .box-leftside-bacheca {
     height: 50%;
     grid-column: 1;
-    margin: 10%;
-    background-color:#ffbf00;
+    margin: 10% 10% 10% 0%;
+    background-color:#ffbf00e1;
     padding: 10%;
-    border-radius: 20px;
+    border-radius: 0% 20px 20px 0%;
   }
    /*MODIFICATO MARGIN PER FAR SI CHE NON FOSSERO ATTACCATI I BLOCCHI*/
   .box-post-bacheca {
-    margin: 10%;
+    margin: 5% 5% 0% 5%;
+    border-radius: 20px 20px 0% 0%;
+    border-color: #ffbf00;
+    border-style: dotted;
+    border-width: thick;
+    padding: 5%;
     grid-column: 2;
   }
 
@@ -213,9 +203,8 @@ body {
 
 .box-sub{
   margin: 3%; 
-  background-color: transparent;
+  background-color:#ffbf00;
   padding: 10%;
-  border: black;
   border-radius: 20px;
 }
 
@@ -254,9 +243,10 @@ body {
   display: grid;
   grid-auto-columns: 4fr 2fr 1fr 2fr 1fr 2fr 4fr;
   align-items: center;
-  overflow: hidden;
-  padding: 10px 10px;
-  height: 350px;
+  background-image: url("ao.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .box-description h1{
@@ -344,14 +334,13 @@ body {
 }
 
 .box-access-left h1{
-  font-size: 30px;
+  font-size: 1.5vw;
   font-family:'Poppins', sans-serif;
   font-weight: 700;
   color: #ffbf00;
-  padding: 10px;
 }
 .box-access-left h2{
-  font-size: 20px;
+  font-size: 1vw;
   font-family:'Poppins', sans-serif;
   font-weight: 300;
   color: #ffbf00;
