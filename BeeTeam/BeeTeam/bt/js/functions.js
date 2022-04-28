@@ -1,4 +1,5 @@
-import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByKey,remove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import * as email from "https://smtpjs.com/v3/smtp.js";
 
@@ -17,12 +18,14 @@ const firebaseConfig = {
   // Initialize Firebase
  const app= initializeApp(firebaseConfig);
  const fire=getFirestore(app);
+ const database=getDatabase(app);
 
 
  export function createElem(id,text,parent){
     var cat=document.createElement("div");
     cat.setAttribute("class","row-mb-1");
     cat.setAttribute("id","cat"+id);
+    cat.setAttribute("style"," color: #ffbf00c1")
     cat.innerHTML=text;
     parent.appendChild(cat);
     }
@@ -42,7 +45,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
-    createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+    createElem("cat"+id,"<b>Categoria: </b>"+ categoria,c);
     c.appendChild(space);
     createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
     c.appendChild(space);
@@ -76,7 +79,7 @@ function loadInfoSub(key){
     try{
         var value=true;
         const docRef=doc(fire,"post",key);
-        const ref= getDoc(docRef).then((snapref)=>{
+        getDoc(docRef).then((snapref)=>{
             if(snapref.data().sub_restanti==0) value=false;
             else if(snapref.data().sub.includes(CurrentUser.user)){
                 value=false;
@@ -116,11 +119,11 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
-
-    const dele =document.createElement("button");
-    dele.setAttribute("class","btn btn-light btn-sm");
-    dele.setAttribute("style","font-size:small;");
-    dele.innerText="Delect";
+    
+    const dele =document.createElement("img");
+    dele.setAttribute("width","5%");
+    dele.setAttribute("style","border-radius:30%;");
+    dele.setAttribute("src","rubbish.jpg");
     c.appendChild(dele);
     c.appendChild(space);
     c.appendChild(space);
@@ -184,6 +187,7 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
     return c;   
 }
 
+
 export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
@@ -191,6 +195,19 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
+
+    const dele =document.createElement("img");
+    dele.setAttribute("width","5%");
+    dele.setAttribute("style","border-radius:30%; color:#ffbf00c1");
+    //dele.innerText="Delect";
+    dele.setAttribute("src","rubbish.jpg");
+    c.appendChild(dele);
+    dele.addEventListener('click',function(){onDelete(id,parent,c)});
+
+
+    c.appendChild(space);
+    c.appendChild(space);
+
 
     createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
     c.appendChild(space);
@@ -254,8 +271,12 @@ function hideContact(child,c,parent){
 
 
 function onDelete(id,parent,c){
+    const richiesta=window.confirm("Elimina post");
+    if (richiesta){
     parent.removeChild(c);
-    const updates={};
-    updates['/post'+id]=null;
-    return update(ref(fire),updates);
+    const up={}
+    up['/Attivity/'+id]=null;
+    update(ref(database),up);
+    deleteDoc(doc(fire,"post",id));
+    }
 }

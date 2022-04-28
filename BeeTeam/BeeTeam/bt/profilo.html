@@ -15,7 +15,7 @@
 		
 	<body class="text-center" >
 
-		<div class="grid-main-container-profile" data-bs-spy="scroll">
+		<div class="grid-main-container-profile">
 
 			<div class="box-header">
 				<div class="box-header-left">{
@@ -45,7 +45,7 @@
 								<br>
 								<div class="row-mb-4" style="padding-bottom: 3px;">
 								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
-								<button id="subedit" class="btn btn-light btn-sm">Invia</button>
+								<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
 								</div>
 							</td>
 						</tr>
@@ -92,7 +92,7 @@
 		
 		<script type="module">
 				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-				import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+				import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByChild,limitToLast} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 				import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 				import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
 				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
@@ -255,7 +255,9 @@
 			info.addEventListener('click',editInfo);
 
 			let spazio_post=null;
-			const commentsRef = ref(database, "Attivity");
+			const date2= new Date();
+
+			const commentsRef = query(ref(database, "Attivity"),orderByChild('data'));
 
             onChildAdded(commentsRef, (date) => {
                 let c=null;

@@ -1,10 +1,12 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "bt",
+    "root":"accesso.html",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "public"
     ],
     "port": 5000,
     "host": "0.0.0.0"

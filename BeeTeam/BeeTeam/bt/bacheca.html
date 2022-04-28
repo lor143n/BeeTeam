@@ -70,8 +70,8 @@
                         </div>    
                     </div>
                     <div class="mb-4"></div>
-                    <div class="row" style="align-items:center;">
-                        <label for="description-area" style="text-align: left;"> Description </label>
+                    <div class="row;" style="align-items:center;">
+                        <label for="description-area" style="text-align: left; "> Description </label>
                         <div class="mb-2"></div>
                         <textarea id="description-area" class="md-textarea form-control" rows="4" id="description-area"></textarea> 
                     </div>
@@ -123,7 +123,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
@@ -172,7 +172,7 @@
         }
 
             function NewAttivity(){
-                let data=new Date();
+                let data=new Date().getTime();
                 const post=localStorage.getItem('post');
                 const Post=ref(database,"Attivity");
                 var newpost=push(Post);
@@ -187,7 +187,6 @@
                        creator: CurrentUser.user,
                        category: type.value
                 });
-                   
                 
                 set(newpost,{
 
@@ -197,7 +196,7 @@
                             description: description.value,
                             user: CurrentUser.user,
                             id: key,
-                            data : data,
+                            data : data* -1,
                             complete: false,
                             
                 })
@@ -205,10 +204,9 @@
                     creati: arrayUnion(key),
                     numero_creati: increment(1),
                 });
-                    alert("Success!");
             }
            
-            const commentsRef = ref(database, "Attivity");
+            const commentsRef = query(ref(database, "Attivity"),orderByChild('data'));
             onChildAdded(commentsRef, (date) => {
                 let c=null;
                 let data=date.val();

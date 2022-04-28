@@ -123,34 +123,7 @@
 
             function RegisterUser(){
                 const db = ref(database);
-                
-
-                /*get(child(db,"Users/"+ user.value )).then((snapshot)=>{
-                    if(snapshot.exists()){
-                        alert("Account already exists!");
-                    }
-                    else{
-                        set(ref(database, "Users/"+user.value),
-                        {
-                            nome:nome.value,
-                            cognome: cognome.value,
-                            numero: numero.value,
-                            user:user.value,
-                            email:email.value,
-                            foto:"nofoto.jpg",
-                            password: encPass()
-                        })
-                       .then(()=>{
-                           alert("User created");
-                       })
-                       .catch((error)=>{
-                           allert("error: "+error);
-                       })
-                    }
-                });*/
-
-        
-           //const ref_sub=collection(fire,"users");
+      
 
            get(child(db,"Users/")).then((snapshot)=>{
                var duplicato=false;
@@ -222,12 +195,6 @@
             function Authentication(){
                 const db2=ref(database);
 
-           //get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
-                    //if(snapshot.exists()){
-                      //  let dbpass = decPass(snapshot.val().password);
-                        //if(dbpass==passlog.value){ 
-           // alert(encPass(passlog.value));
-
             signInWithEmailAndPassword(auth, userlog.value, passlog.value)
                    .then((userCredential) => {
                 // Signed in 
@@ -247,28 +214,6 @@
                 window.location="accesso.html";
                 });
            }
-            //else{
-           //     alert("Incorrect password or username");
-           // }
-        //}
-        //else{
-          //  alert("Incorrect password or username");
-        //}
-  //  });
-            
-                /*get(child(db2,"Users/"+ userlog.value )).then((snapshot)=>{
-                    if(snapshot.exists()){
-                        let dbpass = decPass(snapshot.val().password);
-                        if(dbpass==passlog.value){
-                            LoginUser(snapshot.val());
-                        }
-                    }
-                    else{
-                           allert("User doesn't exist! ");
-                    }
-                });*/
-           // }
-
 
             function decPass(dbpass){
                 var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
@@ -295,7 +240,6 @@
             login.addEventListener('click',Authentication);
         
           </script>
-          <!--script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script-->
             
     </body>
 </html>
