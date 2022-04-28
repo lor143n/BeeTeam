@@ -5,39 +5,46 @@ body {
 body {
     align-items: center;
     padding-bottom: 40px;
-    background-color: #000000;
+    background-color:#0b0b0b
 }
 
 /*Main page division*/
 
 .grid-main-container {
   display: grid;
-  grid-auto-rows: 10% 150% 10%;
+  grid-auto-rows: 10vh 150% 10%;
   background-color: #191919;
 }
 
 .grid-main-container-access {
   display: grid;
-  grid-auto-rows: 8% 110% 60% 10%;
+  grid-auto-rows: 8vh 70% auto 40% 10%;
   grid-auto-columns: 1fr 1fr;
-  background-color: #0b0b0b;
+  background-color:#0b0b0b
+}
+
+.grid-main-container-access hr{
+  grid-column: 1/3;
+  margin-left: 18%;
+  margin-right: 18%;
+  color: antiquewhite;
 }
 
 .grid-main-container-intro {
   display: grid;
-  grid-auto-rows: 0.95fr 9fr 2fr;
+  grid-auto-rows: 8vh 9fr 2fr;
   grid-auto-columns: 1fr 1fr;
   background-color: #000000;
 }
 
 .grid-main-container-bacheca {
   display: grid;
-  grid-auto-rows: 10% 150% 10%;
+  grid-auto-rows: 8vh 150% 10%;
 }
 
 .grid-main-container-profile {
   display: grid;
-  grid-auto-rows: 10% 100% 10%;
+  grid-auto-rows: 10vh 100% 10%;
   background-color: #0b0b0b;
 
 }
@@ -124,7 +131,6 @@ body {
     display: grid;
     grid-column: 1/3;
     grid-auto-columns: 1fr 2fr 1fr;
-    background-color: #0b0b0b;
     /*background-image: url("1063.jpg");
     background-size: cover;*/
   }
@@ -240,11 +246,7 @@ body {
 
 .box-description {
   grid-column: 1/3;
-  display: grid;
-  grid-auto-columns: 4fr 2fr 1fr 2fr 1fr 2fr 4fr;
   align-items: center;
-  background-image: url("ao.jpg");
-  background-size: cover;
   width: 100%;
   height: 100%;
 }
@@ -312,21 +314,19 @@ body {
 
 .box-access {
   display: grid;
-  background-color: #ffbf00;
   grid-auto-columns: 1fr 1fr;
   grid-column: 1/3;
-  background-image: url('try.png');
-  background-size: cover;
 }
 
 .box-access-left {
   display: grid;
   grid-column: 1;
   text-align: center;
-  margin: 1% 0% 1% 30%;
-  background-color: #0b0b0bEF;
-  clip-path: polygon(0% 0%, 90% 0%,100% 100%,0% 100%);
-  border-radius: 5% 0% 0% 5%;
+  margin: 1% 0% 1% 40%;
+  background-color: #000000;
+  clip-path: polygon(0% 0%, 95% 0%,100% 100%,0% 100%);
+  border-radius: 20px 0% 0% 20px;
+  padding: 2%;
 }
 
 .box-access-left table{
@@ -368,8 +368,14 @@ body {
 
 .box-access-right {
   grid-column: 2;
-  border-radius: 2%;
-  margin: 10% 30% 1% 0%;
+  clip-path: polygon(0% 0%, 100% 0%,100% 100%,5% 100%);
+  margin: 1% 40% 1% 0%;
+  overflow: visible;
+  background-image: url('try.png');
+  background-size: cover;
+  background-color: #ffbf00;
+  border-radius: 0% 20px 20px 0%;
+  padding: 9%;
 }
 
 .box-access-right table{
