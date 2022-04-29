@@ -28,8 +28,6 @@ body {
   display: grid;
   grid-auto-rows: 8vh 100% 20vh;
   grid-auto-columns: 1fr 1fr;
-  background-image: url('cooperation_image.jpg');
-  background-size: cover;
 }
 
 .grid-main-container-bacheca {
@@ -49,6 +47,7 @@ body {
 .box-footer {
   grid-column: 1/3;
   background-color: #000000;
+  padding: 5%;
 }
 
 .box-footer h3 {
@@ -68,6 +67,13 @@ body {
     background-color: #000000;
     box-shadow: 0px 10px 40px rgb(0, 0, 0);
   }
+
+  .box-header h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 2vw;
+    color: #ffbf00;
+  }
   
   .box-header a {
     align-content: center;
@@ -78,10 +84,15 @@ body {
     border-radius: 20px;
     font-family: 'Poppins', sans-serif;
   }
+  
+  .box-header a:hover {
+    background-color: #ffbf00c1;
+    color: #000000;
+  }
 
-  .box-header img.written-logo{
-    width: 25%;
-    height: auto;
+  .box-header a.active {
+    background-color: #ffbf00;
+    color: #000000;
   }
 
   .box-header img.image-logo{
@@ -89,19 +100,8 @@ body {
     height: auto;
   }
   
-  .box-header a:hover {
-    background-color: #ffbf00c1;
-    color: #000000;
-  }
-  
-  .box-header a.image-logo:hover {
+  .box-header img.image-logo:hover {
     background-color: #ff840000;
-  }
-  
-  
-  .box-header a.active {
-    background-color: #ffbf00;
-    color: #000000;
   }
   
   .box-header-left {
@@ -408,8 +408,15 @@ body {
 
 /* Intro division */
 
+.box-background-intro {
+  grid-column: 1/3;
+  background-image: url('cooperation_image.jpg');
+  background-size: cover;
+}
 
 .box-intro {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-auto-columns: 1fr 2fr 1fr;
   grid-column: 1/3;
