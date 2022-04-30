@@ -38,7 +38,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");
     user_space.setAttribute("style","padding-bottom: 0.5px");
-    if(!check) user_space.innerHTML="<b> User: </b>"+user;
+    if(!check) user_space.innerHTML="<h1> User: </h1>"+user;
     else user_space.innerHTML="<b> Anonymous </b><br>";
     c.appendChild(user_space);
 
