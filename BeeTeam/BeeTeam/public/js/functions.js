@@ -53,8 +53,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
     c.appendChild(space);
 
-    var button=document.createElement("button");
-    button.setAttribute("class","btn btn-light btn-sm");
+    var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
     button.innerText="SUB";
     c.appendChild(button);
@@ -181,8 +180,7 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
     sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
     c.appendChild(sub_space);
 
-    var button=document.createElement("button");
-    button.setAttribute("class","btn btn-light btn-sm");
+    var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
     button.innerText="Remove sub";
     c.appendChild(button);
@@ -222,7 +220,7 @@ function deleteSub(id,parent,c){
 export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
-    c.setAttribute("class","box-post-bacheca");
+    c.setAttribute("class","box-activity");
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
@@ -253,8 +251,7 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
     c.appendChild(sub_space);
 
-    var button=document.createElement("button");
-    button.setAttribute("class","btn btn-light btn-sm");
+    var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
     button.innerText="Show Contact";
     c.appendChild(button);

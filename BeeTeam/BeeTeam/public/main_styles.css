@@ -173,12 +173,42 @@ body {
   }
 
   .box-activity {
-    margin: 5% 5% 0% 5%;
-    border-radius: 20px 20px 0% 0%;
-    border-color: #ffbf00;
-    border-style: dotted;
-    border-width: thick;
+    margin: 5%;
+    border-radius: 20px;
+    background-color: #ffbf00;
     padding: 5%;
+  }
+
+  .box-activity h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1vw;
+    color: #000000;
+  }
+
+  .box-activity b{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 0.5vw;
+    color: #000000;
+  }
+
+  .box-activity a{
+    color: #000000;
+    font-family:'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1vw;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #ffbf00;
+    border-color: transparent;
+    padding: 1% 5% 1% 5%;
+  }
+  
+  .box-activity a:hover{
+    color: #ffbf00;
+    background-color:#000000;
+    border-color: #ffbf00;
   }
 
   /* Profile division */
