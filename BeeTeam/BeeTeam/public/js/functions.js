@@ -30,7 +30,7 @@ const firebaseConfig = {
     parent.appendChild(cat);
     }
 //bacheca
-export function att(id,parent,c,categoria,numero_persone,check,descrizione,user, key_post){
+export function att(id,parent,c,categoria,numero_persone,check,descrizione,user){
     c=document.createElement("div");
     c.setAttribute("id",id);
     c.setAttribute("class","box-activity");
@@ -38,24 +38,25 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");
     user_space.setAttribute("style","padding-bottom: 0.5px");
-    if(!check) user_space.innerHTML="<h1> User: </h1>"+user;
+    if(!check) user_space.innerHTML=" <b> User:  "+ user +"</b>";
     else user_space.innerHTML="<b> Anonymous </b><br>";
     c.appendChild(user_space);
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
-    createElem("cat"+id,"<b>Categoria: </b>"+ categoria,c);
+    createElem("cat"+id,"<b>Categoria:  "+ categoria +"</b>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
+    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"<b>"+descrizione+"</b>", c);
     //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
     c.appendChild(space);
 
     var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
     button.innerText="SUB";
+    button.setAttribute("style","color:white");
     c.appendChild(button);
     
     button.addEventListener('click',function(){loadInfoSub(id)})
@@ -109,7 +110,7 @@ function loadInfoSub(key){
     }
     }
 
-    //format per post creati in profilo
+    //post creati in profilo
 
 export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     c=document.createElement("div");
@@ -130,18 +131,18 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
 
-    createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+    createElem("cat"+id,"<b>Categoria:  "+categoria+"</b>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
+    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"<b>" +descrizione+"</b>", c);
     //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
+    sub_space.innerHTML="<b>Posti disponibili:  "+sub+"</b>";
     c.appendChild(sub_space);
 
 
@@ -159,30 +160,32 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");
     user_space.setAttribute("style","padding-bottom: 0.5px");
-    if(!check) user_space.innerHTML="<b> User: </b>"+user;
+    if(!check) user_space.innerHTML="<b> User: "+user+"</b>";
     else user_space.innerHTML="<b> Anonymous </b><br>";
     c.appendChild(user_space);
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
-    createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+    createElem("cat"+id,"<b>Categoria  :"+categoria+"</b>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
+    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"</b>"+ descrizione+"</b>", c);
     //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
+    sub_space.innerHTML="<b>Posti disponibili:"+sub+"</b>";
     c.appendChild(sub_space);
 
     var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
     button.innerText="Remove sub";
+    button.setAttribute("style","color:white");
+
     c.appendChild(button);
     button.addEventListener('click',function(){deleteSub(id,parent,c)});
 
@@ -216,7 +219,7 @@ function deleteSub(id,parent,c){
 }
 }
 
-
+//fine posti in profilo
 export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
@@ -238,17 +241,17 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     c.appendChild(space);
 
 
-    createElem("cat"+id,"<b>Categoria: </b>"+categoria,c);
+    createElem("cat"+id,"<b>Categoria:  "+categoria+"</b>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti: </b>" + numero_persone,c);
+    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ descrizione, c);
+    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ "<b>"+descrizione+"</b>", c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili: <b>"+sub+"</b>";
+    sub_space.innerHTML="<b>Posti disponibili: "+sub+"</b>";
     c.appendChild(sub_space);
 
     var button=document.createElement("a");
