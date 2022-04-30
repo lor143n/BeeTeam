@@ -33,7 +33,7 @@ const firebaseConfig = {
 export function att(id,parent,c,categoria,numero_persone,check,descrizione,user, key_post){
     c=document.createElement("div");
     c.setAttribute("id",id);
-    c.setAttribute("class","box-post-bacheca");
+    c.setAttribute("class","box-activity");
 
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");

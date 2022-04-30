@@ -172,6 +172,15 @@ body {
     grid-column: 2;
   }
 
+  .box-activity {
+    margin: 5% 5% 0% 5%;
+    border-radius: 20px 20px 0% 0%;
+    border-color: #ffbf00;
+    border-style: dotted;
+    border-width: thick;
+    padding: 5%;
+  }
+
   /* Profile division */
 
 .box-main-profile {
