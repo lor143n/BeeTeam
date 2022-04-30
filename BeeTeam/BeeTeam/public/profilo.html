@@ -18,13 +18,12 @@
 		<div class="grid-main-container-profile">
 
 			<div class="box-header">
-				<div class="box-header-left">{
-					<h1> BEETEAM </h1>
+				<div class="box-header-left">
+					<span style="font-weight: 800; color: #ffbf00; font-size: 2vw;">BEE</span>
+					<span style="font-weight: 100; color: #ffbf00; font-size: 2vw;">TEAM</span>
 				</div>
 				<div class="box-header-center">
-					<a href="accesso.html" class="image-logo">
-						<img alt="Qries" src="Logoproject.png" width="65" height="65">
-					</a>
+					<img alt="Qries" src="Logoproject.png" width="65" height="65">
 				</div>
 				<div class="box-header-right">
 				<a href="bacheca.html">Bacheca</a>
@@ -33,12 +32,12 @@
 			</div>
 
 			<div class="box-main-profile">
-				<div class="box-left-profile">
+				<div class="box-up-profile">
 					<table width="100%" height="100%">
 						<tr>
 							<td width="30%" valign="middle"> 
 								<br>
-								<img name="FotoUtente" src="nofoto.jpg" width="60%" style="border-radius: 100%;" id="fotoprofilo"  >
+								<img name="FotoUtente" src="nofoto.jpg" width="80%" style="border-radius: 100px;" id="fotoprofilo"  >
 								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 								<br>
 								<div class="row-mb-4" style="padding-bottom: 3px;">
@@ -46,46 +45,40 @@
 								<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
 								</div>
 							</td>
-						</tr>
-						<tr>
 							<td> 
 								<div class="table" width="100%" >
-								<div class="row-mb-4" id="nprof" > Nome </div>  
-								<div class="row-mb-4" id="cprof">Cognome</div>
+								<div class="row-mb-4" > 
+									<span id="nprof" style="font-weight: 400;">Nome</span>  
+									<span id="cprof">Cognome</span>
+								</div>  
 								<div class="row-mb-4" id="userprofil"> Username </div>
 								<div class="row-mb-4" id="numprof">Numero di telefono</div>
 								<div class="row-mb-4" id="eprof">Email</div>
-									<div class="row-mb-4" style="padding-top: 3px;" id="inviamodifica">
-										<button type="submit" id="editinfo" class="btn btn-light btn-sm" style="font-size: small; align-self:center; align-content:center;">Edit</button>
-									</div>
+								<div class="row-mb-4" style="padding-top: 5%;" id="inviamodifica">
+										<button type="submit" id="editinfo" class="btn btn-light btn-sm">Edit</button>
+										<button type="submit" id="logout" class="btn btn-light">Logout</button>
+								</div>
 								</div>
 							</td>
-						</tr>
-						<tr>
-							<button type="submit" id="logout" class="btn btn-light">Logout</button>
 						</tr>
 				</table>
 				</div>
 
-				<div class="box-right-profile" >  
-					<table width="100%" height="10%">
-						<tr>
-							<td>
-								<h1>Creati</h1>
-								<div  id="spazio_creati"></div>
-							</td>
-							<td>
-								<h1>Aderiti</h1>
-								<div id="spazio_aderiti"></div>
-							</td>
-						<tr>
-					</table>		
+				<div class="box-down-profile" > 
+					
+					<div class="box-down-left-profile" id="spazio_creati">
+						<h1> Created</h1>
+					</div>
+					<div class="box-down-right-profile" id="spazio_aderiti">
+						<h1> Subscribed </h1>
+					</div>	
 				</div>
-			</div class="row" style="align-items: center">
+			</div>
 
 			<div class="box-footer">
                 <h3>@BeeTea inc.</h3>
             </div>
+
 		</div>
 		
 		<script type="module">
