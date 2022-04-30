@@ -115,7 +115,7 @@ function loadInfoSub(key){
 export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     c=document.createElement("div");
     c.setAttribute("id",id);
-    c.setAttribute("class","box-post-bacheca");
+    c.setAttribute("class","box-activity");
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
@@ -154,7 +154,7 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
 export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
-    c.setAttribute("class","box-post-bacheca");
+    c.setAttribute("class","box-activity");
 
 
     var user_space=document.createElement("div");
