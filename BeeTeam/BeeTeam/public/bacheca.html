@@ -87,8 +87,10 @@
                     </div>
                 </div> 
 
-                <div class="box-post-bacheca" id ="post" >
+                <div class="box-post-bacheca">
+                    <div id="post">
 
+                    </div>
                 <button class=" btn-sm" style="color: black;" id="next">Next</button>
                 </div>
 
@@ -124,7 +126,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast,startAt,endAt,equalTo} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast,startAt,endAt,equalTo,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
@@ -182,6 +184,8 @@
                 var membri=parseInt(member.value);
 
             //alert(membri);
+
+                localStorage.setItem('post_totali',parseInt(localStorage.getItem('post_totali')+1));
                  
                 setDoc(doc(fire, "post", key), {
                        sub:[" "],
@@ -208,13 +212,14 @@
                 });
             }
            
-            const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToLast(3));
+            const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
             var i=0;
+            sessionStorage.setItem("page",1);
             onChildAdded(commentsRef, (date) => {
-                if(i==0) {sessionStorage.setItem("last_position",date.val().id); i++}
-                let c=null;
+                if(i==3) {sessionStorage.setItem("last_position",date.val().id);}
+                let c=null;                 i++;
                 let data=date.val();
-                if(data.complete==false) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user);
+                if(data.complete==false && i!=4) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user);
             }
         );
 
@@ -250,16 +255,21 @@
 
             function nextPage(){
                 const last=sessionStorage.getItem('last_position');
-                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(3));
+                const page=parseInt(sessionStorage.getItem('page'))+1;
+                alert(page);
+                sessionStorage.setItem('page',page);
+                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToFirst(3*page-1));
                 get(q).then((item)=>{
-                    if(!item.exists()) alert("Not Found"); return;
+                    if(!item.exists()) {alert("Not Found"); return;}
                     while(spazio_post.hasChildNodes()){
                         spazio_post.removeChild(spazio_post.firstChild);
                      }
+                    var i=0; 
                     item.forEach((ogg)=>{
-                        alert(ogg.val().id);
                         const post_data=ogg.val();
-                        //att(id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
+                        if(i==4) {sessionStorage.setItem("last_position",post_data.id); return;}
+                        const c=null;
+                        att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
 
                     })
                 })

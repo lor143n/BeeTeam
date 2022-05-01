@@ -256,6 +256,7 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
 
     var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
+    button.setAttribute("style","color:white");
     button.innerText="Show Contact";
     c.appendChild(button);
     
