@@ -183,8 +183,8 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
 
     var button=document.createElement("a");
     button.setAttribute("style","text-align:center");
-    button.innerText="Remove sub";
     button.setAttribute("style","color:white");
+    button.innerText="Remove sub";
 
     c.appendChild(button);
     button.addEventListener('click',function(){deleteSub(id,parent,c)});

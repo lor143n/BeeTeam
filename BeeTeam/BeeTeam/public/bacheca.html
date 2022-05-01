@@ -88,6 +88,8 @@
                 </div> 
 
                 <div class="box-post-bacheca" id ="post" >
+
+                <button class=" btn-sm" style="color: black;" id="next">Next</button>
                 </div>
 
                 <div class="box-rightside-bacheca">
@@ -122,7 +124,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast,startAt,endAt,equalTo} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
@@ -156,6 +158,7 @@
             let type=document.getElementById("floatingSelect");
             let cerca_post=document.getElementById("cerca_post");
             let toSearch=document.getElementById("floatingSearch");
+            let next=document.getElementById("next");
             var CurrentUser=null;
             let key=null;
 
@@ -206,7 +209,9 @@
             }
            
             const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToLast(3));
+            var i=0;
             onChildAdded(commentsRef, (date) => {
+                if(i==0) {sessionStorage.setItem("last_position",date.val().id); i++}
                 let c=null;
                 let data=date.val();
                 if(data.complete==false) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user);
@@ -230,7 +235,7 @@
                         var post_data=snap.val();
                         var l=spazio_post.childNodes.length;
                         let c=null;
-                        att(data_key,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user,data_key);
+                        att(data_key,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
                      })
                      
                     })
@@ -241,6 +246,34 @@
 
             cerca_post.addEventListener('click',OnSearch);
             crea.addEventListener('click',NewAttivity);
+            next.addEventListener('click',nextPage);
+
+            function nextPage(){
+                const last=sessionStorage.getItem('last_position');
+                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(3));
+                get(q).then((item)=>{
+                    if(!item.exists()) alert("Not Found"); return;
+                    while(spazio_post.hasChildNodes()){
+                        spazio_post.removeChild(spazio_post.firstChild);
+                     }
+                    item.forEach((ogg)=>{
+                        alert(ogg.val().id);
+                        const post_data=ogg.val();
+                        //att(id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
+
+                    })
+                })
+            
+            }
+
+            /*
+             q=query(ref(database, "Attivity"),orderByChild('user'),equalTo("ale"));
+                get(q).then((item)=>{
+                    alert(item.exists());
+                    item.forEach((ogg)=>{
+                        alert(ogg.val().id);
+                    })
+            */
 
             window.onload=function(){
                 getUser();
