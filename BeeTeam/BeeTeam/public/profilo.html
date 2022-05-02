@@ -15,69 +15,79 @@
 		
 	<body class="text-center" >
 
-		<div class="grid-main-container-profile">
-
+		<div class="grid-main">
 			<div class="box-header">
 				<div class="box-header-left">
 					<span style="font-weight: 800; color: #ffbf00; font-size: 2vw;">BEE</span>
 					<span style="font-weight: 100; color: #ffbf00; font-size: 2vw;">TEAM</span>
 				</div>
 				<div class="box-header-center">
-					<img alt="Qries" src="Logoproject.png" width="65" height="65">
+					<img class="image-logo" alt="Qries" src="Logoproject.png">
 				</div>
 				<div class="box-header-right">
 				<a href="bacheca.html">Bacheca</a>
 				<a class="active" href="profilo.html">Profilo</a>
 				</div>
 			</div>
-
-			<div class="box-main-profile">
-				<div class="box-up-profile">
-					<table width="100%" height="100%">
-						<tr>
-							<td width="30%" valign="middle"> 
-								<br>
-								<img name="FotoUtente" src="nofoto.jpg" width="80%" style="border-radius: 100px;" id="fotoprofilo"  >
-								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
-								<br>
-								<div class="row-mb-4" style="padding-bottom: 3px;">
-								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
-								<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
-								</div>
-							</td>
-							<td> 
-								<div class="table" width="100%" >
-								<div class="row-mb-4" > 
-									<span id="nprof" style="font-weight: 400;">Nome</span>  
-									<span id="cprof">Cognome</span>
-								</div>  
-								<div class="row-mb-4" id="userprofil"> Username </div>
-								<div class="row-mb-4" id="numprof">Numero di telefono</div>
-								<div class="row-mb-4" id="eprof">Email</div>
-								<div class="row-mb-4" style="padding-top: 5%;" id="inviamodifica">
-										<button type="submit" id="editinfo" class="btn btn-light btn-sm">Edit</button>
-										<button type="submit" id="logout" class="btn btn-light">Logout</button>
-								</div>
-								</div>
-							</td>
-						</tr>
-				</table>
-				</div>
-
-				<div class="box-down-profile" > 
-					
-					<div class="box-down-left-profile" id="spazio_creati">
-						<h1> Created</h1>
+	
+			<div class="grid-profile">
+				<div class="box-main-profile">
+					<div class="box-up-profile">
+						<table width="100%" height="100%">
+							<tr>
+								<td width="30%" valign="middle"> 
+									<br>
+									<div style="height: 50%; width: 100%; overflow: hidden; border-radius: 20px;">
+										<img name="FotoUtente" src="nofoto.jpg" id="fotoprofilo">
+									</div>
+									<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
+									<br>
+									<div class="row-mb-4">
+										<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
+										<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
+									</div>
+								</td>
+								<td style="text-align: left; padding-left: 5%;"> 
+									<div class="table table-borderless">
+										<div class="row-mb-4" > 
+											<span id="nprof" style="font-weight: 400;">Nome</span>  
+											<span id="cprof">Cognome</span>
+										</div>  
+										<div class="row-mb-4" style="padding-left: 5%;"> <h1 id="userprofil">Username</h1> </div>
+										<div class="row-mb-4" style="padding-left: 5%;"> <h1 id="numprof">555 555 555</h1> </div>
+										<div class="row-mb-4" style="padding-left: 5%;"> <h1 id="eprof">Email</h1> </div>
+									</div>
+								</td>
+								<td>
+									<div class="table table-borderless" width="100%" id="inviamodifica">
+										<div class="row-mb-4" >
+											<button type="submit" id="editinfo" class="btn btn-light btn-sm">Edit</button>
+										</div>
+										<div class="row-mb-4" >
+											<button type="submit" id="logout" class="btn btn-light">Logout</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+					</table>
 					</div>
-					<div class="box-down-right-profile" id="spazio_aderiti">
-						<h1> Subscribed </h1>
-					</div>	
+	
+					<div class="box-down-profile" > 
+						
+						<div class="box-down-left-profile" id="spazio_creati">
+							<h1> Created</h1>
+						</div>
+						<div class="box-down-right-profile" id="spazio_aderiti">
+							<h1> Subscribed </h1>
+						</div>	
+					</div>
 				</div>
+	
 			</div>
-
+	
 			<div class="box-footer">
-                <h3>@BeeTea inc.</h3>
-            </div>
+				<h3>@BeeTea inc.</h3>
+			</div>
 
 		</div>
 		

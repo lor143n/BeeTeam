@@ -11,115 +11,117 @@
         <title>Bacheca</title>
     </head>
     <body class="text-center">
-        <div class="grid-main-container-bacheca">
 
+        <div class="grid-main">
             <div class="box-header">
-				<div class="box-header-left">
-					<span style="font-weight: 800; color: #ffbf00; font-size: 2vw;">BEE</span>
-					<span style="font-weight: 100; color: #ffbf00; font-size: 2vw;">TEAM</span>
-				</div>
-				<div class="box-header-center">
-					<img alt="Qries" src="Logoproject.png" width="65" height="65">
-				</div>
-				<div class="box-header-right">
-				<a class="active" href="bacheca.html">Bacheca</a>
-				<a href="profilo.html">Profilo</a>
-				</div>
-			</div>
-
-            <div class="box-main-bacheca">
-                <div class="box-leftside-bacheca" > 
-
-                    <div class="row" style="align-items: center;">
-                        <h1>  Create a project!  </h1>
-                    </div>
-                    <div class="mb-4"></div>
-                    <div class="row" style="align-items: center;">
-                        <div class="col-md-6"> 
-                            <div class="form-floating">
-                                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                  <option selected> Select </option>
-                                  <option value="Film"> Film </option>
-                                  <option value="Videogame"> Videogame </option>
-                                  <option value="Book"> Book </option>
-                                  <option value="Journey"> Journey </option>
-                                  <option value="Five">Five</option>
-                                </select>
-                                <label for="floatingSelect">Project type</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6"> 
-                            <div class="form-floating">
-                                <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
-                                  <option selected> Select </option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">Five</option>
-                                </select>
-                                <label for="floatingSelect">#Members</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-2"></div>
-                    <div class="row" style="align-items: center;">
-                        <div class="col-md-6"> 
-                           
-                        </div>    
-                    </div>
-                    <div class="mb-4"></div>
-                    <div class="row;" style="align-items:center;">
-                        <label for="description-area" style="text-align: left; "> Description </label>
-                        <div class="mb-2"></div>
-                        <textarea id="description-area" class="md-textarea form-control" rows="4" id="description-area"></textarea> 
-                    </div>
-                    <div class="mb-4"></div>
-                    <div class="row" style="align-items: center;">
-                        <div class="col-md-6">
-                            <label class="radio-inline">
-                                <input type="checkbox" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
-                            </label>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-light" style="font-size: medium" id="crea" value="Crea"> Create </button>  
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="box-post-bacheca">
-                    <div id="post">
-
-                    </div>
-                <button class=" btn-sm" style="color: black;" id="next">Next</button>
+                <div class="box-header-left">
+                    <span style="font-weight: 800; color: #ffbf00; font-size: 2vw;">BEE</span>
+                    <span style="font-weight: 100; color: #ffbf00; font-size: 2vw;">TEAM</span>
                 </div>
-
-                <div class="box-rightside-bacheca">
-                    <div class="row mb-2" style="align-items: center;">
-                        <h1>Ricerca</h1>
-                    </div>
-                    <div class="row mb-2" style="align-items: center;">
-                        <select class="form-select" id="floatingSearch" aria-label="Floating label select example">
-                            <option selected> Select </option>
-                            <option value="Film"> Film </option>
-                            <option value="Videogame"> Videogame </option>
-                            <option value="Book"> Book </option>
-                            <option value="Journey"> Journey </option>
-                            <option value="Five">Five</option>
-                        </select>
-                    </div>
-
-                    <div class="row mb-1">
-                        <button type="submit" class="btn btn-light" style="font-size:small; " id="cerca_post" value="cerca"> Cerca </button> 
-                    </div> 
-                    <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button> 
+                <div class="box-header-center">
+                    <img class="image-logo" alt="Qries" src="Logoproject.png">
+                </div>
+                <div class="box-header-right">
+                <a class="active" href="bacheca.html">Bacheca</a>
+                <a href="profilo.html">Profilo</a>
                 </div>
             </div>
-
+    
+            <div class="grid-bacheca">
+    
+                <div class="box-main-bacheca">
+                    <div class="box-leftside-bacheca" > 
+    
+                        <div class="row" style="align-items: center;">
+                            <h1>  Create a project!  </h1>
+                        </div>
+                        <div class="mb-4"></div>
+                        <div class="row" style="align-items: center;">
+                            <div class="col-md-6"> 
+                                <div class="form-floating">
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                      <option selected> Select </option>
+                                      <option value="Film"> Film </option>
+                                      <option value="Videogame"> Videogame </option>
+                                      <option value="Book"> Book </option>
+                                      <option value="Journey"> Journey </option>
+                                      <option value="Five">Five</option>
+                                    </select>
+                                    <label for="floatingSelect">Project type</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> 
+                                <div class="form-floating">
+                                    <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
+                                      <option selected> Select </option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">Five</option>
+                                    </select>
+                                    <label for="floatingSelect">#Members</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2"></div>
+                        <div class="row" style="align-items: center;">
+                            <div class="col-md-6"> 
+                               
+                            </div>    
+                        </div>
+                        <div class="mb-4"></div>
+                        <div class="row;" style="align-items:center;">
+                            <label for="description-area" style="text-align: left; "> Description </label>
+                            <div class="mb-2"></div>
+                            <textarea id="description-area" class="md-textarea form-control" rows="4" id="description-area"></textarea> 
+                        </div>
+                        <div class="mb-4"></div>
+                        <div class="row" style="align-items: center;">
+                            <div class="col-md-6">
+                                <label class="radio-inline">
+                                    <input type="checkbox" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-light" style="font-size: medium" id="crea" value="Crea"> Create </button>  
+                            </div>
+                        </div>
+                    </div> 
+    
+                    <div class="box-post-bacheca">
+                        <div id="post">
+    
+                        </div>
+                    <button class=" btn-sm" style="color: black;" id="next">Next</button>
+                    </div>
+    
+                    <div class="box-rightside-bacheca">
+                        <div class="row mb-2" style="align-items: center;">
+                            <h1>Ricerca</h1>
+                        </div>
+                        <div class="row mb-2" style="align-items: center;">
+                            <select class="form-select" id="floatingSearch" aria-label="Floating label select example">
+                                <option selected> Select </option>
+                                <option value="Film"> Film </option>
+                                <option value="Videogame"> Videogame </option>
+                                <option value="Book"> Book </option>
+                                <option value="Journey"> Journey </option>
+                                <option value="Five">Five</option>
+                            </select>
+                        </div>
+    
+                        <div class="row mb-1">
+                            <button type="submit" class="btn btn-light" style="font-size:small; " id="cerca_post" value="cerca"> Cerca </button> 
+                        </div> 
+                        <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button> 
+                    </div>
+                </div>
+            </div>
+    
             <div class="box-footer">
                 <h3>@BeeTea inc.</h3>
             </div>
-
         </div>
 
 
