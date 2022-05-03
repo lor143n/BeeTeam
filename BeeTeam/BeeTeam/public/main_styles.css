@@ -23,6 +23,8 @@ span {
 
 .grid-main{
   display: grid;
+  min-height: 400px;
+  min-width: 400px;
   grid-auto-rows: 8vh 100% 20vh;
 }
 
@@ -144,49 +146,80 @@ span {
   .box-main-bacheca {
     display: grid;
     grid-column: 1/3;
-    grid-auto-columns: 20% 2fr 20%;
+    grid-auto-columns: 20% 60% 20%;
     /*background-image: url("1063.jpg");
     background-size: cover;*/
+  }
+
+  .box-main-bacheca button{
+    color: #000000;
+    font-family:'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9vw;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #ffbf00;
+    border-color: transparent;
+    padding: 1% 2% 1% 2%;
+  }
+  
+  .box-main-bacheca button:hover{
+    color: #ffbf00;
+    background-color:#000000;
+    border-color: #ffbf00;
   }
 
   .box-main-bacheca h1{
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
-    color: #000000;
+    color: #ffbf00;
     font-size: 1.5vw;
   }
 
   .box-main-bacheca h2{
     font-family: 'Poppins', sans-serif;
     font-weight: 200;
-    color: #ffbf00;
+    color:#000000;
     font-size: 1.5vw;
   }
   
   .box-rightside-bacheca {
-    height: 30%;
+    min-height: 200px;
+    max-height: 400px;
     grid-column: 3;
-    margin: 10% 0% 10% 10%;
-    background-color:#ffbf00e1;
+    margin: 10% 10% 10% 10%;
+    background-color:rgb(0, 0, 0);
     padding: 10%;
-    border-radius: 20px 0% 0% 20px;
+    border-radius: 20px 20px 20px 20px;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
   }
   
   .box-leftside-bacheca {
-    height: 50%;
+    min-height: 500px;
+    max-height: 500px;
     grid-column: 1;
-    margin: 10% 10% 10% 0%;
-    background-color:#ffbf00e1;
+    margin: 10% 10% 10% 10%;
+    background-color:#000000e1;
     padding: 10%;
-    border-radius: 0% 20px 20px 0%;
+    border-radius: 20px 20px 20px 20px;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
   }
+
    /*MODIFICATO MARGIN PER FAR SI CHE NON FOSSERO ATTACCATI I BLOCCHI*/
   .box-post-bacheca {
     margin: 3.1% 0% 5% 0%;
-    border-radius: 20px 20px 0% 0%;
-    border-color: #ffbf00;
-    border-style:double;
-    border-width: medium;
+    border-radius: 20px 20px 20px 20px;
+    background-color: #000000;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
     padding: 5%;
     grid-column: 2;
   }
@@ -235,7 +268,7 @@ span {
 .box-main-profile {
     display: grid;
     grid-column: 1/3;
-    grid-auto-rows: 1fr 2fr;
+    grid-auto-rows: minmax(200px, 400px) minmax(400px, auto);
 }
 
 .box-up-profile{
