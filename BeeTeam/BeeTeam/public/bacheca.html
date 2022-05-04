@@ -30,7 +30,7 @@
             <div class="grid-bacheca">
     
                 <div class="box-main-bacheca">
-                    <div class="box-leftside-bacheca" > 
+                    <div class="box-leftside-up-bacheca" > 
                         <div style="width: 100%; height: 100%;">
                             <div class="row" style="align-items: center;">
                                 <h1>  Create </h1>
@@ -38,23 +38,24 @@
                             <div class="mb-4"></div>
                             <div class="row" style="align-items: center;">
                                 <div class="col-md-6"> 
-                                    <div class="form-floating">
+                                    <div class="form-group">
+                                        <label for="floatingSelect">Project type</label>
+                                        <div class="mb-2"></div>
                                         <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                          <option selected> Select </option>
-                                          <option value="Film"> Film </option>
+                                          <option selected value="Film"> Film </option>
                                           <option value="Videogame"> Videogame </option>
                                           <option value="Book"> Book </option>
                                           <option value="Journey"> Journey </option>
                                           <option value="Five">Five</option>
                                         </select>
-                                        <label for="floatingSelect">Project type</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6"> 
-                                    <div class="form-floating">
+                                    <div class="form-group">
+                                        <label for="floatingSelect2">Members count</label>
+                                        <div class="mb-2"></div>
                                         <select class="form-select" id="floatingSelect2" aria-label="Floating label select example">
-                                          <option selected> Select </option>
-                                          <option value="1">1</option>
+                                          <option selected value="1">1</option>
                                           <option value="2">2</option>
                                           <option value="3">3</option>
                                           <option value="4">4</option>
@@ -64,7 +65,6 @@
                                           <option value="8">8</option>
                                           <option value="9">9</option>
                                         </select>
-                                        <label for="floatingSelect">#Members</label>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +83,8 @@
                             <div class="mb-4"></div>
                             <div class="row" style="align-items: center;">
                                 <div class="col-md-6">
-                                    <label class="radio-inline">
-                                        <input type="checkbox" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Anonymous
+                                    <label class="radio-inline" style="color: #ffbf00;">
+                                        <input type="checkbox" class="form-check-input" name="inlineRadioOptions" id="inlineRadio1" value="option1" > Anonymous
                                     </label>
                                 </div>
                                 <div class="col-md-6">
@@ -92,24 +92,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
-    
-                    <div class="box-post-bacheca">
-                        <h1> Choose </h1>
-                        <div id="post">
-    
-                        </div>
-                        <button class=" btn-sm" id="next">Next</button>
                     </div>
-    
-                    <div class="box-rightside-bacheca">
+                    
+                    <div class="box-leftside-down-bacheca">
                         <div class="row mb-2" style="align-items: center;">
                             <h1> Search </h1>
                         </div>
                         <div class="row mb-2" style="align-items: center;">
                             <select class="form-select" id="floatingSearch" aria-label="Floating label select example">
-                                <option selected> Select </option>
-                                <option value="Film"> Film </option>
+                                <option selected value="Film"> Film </option>
                                 <option value="Videogame"> Videogame </option>
                                 <option value="Book"> Book </option>
                                 <option value="Journey"> Journey </option>
@@ -120,7 +111,15 @@
                         <div class="row mb-1">
                             <button type="submit" class="btn btn-light" style="font-size:small; " id="cerca_post" value="cerca"> Cerca </button> 
                         </div> 
-                        <button type="submit" class="btn btn-light" style="height: 40px; width: 80px;" id="update"> Update </button> 
+                        
+                    </div>
+    
+                    <div class="box-post-bacheca">
+                        <h1> Choose </h1>
+                        <div id="post">
+    
+                        </div>
+                        <button class=" btn-sm" id="next">Next</button>
                     </div>
                 </div>
             </div>
