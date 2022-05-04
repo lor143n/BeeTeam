@@ -138,7 +138,7 @@
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
            import { getDatabase, set, ref, update , get, child, onValue,push , startAt,onChildAdded,orderByChild,endAt,limitToLast,startAfter,endBefore,equalTo,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-           import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+           import { collection, query, where,getDoc, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
            import {att, createElem} from "./js/functions.js";
@@ -227,10 +227,14 @@
             var i=0;
             sessionStorage.setItem("page",1);
             onChildAdded(commentsRef, (date) => {
+                
                 if(i==3) {sessionStorage.setItem("last_position",date.val().id);}
                 let c=null;                 i++;
                 let data=date.val();
+                //const docRef = doc(fire, "post",date.key);
+				//const docSnap =  getDoc(docRef).then((item) =>{
                 if(data.complete==false && i!=4) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user);
+               // })
             }
         );
 
@@ -266,40 +270,42 @@
 
             function nextPage(){
                 const last=sessionStorage.getItem('last_position');
-                const page=parseInt(sessionStorage.getItem('page'))+1;
+                var page=parseInt(sessionStorage.getItem('page'));
+                var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*page);
+                page++;
                 sessionStorage.setItem('page',page);
-                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(3));
+                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(4));
                 get(q).then((item)=>{
-                    alert(item.size);
-                    const dim=3-item.size;
-                    alert(dim);
                     if(!item.exists()) {alert("Not Found"); return;}
                     while(spazio_post.hasChildNodes()){
                         spazio_post.removeChild(spazio_post.firstChild);
                      }
-                    var i=0; 
+                    var i=0,k=0;
+                    var limit= (total_size>3) ? 0 : 10;
                     item.forEach((ogg)=>{
+                        const c=null; 
                         const post_data=ogg.val();
-                        if(i==3) {sessionStorage.setItem("last_position",post_data.id); return;}
-                        const c=null; i++;
-                        att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
-
+                        if(i==limit) {sessionStorage.setItem("last_position",post_data.id); }
+                        else att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
+                        i++;
+                        if(limit==10 && k!=1){
+                            alert("No more post!");
+                            k=1;
+                            next.disabled=true;
+                        }
                     })
                 })
             
             }
 
-            /*
-             q=query(ref(database, "Attivity"),orderByChild('user'),equalTo("ale"));
-                get(q).then((item)=>{
-                    alert(item.exists());
-                    item.forEach((ogg)=>{
-                        alert(ogg.val().id);
-                    })
-            */
 
             window.onload=function(){
                 getUser();
+                //Post nel db attualmente
+                var total_post=get(query(ref(database, "Attivity")));
+                total_post.then((item)=>{
+                    sessionStorage.setItem('total_post',item.size);
+                })
             }
 
         </script>

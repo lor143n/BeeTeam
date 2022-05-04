@@ -43,6 +43,8 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user)
     else user_space.innerHTML="<h3><b> Anonymous </b></h3><br>";
     c.appendChild(user_space);
     */
+   // non so se funziona
+    
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
@@ -56,6 +58,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user)
     c.appendChild(space)
     createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
     c.appendChild(space);
+    //modifica anche qui
     createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+numero_persone+" / "+numero_persone+"</h2>",c);
     c.appendChild(space);
 
@@ -237,7 +240,6 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     const dele =document.createElement("img");
     dele.setAttribute("width","5%");
     dele.setAttribute("style","border-radius:30%; color:#ffbf00c1");
-    //dele.innerText="Delect";
     dele.setAttribute("src","rubbish.jpg");
     c.appendChild(dele);
     dele.addEventListener('click',function(){onDelete(id,parent,c)});
