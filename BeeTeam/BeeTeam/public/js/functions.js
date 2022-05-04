@@ -38,19 +38,19 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user)
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");
     user_space.setAttribute("style","padding-bottom: 0.5px");
-    if(!check) user_space.innerHTML=" <b> User:  "+ user +"</b>";
-    else user_space.innerHTML="<b> Anonymous </b><br>";
+    if(!check) user_space.innerHTML=" <h3><b> User:  </b>"+ user +"</h3>";
+    else user_space.innerHTML="<h3><b> Anonymous </b></h3><br>";
     c.appendChild(user_space);
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
-    createElem("cat"+id,"<b>Categoria:  "+ categoria +"</b>",c);
+    createElem("cat"+id,"<h3><b>Categoria:  </b>"+ categoria +"</h3>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
+    createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"<b>"+descrizione+"</b>", c);
-    //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
+    createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+"<h3>"+descrizione+"</h3>", c);
+    //createElem("disp"+id, "<h3><b>Posizioni disponibili: </b></h3>" + numero_persone,c);
     c.appendChild(space);
 
     var button=document.createElement("a");
@@ -131,18 +131,18 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
 
-    createElem("cat"+id,"<b>Categoria:  "+categoria+"</b>",c);
+    createElem("cat"+id,"<h3><b>Categoria:  </b>"+categoria+"</h3>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
+    createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"<b>" +descrizione+"</b>", c);
-    //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
+    createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+"<h3>" +descrizione+"</h3>", c);
+    //createElem("disp"+id, "<h3><b>Posizioni disponibili: </b></h3>" + numero_persone,c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili:  "+sub+"</b>";
+    sub_space.innerHTML="<h3><b>Posti disponibili:  </b>"+sub+"</h3>";
     c.appendChild(sub_space);
 
 
@@ -160,25 +160,25 @@ export function att_sub(id,parent,c,categoria,numero_persone,check,descrizione,u
     var user_space=document.createElement("div");
     user_space.setAttribute("class","row");
     user_space.setAttribute("style","padding-bottom: 0.5px");
-    if(!check) user_space.innerHTML="<b> User: "+user+"</b>";
-    else user_space.innerHTML="<b> Anonymous </b><br>";
+    if(!check) user_space.innerHTML="<h3><b> User: </b>"+user+"</h3>";
+    else user_space.innerHTML="<h3><b> Anonymous </b></h3><br>";
     c.appendChild(user_space);
 
     const space=document.createElement("div");
     space.setAttribute("class","mb-1");
 
-    createElem("cat"+id,"<b>Categoria  :"+categoria+"</b>",c);
+    createElem("cat"+id,"<h3><b>Categoria  </b>:"+categoria+"</h3>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
+    createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+"</b>"+ descrizione+"</b>", c);
-    //createElem("disp"+id, "<b>Posizioni disponibili: </b>" + numero_persone,c);
+    createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+"<h3>"+ descrizione+"</h3>", c);
+    //createElem("disp"+id, "<h3><b>Posizioni disponibili: </b></h3>" + numero_persone,c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili:"+sub+"</b>";
+    sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+sub+"</h3>";
     c.appendChild(sub_space);
 
     var button=document.createElement("a");
@@ -241,17 +241,17 @@ export function att_richiesta(id,parent,c,categoria,numero_persone,descrizione,s
     c.appendChild(space);
 
 
-    createElem("cat"+id,"<b>Categoria:  "+categoria+"</b>",c);
+    createElem("cat"+id,"<h3><b>Categoria:  </b>"+categoria+"</h3>",c);
     c.appendChild(space);
-    createElem("nump"+id, "<b>Numero di membri richiesti:  " + numero_persone+"</b>",c);
+    createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
     c.appendChild(space);
-    createElem("descrizione"+id, "<b>Descrizione: </b><br>"+ "<b>"+descrizione+"</b>", c);
+    createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+ "<h3>"+descrizione+"</h3>", c);
     c.appendChild(space);
 
     var sub_space=document.createElement("div");
     sub_space.setAttribute("class","row");
     sub_space.setAttribute("style","padding-bottom: 0.5px");
-    sub_space.innerHTML="<b>Posti disponibili: "+sub+"</b>";
+    sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+sub+"</h3>";
     c.appendChild(sub_space);
 
     var button=document.createElement("a");

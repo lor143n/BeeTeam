@@ -134,7 +134,7 @@
         <script type="module">
            
            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-           import { getDatabase, set, ref, update , get, child, onValue,push , onChildAdded,orderByChild,limitToLast,startAt,endAt,equalTo,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+           import { getDatabase, set, ref, update , get, child, onValue,push , startAt,onChildAdded,orderByChild,endAt,limitToLast,startAfter,endBefore,equalTo,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
            import { collection, query, where, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
@@ -264,10 +264,12 @@
             function nextPage(){
                 const last=sessionStorage.getItem('last_position');
                 const page=parseInt(sessionStorage.getItem('page'))+1;
-                alert(page);
                 sessionStorage.setItem('page',page);
-                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToFirst(3*page-1));
+                var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(3));
                 get(q).then((item)=>{
+                    alert(item.size);
+                    const dim=3-item.size;
+                    alert(dim);
                     if(!item.exists()) {alert("Not Found"); return;}
                     while(spazio_post.hasChildNodes()){
                         spazio_post.removeChild(spazio_post.firstChild);
@@ -275,8 +277,8 @@
                     var i=0; 
                     item.forEach((ogg)=>{
                         const post_data=ogg.val();
-                        if(i==4) {sessionStorage.setItem("last_position",post_data.id); return;}
-                        const c=null;
+                        if(i==3) {sessionStorage.setItem("last_position",post_data.id); return;}
+                        const c=null; i++;
                         att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
 
                     })
