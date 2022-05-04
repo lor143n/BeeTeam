@@ -237,6 +237,8 @@ span {
   .box-activity {
     margin: 5%;
     border-radius: 20px;
+    background-image: url('try.png');
+    background-size: cover;
     background-color: #ffbf00;
     padding: 5%;
   }
