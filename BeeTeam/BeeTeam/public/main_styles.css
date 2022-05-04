@@ -243,6 +243,12 @@ span {
     padding: 5%;
   }
 
+  .box-activity hr{
+    margin-left: 18%;
+    margin-right: 18%;
+    color: rgba(0, 0, 0, 0.721);
+  }
+
   .box-activity h1{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;

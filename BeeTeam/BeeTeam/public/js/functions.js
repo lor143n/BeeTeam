@@ -54,11 +54,9 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user)
     if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
     else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
     c.appendChild(space)
-    createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+"<h3>"+descrizione+"</h3>", c);
+    createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
     c.appendChild(space);
-    createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
-    c.appendChild(space);
-    createElem("disp"+id, "<h3><b>Posizioni disponibili: </b></h3>" + numero_persone,c);
+    createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+numero_persone+" / "+numero_persone+"</h2>",c);
     c.appendChild(space);
 
     var button=document.createElement("a");
