@@ -1,11 +1,30 @@
+
 body {
-    height: 100%;
+  height: 100%;
+  align-items: center;
+  padding-bottom: 100px;
+  background-color:#0b0b0b;
+  text-align: center;
 }
-  
-body {
-    align-items: center;
-    padding-bottom: 40px;
-    background-color:#0b0b0b
+
+body.bg-access{
+  background-image: url('intro_image.jpg'); 
+  background-size: cover;
+}
+
+body.bg-profile{
+  background-image: url('intro_image.jpg'); 
+  background-size: cover;
+}
+
+body.bg-intro{
+  background-image: url('intro_image.jpg'); 
+  background-size: cover;
+}
+
+body.bg-bacheca{
+  background-image: url('intro_image.jpg'); 
+  background-size: cover;
 }
 
 hr{
@@ -31,12 +50,8 @@ span {
 .grid-access {
   display: grid;
   grid-row: 2;
-  grid-auto-rows: 1fr auto 2fr;
-  grid-auto-columns: 1fr 1fr;
-}
-
-.grid-access hr{
-  grid-column: 1/3;
+  grid-auto-rows: 25% 70%;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 70%, rgba(255,255,255,0) 100%);
 }
 
 .grid-intro {
@@ -50,12 +65,14 @@ span {
   display: grid;
   grid-row: 2;
   grid-auto-rows: 1fr;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 20%, rgba(255,255,255,0) 100%);
 }
 
 .grid-profile {
   display: grid;
   grid-row: 2;
   grid-auto-rows: 1fr;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 70%, rgba(255,255,255,0) 100%);
 }
 
 /*Simple footer*/
@@ -197,7 +214,7 @@ span {
     height:fit-content;
     grid-row: 2;
     grid-column: 1;
-    background-color:rgb(0, 0, 0);
+    background-color:#000000e1;
     padding: 5% 10% 5% 10%;
     border-radius: 20px;
     outline: dashed;
@@ -224,7 +241,7 @@ span {
 
   .box-post-bacheca {
     border-radius: 20px 20px 20px 20px;
-    background-color: #000000;
+    background-color: #000000e1;
     outline: dashed;
     outline-offset: 10px; 
     outline-color: #ffbf00;
@@ -292,13 +309,22 @@ span {
 .box-up-profile{
   border-radius: 20px;
   margin: 1% 20% 1% 20%;
+  text-align: center;
+  position: relative;
+  top: 20%;
+}
+
+.box-up-profile img{
+  width: 65%;
+  height: auto;
+  border-radius: 100px;
 }
 
 .box-down-profile {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
   border-color: #ffbf00;
   border-style: dashed;
   border-width: thin;
@@ -330,7 +356,7 @@ span {
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
   color:#ffbf00;
-  font-size: 2vw;
+  font-size: 2.5vw;
 }
 
 .box-main-profile button{
@@ -380,89 +406,19 @@ span {
   border-top-right-radius: 0;
 }
 
-.box-description {
-  grid-column: 1/3;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.box-description h1{
-  font-family: 'Poppins', sans-serif;
-  font-weight:200;
-  font-size: 1.5vw;
-  color: #ffbf00;
-  margin: 5%;
-}
-
-.box-description-emptyobj1{
-  grid-column: 1;
-}
-
-.box-description-emptyobj2{
-  grid-column: 7;
-}
-
-.box-description-lineobj1{
-  grid-column: 3;
-  border-color:#ffbf00;
-  border-style: solid;
-  border: 10%;
-}
-
-.box-description-lineobj2{
-  grid-column: 5;
-  border-color:#ffbf00;
-  border-style: solid;
-  border: 10%;
-}
-
-.box-description-postobj{
-  grid-column: 2;
-  border-color:#ffbf00;
-  border-style: dotted;
-  border: 10%;
-  border-radius: 20%;
-  margin: 10%;
-  margin-left: 30%;
-  margin-right: 0%;
-}
-.box-description-chooseobj{
-  grid-column: 4;
-  border-color:#ffbf00;
-  border-style: dotted;
-  border: 10%;
-  border-radius: 20%;
-  margin: 10%;
-  margin-left: 0%;
-  margin-right: 0%;
-}
-.box-description-createobj{
-  grid-column: 6;
-  border-color:#ffbf00;
-  border-style: dotted;
-  border: 10%;
-  border-radius: 20%;
-  margin: 10%;
-  margin-left: 0%;
-  margin-right: 20%;
-}
-
-.box-access {
+.box-down-access {
   display: grid;
   grid-auto-columns: 1fr 1fr;
-  grid-column: 1/3;
 }
 
 .box-access-left {
   display: grid;
   grid-column: 1;
   text-align: center;
-  margin: 1% 0% 1% 40%;
+  margin: 5% 0% 5% 40%;
   background-color: #000000;
   clip-path: polygon(0% 0%, 95% 0%,100% 100%,0% 100%);
   border-radius: 20px 0% 0% 20px;
-  padding: 2%;
 }
 
 .box-access-left table{
@@ -505,18 +461,18 @@ span {
 .box-access-right {
   grid-column: 2;
   clip-path: polygon(0% 0%, 100% 0%,100% 100%,5% 100%);
-  margin: 1% 40% 1% 0%;
+  margin: 5% 40% 5% 0%;
   overflow: visible;
   background-image: url('try.png');
   background-size: cover;
   background-color: #ffbf00;
   border-radius: 0% 20px 20px 0%;
-  padding: 9%;
 }
 
 .box-access-right table{
   margin: auto;
-
+  position: relative;
+  top: 20%;
 }
 
 .box-access-right h1{
