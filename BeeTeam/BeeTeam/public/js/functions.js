@@ -30,7 +30,7 @@ const firebaseConfig = {
     parent.appendChild(cat);
     }
 //bacheca
-export function att(id,parent,c,categoria,numero_persone,check,descrizione,user){
+export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
     c=document.createElement("div");
     c.setAttribute("id",id);
     c.setAttribute("class","box-activity");
@@ -59,7 +59,7 @@ export function att(id,parent,c,categoria,numero_persone,check,descrizione,user)
     createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
     c.appendChild(space);
     //modifica anche qui
-    createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+numero_persone+" / "+numero_persone+"</h2>",c);
+    createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
     c.appendChild(space);
 
     var button=document.createElement("a");
