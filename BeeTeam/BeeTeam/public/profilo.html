@@ -35,7 +35,7 @@
 					<div class="box-up-profile">
 						<div class="row">
 							<div class="col-sm">
-								<img name="FotoUtente" src="nofoto.jpg" id="fotoprofilo">
+								<img name="FotoUtente" src="nofoto.jpg" id="fotoprofilo" class="flex">
 								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 							</div>
 							<div class="col-sm">
@@ -58,7 +58,7 @@
 								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
 								<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
 							</div>
-							<div class="col-sm">
+							<div class="col-sm" id="inviamodifica">
 								<button type="submit" id="editinfo" class="btn btn-light btn-sm">Edit</button>
 								<button type="submit" id="logout" class="btn btn-light">Logout</button>
 							</div>
@@ -214,7 +214,8 @@
 				foto.setAttribute("src",url);
 				update(ref(database, "Users/"+CurrentUser.uid),{
 							foto:url,
-				})
+				});
+				saveData(CurrentUser.uid);
 				})
 				.catch((error)=>{
 					alert(error);
@@ -241,23 +242,36 @@
 				c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
 				num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
 
-				info.setAttribute("style","display:none");
+				//info.setAttribute("style","display:none");
 
 				btnsub=document.createElement("button");
 				btnsub.setAttribute("type","submit");
 				btnsub.setAttribute("id","btnsub");
 				btnsub.setAttribute("class","btn btn-light btn-sm");
 				btnsub.innerHTML="Save";
-				inviamodifica.appendChild(btnsub);
-				alert("Modify your info");
+				inviamodifica.replaceChild(btnsub,info);
 
 				btnsub.addEventListener('click',saveInfo);
+			}
+			function saveData(uid){
+				get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
+                    const up=snapshot.val();
+                });
+				
+				let keepLog=localStorage.getItem('KeepLog');
+
+				if(keepLog == "yes"){
+					localStorage.setItem('user', JSON.stringify(up));
+				}
+				else{
+					sessionStorage.setItem('user', JSON.stringify(up));
+				}
 			}
 
 			function saveInfo(){
 				var i=0;
-				btnsub.setAttribute("style","display:none");
-				info.setAttribute("style","display:inline");
+				inviamodifica.replaceChild(info,btnsub);
+
 
 				var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
 				if(n2.value != novalue && n2.value != "") novalue=n2.value; i++;
@@ -277,6 +291,7 @@
 				cprof.innerText=cvalue;
 				numprof.innerText=nvalue;
 				i=0;
+				saveData(CurrentUser.uid);
 				}
 			else{
 					alert("Nessuna modifica");
@@ -315,7 +330,7 @@
 				getUser();
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
-					window.location="accesso.html";
+					window.location="404.html";
 
 				}
 				else{
@@ -329,8 +344,8 @@
 					numprof.style="color: white";
 					eprof.innerText= CurrentUser.email;
 					eprof.style="color: white";
-					//alert(CurrentUser.foto);
-					foto.setAttribute("src",CurrentUser.foto);
+					if(CurrentUser.foto!=null) foto.setAttribute("src",CurrentUser.foto);
+					else foto.setAttribute("src","nofoto.jpg");
 					
 
 				}
