@@ -205,8 +205,6 @@
                 // Signed in 
 
                 const u = userCredential.user;
-               // alert(u.uid);
-
                get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
                 LoginUser(snapshot.val());
                })

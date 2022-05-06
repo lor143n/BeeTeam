@@ -54,9 +54,8 @@
 							</div>
 						</div>
 						<div class="row" style="margin-top: 2%;">
-							<div class="col-sm">
+							<div class="col-sm" id="modifica_foto">
 								<button id="editbutton" class="btn btn-light btn-sm" onclick="document.getElementById('sourcefoto').click()">Edit</button>
-								<button id="subedit" class="btn btn-light btn-sm" >Invia</button>
 							</div>
 							<div class="col-sm" id="inviamodifica">
 								<button type="submit" id="editinfo" class="btn btn-light btn-sm">Edit</button>
@@ -157,6 +156,7 @@
 			let foto=document.getElementById("fotoprofilo");
 
 			let inviamodifica=document.getElementById("inviamodifica");
+			let modifica_foto=document.getElementById("modifica_foto");
 
 
 			const out=document.getElementById("logout");
@@ -188,41 +188,6 @@
 
 			};
 
-			
-
-			function updatePhoto(){
-				const f=document.getElementById("sourcefoto").files[0];
-				
-				const metadata = {
-					contentType: 'image/'+f.type,
-				};
-				
-				var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
-				var uploadTask= uploadBytesResumable(storageRef,f,metadata)
-					alert("Update Succesfully");
-			
-
-				getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-				console.log('File available at', url);
-				const xhr = new XMLHttpRequest();
-				xhr.responseType = 'blob';
-				xhr.onload = (event) => {
-					const blob = xhr.response;
-				};
-				xhr.open('GET', url);
-				xhr.send();
-				foto.setAttribute("src",url);
-				update(ref(database, "Users/"+CurrentUser.uid),{
-							foto:url,
-				});
-				saveData(CurrentUser.uid);
-				})
-				.catch((error)=>{
-					alert(error);
-				})
-
-			};
-			
 			var btnsub=null,c2=null,n2=null, num2=null;
 
 			function getElem(id,parent,type,c,place){
@@ -297,10 +262,55 @@
 					alert("Nessuna modifica");
 			}
 			}
+			function editPhoto(){
+				btnsub=document.createElement("button");
+				btnsub.setAttribute("type","submit");
+				btnsub.setAttribute("class","btn btn-light btn-sm");
+				btnsub.innerHTML="Save";
+
+				modifica_foto.replaceChild(btnsub,edit);
+				btnsub.addEventListener('click',function(){updatePhoto(btnsub)});
+			}
+
+
+			function updatePhoto(btn){
+				const f=document.getElementById("sourcefoto").files[0];
+				
+				const metadata = {
+					contentType: 'image/'+f.type,
+				};
+				
+				var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
+				var uploadTask= uploadBytesResumable(storageRef,f,metadata)
+					alert("Update Succesfully");
+			
+
+				getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+				console.log('File available at', url);
+				const xhr = new XMLHttpRequest();
+				xhr.responseType = 'blob';
+				xhr.onload = (event) => {
+					const blob = xhr.response;
+				};
+				xhr.open('GET', url);
+				xhr.send();
+				foto.setAttribute("src",url);
+				update(ref(database, "Users/"+CurrentUser.uid),{
+							foto:url,
+				});
+				})
+				.catch((error)=>{
+					alert(error);
+				})
+
+				modifica_foto.replaceChild(edit,btn);
+				saveData(CurrentUser.uid);
+
+			};
 
 			out.addEventListener('click',signout);
-			sub.addEventListener('click',updatePhoto);
 			info.addEventListener('click',editInfo);
+			edit.addEventListener('click',editPhoto);
 
 			let spazio_post=null;
 			const date2= new Date();
