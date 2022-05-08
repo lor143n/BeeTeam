@@ -125,6 +125,7 @@
 			const sub=document.getElementById("subedit");
 			const info=document.getElementById("editinfo")
 			var percorso=null;
+			var up=null;
 			
 			var storage=getStorage(app);
 
@@ -181,17 +182,18 @@
 			}
 			function saveData(uid){
 				get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
-                    const up=snapshot.val();
+                     up=snapshot.val();
+					 let keepLog=localStorage.getItem('KeepLog');
+
+				    if(keepLog == "yes"){
+					     if(up!=null)localStorage.setItem('user', JSON.stringify(up));
+				    }
+				    else{
+					    if(up!=null)sessionStorage.setItem('user', JSON.stringify(up));
+				    }
                 });
 				
-				let keepLog=localStorage.getItem('KeepLog');
-
-				if(keepLog == "yes"){
-					localStorage.setItem('user', JSON.stringify(up));
-				}
-				else{
-					sessionStorage.setItem('user', JSON.stringify(up));
-				}
+				
 			}
 
 			function saveInfo(){
@@ -299,6 +301,7 @@
 			
 			window.onload=function() {
 				getUser();
+			const auth=getAuth();
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
 					window.location="404.html";

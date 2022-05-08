@@ -96,7 +96,7 @@
             // Import the functions you need from the SDKs you need
             import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
             import { getDatabase, set, ref, update , get, child,orderByChild, equalTo,query } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
             import { collection, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            // import * as func2 from "./js/func2.js";
 
@@ -151,8 +151,7 @@
                  .then((userCredential) => {
 
                  const u = userCredential.user;
-                 alert("User created");
-                 window.location="accesso.html";
+                 let autentication=localStorage.setItem('auth',"false");
 
                         set(ref(database, "Users/"+u.uid),{
                             nome:nome.value,
@@ -164,7 +163,13 @@
                             foto:"nofoto.jpg",
                             password: password.value
                         })
-                   })
+
+                        sendEmailVerification(auth.currentUser).then(() => {
+                            alert("User created, please verify your email!");
+                        })
+                        window.location="accesso.html";
+
+                })
 
                   .catch((error) => {
                   const errorCode = error.code;
@@ -203,12 +208,15 @@
             signInWithEmailAndPassword(auth, userlog.value, passlog.value)
                    .then((userCredential) => {
                 // Signed in 
-
                 const u = userCredential.user;
-               get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
-                LoginUser(snapshot.val());
-               })
-                // ...
+                if(u.emailVerified){
+                    get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
+                        LoginUser(snapshot.val());
+                    })
+                }
+                else{
+                    alert("Please verify your email");
+                }
                })
                .catch((error) => {
                 const errorCode = error.code;
