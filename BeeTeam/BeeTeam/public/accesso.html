@@ -98,7 +98,7 @@
             import { getDatabase, set, ref, update , get, child,orderByChild, equalTo,query } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
             import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
             import { collection, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
-           // import * as func2 from "./js/func2.js";
+            import {sendEmail} from "./js/functions.js";
 
             const firebaseConfig = {
               apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -163,10 +163,7 @@
                             foto:"nofoto.jpg",
                             password: password.value
                         })
-
-                        sendEmailVerification(auth.currentUser).then(() => {
-                            alert("User created, please verify your email!");
-                        })
+                        sendEmail(auth.currentUser);
                         window.location="accesso.html";
 
                 })

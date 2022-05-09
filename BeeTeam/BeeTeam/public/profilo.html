@@ -91,7 +91,7 @@
 				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 
 			// import * as func2 from "./js/func2.js";
-			   import {att,att2,att_sub,att_richiesta} from "./js/functions.js";
+			   import {att,att2,att_sub,att_richiesta,getElem,createButton,getUser} from "./js/functions.js";
 
 				const firebaseConfig = {
 				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -132,17 +132,6 @@
 
 			var CurrentUser=null;
 
-			function getUser(){
-				let keepLog=localStorage.getItem('KeepLog');
-
-				if(keepLog == "yes"){
-					CurrentUser=JSON.parse(localStorage.getItem('user'));
-				}
-				else{
-					CurrentUser=JSON.parse(sessionStorage.getItem('user'));
-				}
-			};
-
 			function signout(){
 				sessionStorage.removeItem('user');
 				localStorage.removeItem('user');
@@ -153,85 +142,10 @@
 
 			var btnsub=null,c2=null,n2=null, num2=null,p2, edit_pass;
 
-			function getElem(id,parent,type,c,place){
-				c=document.createElement("input");
-				c.setAttribute("type",type);
-				c.setAttribute("id",id);
-				c.setAttribute("placeholder",place);
-				c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
-				c.setAttribute("class","text-warning bg-dark; text-center");
-				parent.innerText="";
-				parent.appendChild(c);
-				return c;
+			function openEdit(){
+				window.location="edit.html";
 			}
-
-			function createButton(type,id,text){
-				var btnsub=document.createElement("button");
-				btnsub.setAttribute("type",type);
-				btnsub.setAttribute("id",id);
-				btnsub.setAttribute("class","btn btn-light btn-sm");
-				btnsub.innerHTML=text;
-				return btnsub;
-			}
-
-			function editInfo(){
-				n2=getElem("n2",nprof,"text",n2,CurrentUser.nome);
-				c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
-				num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
-
-			    btnsub=createButton("submit","btnsub","Save");
-			    inviamodifica.replaceChild(btnsub,info);
-				btnsub.addEventListener('click',saveInfo);
-				edit_pass=createButton("submit","edit_pass","Modify your password");
-				inviamodifica.replaceChild(edit_pass,out);
-				
-			}
-			function saveData(uid){
-				get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
-                     up=snapshot.val();
-					 let keepLog=localStorage.getItem('KeepLog');
-
-				    if(keepLog == "yes"){
-					     if(up!=null)localStorage.setItem('user', JSON.stringify(up));
-				    }
-				    else{
-					    if(up!=null)sessionStorage.setItem('user', JSON.stringify(up));
-				    }
-                });
-				
-				
-			}
-
-			function saveInfo(){
-				var i=0;
-				inviamodifica.replaceChild(info,btnsub);
-
-
-				var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
-				if(n2.value != novalue && n2.value != "") novalue=n2.value; i++;
-				if(c2.value != cvalue && c2.value != "") cvalue=c2.value; i++;
-				if(num2.value != nvalue && num2.value != "") nvalue=num2.value; i++;
-
-			if(i>0){
-				update(ref(database, "Users/"+ CurrentUser.uid),{
-							nome:novalue,
-							cognome:cvalue,
-							numero:nvalue
-				})
-				nprof.removeChild(n2); n2=null;
-				cprof.removeChild(c2); c2=null;
-				numprof.removeChild(num2); num2=null;
-				nprof.innerText=novalue;
-				cprof.innerText=cvalue;
-				numprof.innerText=nvalue;
-				i=0;
-				saveData(CurrentUser.uid);
-				}
-			else{
-					alert("Nessuna modifica");
-			}
-			inviamodifica.replaceChild(out,edit_pass);
-			}
+	
 			function editPhoto(){
 				btnsub=document.createElement("button");
 				btnsub.setAttribute("type","submit");
@@ -279,7 +193,7 @@
 			};
 
 			out.addEventListener('click',signout);
-			info.addEventListener('click',editInfo);
+			info.addEventListener('click',openEdit);
 			edit.addEventListener('click',editPhoto);
 
 			let spazio_post=null;
@@ -307,17 +221,15 @@
 			});
 			
 			window.onload=function() {
-				getUser();
+				CurrentUser=getUser();
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
 					window.location="404.html";
 
 				}
 				else{
-					nprof.innerText= CurrentUser.nome;
+					nprof.innerText= CurrentUser.nome +" "+ CurrentUser.cognome;
 					nprof.style="color: white";
-					cprof.innerText= CurrentUser.cognome;
-					cprof.style="color: white";
 					userprof.innerText= CurrentUser.user;
 					userprof.style="color: white";
 					numprof.innerText= CurrentUser.numero;

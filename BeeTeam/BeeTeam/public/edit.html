@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+	<html lang="it">
+		<head>
+			<title> Profilo </title>
+			<meta charset="UTF-8">
+
+			<meta name="viewport" content="width=device-width,initial-scale=1.0">
+			<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+			<link rel=stylesheet href="main_styles.css" type="text/css">
+			<link rel="preconnect" href="https://fonts.googleapis.com">
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;1,100;1,700&display=swap" rel="stylesheet">
+			<script type="module" src="./js/functions.js"></script>
+		</head>
+        <body style="text-align: left;">
+            <br><br>
+            <div class="col-sm" id="space_info">
+                <div class="row" style="text-align: right;">
+                    <a class="active; text-warning;" href="profilo.html" >Back</a>
+                </div>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="nome_edit"> Nome </label>
+                    <input type="text" id="nome_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" id="cprof"></span>  
+                </div>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="cognome_edit"> Cognome </label>
+                    <input type="text" id="cognome_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" id="cprof"></span>  
+                </div>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="numero_edit"> Numero di Telefono </label>
+                    <input type="number" id="numero_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left"></h1>
+                </div>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="email_edit"> Email </label>
+                    <input type="email" id="email_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left"></h1>
+                </div>
+                <br><br>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="password_edit_vecchia"> Vecchia Password </label>
+                    <input type="password" id="password_edit_vecchia" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" placeholder="Vecchia "></h1>
+                </div>
+                <div class="row">
+                    <label class="custom-control-label; text-warning"  for="password_edit_nuova"> Nuova Password </label>
+                    <input type="password" id="password_edit_nuova" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" placeholder="Nuova"></h1>
+                </div>
+                <div class="row; weigth:20px; text-center ; height:15px;" >
+                    <button type="submit" id="edit_page"  class="btn btn-light btn-sm;">Save</button>
+                </div>
+
+
+            </div>
+            <script type="module">
+                import {getUser,saveData,updatePass,updateUser,getA,update_email,sendEmail} from "./js/functions.js";
+                import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+
+                var CurrentUser=null,user=null;
+                let nome=document.getElementById("nome_edit");
+                let cognome=document.getElementById("cognome_edit");
+
+                let numero=document.getElementById("numero_edit");
+                let email=document.getElementById("email_edit");
+                let vecchia=document.getElementById("password_edit_vecchia");
+                let nuova=document.getElementById("password_edit_nuova");
+
+                let invia=document.getElementById("edit_page");
+
+                invia.addEventListener('click',saveInfo);
+
+                function saveInfo(){
+                    var i=0;
+                    var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
+                    var vp=CurrentUser.password, email_user=CurrentUser.email;
+                    
+                    if(nome.value != novalue && nome.value != "") novalue=nome.value; i++;
+                    if(cognome.value != cvalue && cognome.value != "") cvalue=cognome.value; i++;
+                    if(numero.value != nvalue && numero.value != "") nvalue=numero.value; i++;
+                    if(nuova.value != vp && nuova.value != "") {
+                        i++;
+                        if(vp!=vecchia.value) {alert("La vecchia password non corrisponde!"); return;}
+                        else{
+                            if(nuova.value.length<6){ alert("password troppo corta"); return;}
+                            else {
+                                vp=nuova.value;
+                                updatePass(user,vp);
+                            }
+                        }
+                    }
+                    if(email.value != email_user && email.value != "") {
+                        email_user=email.value; i++;
+                        update_email(user,email_user);
+                    }
+
+
+
+                if(i>0){
+                    updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
+                    saveData(CurrentUser.uid);
+                    alert("Modify!");
+                    //window.location="profilo.html";
+                    i=0;
+                    }
+                    else{
+                            alert("Nessuna modifica");
+                    }
+                }
+
+
+                window.onload=function() {
+			    CurrentUser=getUser();
+                const auth=getAuth();
+                user=auth.currentUser;
+				if(CurrentUser==null){
+					alert("Non hai effettuato l'accesso!");
+					window.location="404.html";
+
+				}
+				else{
+					nome.setAttribute("placeholder",CurrentUser.nome);
+                    cognome.setAttribute("placeholder",CurrentUser.cognome);
+                    numero.setAttribute("placeholder",CurrentUser.numero);
+					email.setAttribute("placeholder",CurrentUser.email);
+
+				}
+            }
+            </script>
+        </body>

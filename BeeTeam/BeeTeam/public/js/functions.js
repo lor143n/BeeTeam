@@ -1,7 +1,7 @@
 import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByKey,remove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-import * as email from "https://smtpjs.com/v3/smtp.js";
+import { getAuth,updatePassword, updateEmail,sendEmailVerification,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -19,6 +19,7 @@ const firebaseConfig = {
  const app= initializeApp(firebaseConfig);
  const fire=getFirestore(app);
  const database=getDatabase(app);
+ const auth=getAuth();
 
 
  export function createElem(id,text,parent){
@@ -310,3 +311,90 @@ function onDelete(id,parent,c){
     deleteDoc(doc(fire,"post",id));
     }
 }
+export function getUser(){
+    var CurrentUser=null;
+    let keepLog=localStorage.getItem('KeepLog');
+		if(keepLog == "yes"){
+			CurrentUser=JSON.parse(localStorage.getItem('user'));
+			}
+		else{
+			CurrentUser=JSON.parse(sessionStorage.getItem('user'));
+		     }
+    return CurrentUser;
+}
+
+export function getElem(id,parent,type,c,place){
+    c=document.createElement("input");
+    c.setAttribute("type",type);
+    c.setAttribute("id",id);
+    c.setAttribute("placeholder",place);
+    c.setAttribute("style","background-color: transparent; weigth: 100%; border-color: transparent;");
+    c.setAttribute("class","text-warning bg-dark; text-center");
+    parent.innerText="";
+    parent.appendChild(c);
+    return c;
+}
+
+export function createButton(type,id,text){
+    var btnsub=document.createElement("button");
+    btnsub.setAttribute("type",type);
+    btnsub.setAttribute("id",id);
+    btnsub.setAttribute("class","btn btn-light btn-sm");
+    btnsub.innerHTML=text;
+    return btnsub;
+}
+var up=null;
+export function saveData(uid){
+    get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
+         up=snapshot.val();
+         let keepLog=localStorage.getItem('KeepLog');
+
+        if(keepLog == "yes"){
+             if(up!=null)localStorage.setItem('user', JSON.stringify(up));
+        }
+        else{
+            if(up!=null)sessionStorage.setItem('user', JSON.stringify(up));
+        }
+    });
+}
+
+    export function updatePass(user,vp){
+            updatePassword(user, vp).then(() => {
+                alert("Succesfully update!")
+            }).catch((error) => {
+                   alert(error);
+            });
+    }
+
+    export function update_email(user,new_email){
+        updateEmail(user, new_email).then(() => {
+            
+            sendEmail(user);
+            user.emailVerified=false;
+          }).catch((error) => {
+             alert(error);
+          });
+    }
+    export function getA(){
+        return getAuth();
+    }
+
+    export function updateUser(uid,novalue,cvalue,nvalue,email_user,vp){
+
+        update(ref(database, "Users/"+ uid),{
+            nome:novalue,
+            cognome:cvalue,
+            numero:nvalue,
+            email:email_user,
+            password:vp,
+        })
+
+    }
+    
+    export function sendEmail(user){
+        sendEmailVerification(user).then(() => {
+            alert("Please verify your email!");
+        })
+    }
+    
+
