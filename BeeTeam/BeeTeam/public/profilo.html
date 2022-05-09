@@ -38,7 +38,7 @@
 								<img name="FotoUtente" src="nofoto.jpg" id="fotoprofilo" class="flex">
 								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 							</div>
-							<div class="col-sm">
+							<div class="col-sm" id="space_info">
 								<div class="row">
 									<span id="nprof"> <b id="cprof">Name</b> Surname</span>  
 								</div>
@@ -118,6 +118,7 @@
 
 			let inviamodifica=document.getElementById("inviamodifica");
 			let modifica_foto=document.getElementById("modifica_foto");
+			let space_info=document.getElementById("space_info");
 
 
 			const out=document.getElementById("logout");
@@ -150,7 +151,7 @@
 
 			};
 
-			var btnsub=null,c2=null,n2=null, num2=null;
+			var btnsub=null,c2=null,n2=null, num2=null,p2, edit_pass;
 
 			function getElem(id,parent,type,c,place){
 				c=document.createElement("input");
@@ -164,21 +165,26 @@
 				return c;
 			}
 
+			function createButton(type,id,text){
+				var btnsub=document.createElement("button");
+				btnsub.setAttribute("type",type);
+				btnsub.setAttribute("id",id);
+				btnsub.setAttribute("class","btn btn-light btn-sm");
+				btnsub.innerHTML=text;
+				return btnsub;
+			}
+
 			function editInfo(){
 				n2=getElem("n2",nprof,"text",n2,CurrentUser.nome);
 				c2=getElem("c2",cprof,"text",c2,CurrentUser.cognome);
 				num2=getElem("num2",numprof,"number",num2,CurrentUser.numero);
 
-				//info.setAttribute("style","display:none");
-
-				btnsub=document.createElement("button");
-				btnsub.setAttribute("type","submit");
-				btnsub.setAttribute("id","btnsub");
-				btnsub.setAttribute("class","btn btn-light btn-sm");
-				btnsub.innerHTML="Save";
-				inviamodifica.replaceChild(btnsub,info);
-
+			    btnsub=createButton("submit","btnsub","Save");
+			    inviamodifica.replaceChild(btnsub,info);
 				btnsub.addEventListener('click',saveInfo);
+				edit_pass=createButton("submit","edit_pass","Modify your password");
+				inviamodifica.replaceChild(edit_pass,out);
+				
 			}
 			function saveData(uid){
 				get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
@@ -224,6 +230,7 @@
 			else{
 					alert("Nessuna modifica");
 			}
+			inviamodifica.replaceChild(out,edit_pass);
 			}
 			function editPhoto(){
 				btnsub=document.createElement("button");
@@ -301,7 +308,6 @@
 			
 			window.onload=function() {
 				getUser();
-			const auth=getAuth();
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
 					window.location="404.html";
