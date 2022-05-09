@@ -1,7 +1,7 @@
 import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByKey,remove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-import { getAuth,updatePassword, updateEmail,sendEmailVerification,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -359,7 +359,9 @@ export function saveData(uid){
 }
 
     export function updatePass(user,vp){
-            updatePassword(user, vp).then(() => {
+        const auth=getAuth();
+        const us=auth.currentUser;
+            updatePassword(us, vp).then(() => {
                 alert("Succesfully update!")
             }).catch((error) => {
                    alert(error);
@@ -367,16 +369,15 @@ export function saveData(uid){
     }
 
     export function update_email(user,new_email){
-        updateEmail(user, new_email).then(() => {
-            
+        const auth=getAuth();
+        const us=auth.currentUser;
+        updateEmail(us, new_email).then(() => {
             sendEmail(user);
-            user.emailVerified=false;
+            //user.emailVerified=false;
+
           }).catch((error) => {
              alert(error);
           });
-    }
-    export function getA(){
-        return getAuth();
     }
 
     export function updateUser(uid,novalue,cvalue,nvalue,email_user,vp){
@@ -388,13 +389,38 @@ export function saveData(uid){
             email:email_user,
             password:vp,
         })
+        .catch((error)=>{
+            alert(error);
+        })
+        
+        saveData(uid);
 
     }
     
     export function sendEmail(user){
-        sendEmailVerification(user).then(() => {
+        const auth=getAuth();
+        const us=auth.currentUser;
+        sendEmailVerification(us).then(() => {
             alert("Please verify your email!");
         })
+    }
+
+
+    export function delUser(){
+        const auth = getAuth();
+        const user = auth.currentUser;
+        const bool=window.confirm="Vuoi eliminare definitivamente l'account?";
+        if(bool){
+        deleteUser(user).then(() => {
+            alert("Delete User!");
+            window.location="accesso.html";
+            //Da cancellare nel database e nei docs!
+        }).catch((error) => {
+            alert(error);
+        });
+    }
+
+
     }
     
 

@@ -46,11 +46,14 @@
                 <div class="row; weigth:20px; text-center ; height:15px;" >
                     <button type="submit" id="edit_page"  class="btn btn-light btn-sm;">Save</button>
                 </div>
+                <div class="row; weigth:20px; text-right ; height:15px;" >
+                    <button type="submit" id="delete_user"  class="btn btn-light btn-sm;">Delete Account</button>
+                </div>
 
 
             </div>
             <script type="module">
-                import {getUser,saveData,updatePass,updateUser,getA,update_email,sendEmail} from "./js/functions.js";
+                import {getUser,saveData,updatePass,updateUser,update_email,sendEmail,delUser} from "./js/functions.js";
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
                 var CurrentUser=null,user=null;
@@ -63,8 +66,10 @@
                 let nuova=document.getElementById("password_edit_nuova");
 
                 let invia=document.getElementById("edit_page");
+                let del=document.getElementById("delete_user");
 
                 invia.addEventListener('click',saveInfo);
+                del.addEventListener('click',delUser);
 
                 function saveInfo(){
                     var i=0;
@@ -85,25 +90,24 @@
                             }
                         }
                     }
-                    if(email.value != email_user && email.value != "") {
+                    if(email.value != "") {
+                        if(email.value == email_user ){ alert("Same email!"); return;}
                         email_user=email.value; i++;
                         update_email(user,email_user);
                     }
 
+                    if(i>0){
+                        updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
+                        alert("Modify!");
+                        //window.location="profilo.html";
+                        i=0;
 
-
-                if(i>0){
-                    updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
-                    saveData(CurrentUser.uid);
-                    alert("Modify!");
-                    //window.location="profilo.html";
-                    i=0;
-                    }
-                    else{
+                        }
+                        else{
                             alert("Nessuna modifica");
+                        }
                     }
-                }
-
+                
 
                 window.onload=function() {
 			    CurrentUser=getUser();
