@@ -27,6 +27,11 @@ body.bg-bacheca{
   background-size: cover;
 }
 
+body.bg-edit {
+  background-image: url('intro_image.jpg'); 
+  background-size: cover;
+}
+
 hr{
   margin-left: 18%;
   margin-right: 18%;
@@ -35,6 +40,26 @@ hr{
 
 span {
   font-family: 'Poppins', sans-serif;
+}
+
+a {
+  color: #000000;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1vw;
+  text-decoration: none;
+  border-radius: 20px;
+  background-color: #ffbf00;
+  border-color: transparent;
+  padding: 1% 5% 1% 5%;
+}
+
+a:hover {
+  color: #ffbf00;
+  background-color:#000000;
+  border-color: #ffbf00;
+  border-width: thin;
+  border-style: groove;
 }
 
 /*Main page division*/
@@ -110,6 +135,7 @@ span {
   
   .box-header a {
     align-content: center;
+    background-color: transparent;
     color: #ffbf00;
     padding: 1% 2% 1% 2%;
     text-decoration: none;
@@ -122,8 +148,8 @@ span {
   }
   
   .box-header a:hover {
-    background-color: #ffbf00c1;
-    color: #000000;
+    background-color: transparent;
+    color: #ffbf00;
   }
 
   .box-header a.active {
@@ -375,6 +401,10 @@ span {
   border-color: #ffbf00;
 }
 
+.box-main-profile button.red-butt{
+  background-color: #ff0000;
+}
+
 
 /* Access division */
 .form-signin {
@@ -575,3 +605,63 @@ span {
   grid-column: 1/3;
   background-color: #000000;
 }
+
+/* Edit side */
+
+.grid-edit {
+  display: grid;
+  grid-row: 2;
+  grid-auto-rows: 1fr auto;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 70%, rgba(255,255,255,0) 100%);
+}
+
+.box-center-edit {
+  margin: 10% 30% 0% 30%;
+  padding: 2% 10% 2% 10%;
+  height: fit-content;
+  background-color: #000000a4;
+  border-radius: 20px;
+  outline: dashed;
+  outline-offset: 10px; 
+  outline-color: #ffbf00;
+  outline-width: thin;
+}
+
+.box-center-edit label{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  color: #ffbf00;
+  font-size: 1vw;
+}
+
+.box-center-edit button{
+  color: #000000;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 0.9vw;
+  text-decoration: none;
+  border-radius: 20px;
+  background-color: #ffbf00;
+  border-color: transparent;
+  padding: 1% 2% 1% 2%;
+  margin: 5%;
+}
+
+.box-center-edit button:hover{
+  color: #ffbf00;
+  background-color:#000000;
+  border-color: #ffbf00;
+}
+
+.box-center-edit button.red-butt{
+  background-color: #ff0000;
+}
+
+.box-center-edit h1{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  font-size: 2.2vw;
+  color: #ffbf00;
+}
+
+

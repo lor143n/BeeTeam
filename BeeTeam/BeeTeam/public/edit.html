@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html lang="it">
 		<head>
-			<title> Profilo </title>
+			<title> Update Profile </title>
 			<meta charset="UTF-8">
 
 			<meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -12,46 +12,78 @@
 	        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,500;1,100;1,700&display=swap" rel="stylesheet">
 			<script type="module" src="./js/functions.js"></script>
 		</head>
-        <body style="text-align: left;">
-            <br><br>
-            <div class="col-sm" id="space_info">
-                <div class="row" style="text-align: right;">
-                    <a class="active; text-warning;" href="profilo.html" >Back</a>
-                </div>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="nome_edit"> Nome </label>
-                    <input type="text" id="nome_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" id="cprof"></span>  
-                </div>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="cognome_edit"> Cognome </label>
-                    <input type="text" id="cognome_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" id="cprof"></span>  
-                </div>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="numero_edit"> Numero di Telefono </label>
-                    <input type="number" id="numero_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left"></h1>
-                </div>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="email_edit"> Email </label>
-                    <input type="email" id="email_edit" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left"></h1>
-                </div>
-                <br><br>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="password_edit_vecchia"> Vecchia Password </label>
-                    <input type="password" id="password_edit_vecchia" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" placeholder="Vecchia "></h1>
-                </div>
-                <div class="row">
-                    <label class="custom-control-label; text-warning"  for="password_edit_nuova"> Nuova Password </label>
-                    <input type="password" id="password_edit_nuova" style="background-color: transparent; weigth: 100%; border-color: transparent;" class="text-warning bg-dark; text-left" placeholder="Nuova"></h1>
-                </div>
-                <div class="row; weigth:20px; text-center ; height:15px;" >
-                    <button type="submit" id="edit_page"  class="btn btn-light btn-sm;">Save</button>
-                </div>
-                <div class="row; weigth:20px; text-right ; height:15px;" >
-                    <button type="submit" id="delete_user"  class="btn btn-light btn-sm;">Delete Account</button>
+        <body class="bg-edit">
+            <div class="grid-main">
+
+                <div class="box-header">
+                    <div class="box-header-left">
+                        <span style="font-weight: 800; color: #ffbf00; font-size: 2vw;">BEE</span>
+                        <span style="font-weight: 100; color: #ffbf00; font-size: 2vw;">TEAM</span>
+                    </div>
+                    <div class="box-header-center">
+                        <img class="image-logo" alt="Qries" src="Logoproject.png">
+                    </div>
+                    <div class="box-header-right">
+                    <a href="bacheca.html">Bacheca</a>
+                    <a href="profilo.html">Profilo</a>
+                    </div>
                 </div>
 
+                <div class="grid-edit">
+                    <div class="box-center-edit">
+                        <div class="col-sm" id="space_info">
+                            <div class="row">
+                                <h1> Update Profile </h1>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="nome_edit"> Name </label>
+                                <input class="border-1 rounded" type="text" id="nome_edit" class="text-warning bg-dark; text-left" id="cprof"></span>  
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="cognome_edit"> Surname </label>
+                                <input class="border-1 rounded" type="text" id="cognome_edit" class="text-warning bg-dark; text-left" id="cprof"></span>  
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="numero_edit"> Phone Number </label>
+                                <input class="border-1 rounded" type="number" id="numero_edit">
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="email_edit"> Email </label>
+                                <input class="border-1 rounded" type="email" id="email_edit">
+                            </div>
+                            <br><br><br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="password_edit_vecchia"> Old Password </label>
+                                <input class="border-1 rounded" type="password" id="password_edit_vecchia">
+                            </div>
+                            <br>
+                            <div class="row">
+                                <label class="custom-control-label; text-warning"  for="password_edit_nuova"> New Password </label>
+                                <input class="border-1 rounded" type="password" id="password_edit_nuova">
+                            </div>
+                            <div class="row; weigth:20px; text-center ; height:15px;" >
+                                <button type="submit" id="edit_page"  class="btn btn-light btn-sm;">Save</button>
+                            </div>
+                            <br><br>
+                            <div class="row; weigth:20px; text-right ; height:15px;" >
+                                <button type="submit" id="delete_user"  class="btn btn-light; red-butt">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <h3>@BeeTea inc.</h3>
+                </div>
 
             </div>
+            
+
+
             <script type="module">
                 import {getUser,saveData,updatePass,updateUser,update_email,sendEmail,delUser} from "./js/functions.js";
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
