@@ -343,6 +343,7 @@ export function createButton(type,id,text){
     btnsub.innerHTML=text;
     return btnsub;
 }
+
 var up=null;
 export function saveData(uid){
     get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
@@ -358,20 +359,20 @@ export function saveData(uid){
     });
 }
 
-    export function updatePass(user,vp){
+    export function updatePass(vp){
         const auth=getAuth();
-        const us=auth.currentUser;
-            updatePassword(us, vp).then(() => {
+        const user=auth.currentUser;
+            updatePassword(user, vp).then(() => {
                 alert("Succesfully update!")
             }).catch((error) => {
                    alert(error);
             });
     }
 
-    export function update_email(user,new_email){
+    export function update_email(new_email){
         const auth=getAuth();
-        const us=auth.currentUser;
-        updateEmail(us, new_email).then(() => {
+        const user=auth.currentUser;
+        updateEmail(user, new_email).then(() => {
             sendEmail(user);
             //user.emailVerified=false;
 
@@ -397,10 +398,10 @@ export function saveData(uid){
 
     }
     
-    export function sendEmail(user){
+    export function sendEmail(){
         const auth=getAuth();
-        const us=auth.currentUser;
-        sendEmailVerification(us).then(() => {
+        const user=auth.currentUser;
+        sendEmailVerification(user).then(() => {
             alert("Please verify your email!");
         })
     }
@@ -411,10 +412,14 @@ export function saveData(uid){
         const user = auth.currentUser;
         const bool=window.confirm="Vuoi eliminare definitivamente l'account?";
         if(bool){
+            const up={}
+            up['/Users/'+user.uid]=null;
+            update(ref(database),up);
+            deleteDoc(doc(fire,"users",user.uid));
         deleteUser(user).then(() => {
             alert("Delete User!");
+            
             window.location="accesso.html";
-            //Da cancellare nel database e nei docs!
         }).catch((error) => {
             alert(error);
         });

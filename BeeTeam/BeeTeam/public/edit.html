@@ -86,14 +86,14 @@
                             if(nuova.value.length<6){ alert("password troppo corta"); return;}
                             else {
                                 vp=nuova.value;
-                                updatePass(user,vp);
+                                updatePass(vp);
                             }
                         }
                     }
                     if(email.value != "") {
                         if(email.value == email_user ){ alert("Same email!"); return;}
                         email_user=email.value; i++;
-                        update_email(user,email_user);
+                        update_email(email_user);
                     }
 
                     if(i>0){

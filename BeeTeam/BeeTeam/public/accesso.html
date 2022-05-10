@@ -163,7 +163,7 @@
                             foto:"nofoto.jpg",
                             password: password.value
                         })
-                        sendEmail(auth.currentUser);
+                        sendEmail();
                         window.location="accesso.html";
 
                 })
@@ -201,26 +201,26 @@
             //AUTHENTICATION
             function Authentication(){
                 const db2=ref(database);
-
-            signInWithEmailAndPassword(auth, userlog.value, passlog.value)
-                   .then((userCredential) => {
-                // Signed in 
-                const u = userCredential.user;
-                if(u.emailVerified){
-                    get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
-                        LoginUser(snapshot.val());
-                    })
-                }
-                else{
-                    alert("Please verify your email");
-                }
-               })
-               .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-                window.location="accesso.html";
-                });
+                
+                signInWithEmailAndPassword(auth, userlog.value, passlog.value)
+                    .then((userCredential) => {
+                    // Signed in 
+                    const u = userCredential.user;
+                    if(u.emailVerified){
+                        get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
+                            LoginUser(snapshot.val());
+                        })
+                    }
+                    else{
+                        alert("Please verify your email");
+                    }
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                    window.location="accesso.html";
+                    });
            }
 
             function decPass(dbpass){
