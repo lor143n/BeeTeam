@@ -1,4 +1,4 @@
-import { getDoc,getFirestore, updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { getDoc,getFirestore,getDocs,setDoc, updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByKey,remove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
@@ -133,9 +133,6 @@ export function att2(id,parent,c,categoria,numero_persone,descrizione,sub ){
     createElem("cat"+id,"<h1>"+ categoria +"</h1>",c);
     c.appendChild(space);
     createElem("hr"+id, "<hr>", c)
-    c.appendChild(space)
-    if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
-    else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
     c.appendChild(space)
     createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
     c.appendChild(space);
@@ -311,6 +308,7 @@ function onDelete(id,parent,c){
     deleteDoc(doc(fire,"post",id));
     }
 }
+//riottenere dati locale
 export function getUser(){
     var CurrentUser=null;
     let keepLog=localStorage.getItem('KeepLog');
@@ -322,6 +320,160 @@ export function getUser(){
 		     }
     return CurrentUser;
 }
+
+export function RegisterUser(user,email,password,nome,cognome,numero){
+    const db = ref(database);
+    get(child(db,"Users/")).then((snapshot)=>{
+        var duplicato=false;
+        snapshot.forEach((snapchild)=>{
+            if(snapchild.val().user==user ){
+                alert("Account already exists!");
+                duplicato=true;
+            }
+        })
+
+        if(duplicato==false){
+            setDoc(doc(fire, "users", user), {
+                creati:[" "],
+                aderiti:[" "],
+                numero_creati: 0
+        });
+                        
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+
+            const u = userCredential.user;
+            set(ref(database, "Users/"+u.uid),{
+                nome:nome,
+                cognome: cognome,
+                numero: numero,
+                user:user,
+                uid:u.uid,
+                email:u.email,
+                foto:"nofoto.jpg",
+                password: password
+            })
+            sendEmail();
+            window.location="accesso.html";
+            })
+            .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+            });
+
+        }
+        else alert("Please change user");
+    })
+}
+
+export function Authentication(email,password){
+    const db2=ref(database);
+    
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+        // Signed in 
+        const u = userCredential.user;
+        if(u.emailVerified){
+            get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
+                LoginUser(snapshot.val());
+            })
+        }
+        else{
+            alert("Please verify your email");
+            const bool=window.confirm("Resend email");
+            if(bool) {sendEmail(); return;}
+        }
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        window.location="accesso.html";
+        });
+}
+
+//Salvare dati in locale dopo l'accesso 
+export function LoginUser(userinfo){
+    let keepLog=document.getElementById("stay").checked;
+
+    if(!keepLog){
+        sessionStorage.setItem('user', JSON.stringify(userinfo));
+        localStorage.setItem('KeepLog','no');
+        window.location="profilo.html";
+    }
+    else{
+
+        localStorage.setItem('KeepLog','yes');
+        localStorage.setItem('user', JSON.stringify(userinfo));
+        window.location="profilo.html";
+    }
+
+}
+//Eliminare il proprio account
+export async function delUser(us,email){
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const bool=window.confirm="Vuoi eliminare definitivamente l'account?";
+    if(bool){
+        try{
+        await getDoc(doc(fire,"users",us)).then((item)=>{
+            const dt=item.data();
+            if(dt.numero_creati!=0 || dt.aderiti.length!=1){
+                const creati=dt.creati;
+                const aderiti=dt.aderiti;
+                if(creati.length!=1){
+                    creati.forEach((post)=>{
+                        if(post!=" "){
+                            const up={};
+                            up['/Attivity/'+post]=null;
+                            update(ref(database),up);
+                            deleteDoc(doc(fire,"post",post));
+                        }
+
+                    })
+                }
+                if(aderiti.length!=1){
+                    aderiti.forEach((post)=>{
+                        if(post!=" "){
+                            updateDoc(doc(fire,"post",post),{
+                            sub_restanti:increment(1),
+                            sub: arrayRemove(email),
+                        })
+                    }
+                    })
+                }
+        }
+            
+        })
+        const up={};
+        up['/Users/'+user.uid]=null;
+        await update(ref(database),up);
+        await deleteDoc(doc(fire,"users",us));
+
+        await deleteUser(user).then(() => {
+            alert("Delete User!");
+        // window.location="accesso.html";
+        }).catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);              
+        });
+    }
+    catch(error){
+        const errorMessage = error.message;
+        alert(errorMessage);  
+    }
+    sign_Out();
+
+}
+}
+
+export function sign_Out(){
+    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
+    localStorage.removeItem('KeepLog');
+    window.location="accesso.html";
+
+};
 
 export function getElem(id,parent,type,c,place){
     c=document.createElement("input");
@@ -345,8 +497,8 @@ export function createButton(type,id,text){
 }
 
 var up=null;
-export function saveData(uid){
-    get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
+export async function saveData(uid){
+    await get(child(ref(database),"Users/"+ uid )).then((snapshot)=>{
          up=snapshot.val();
          let keepLog=localStorage.getItem('KeepLog');
 
@@ -381,9 +533,9 @@ export function saveData(uid){
           });
     }
 
-    export function updateUser(uid,novalue,cvalue,nvalue,email_user,vp){
+    export async function updateUser(uid,novalue,cvalue,nvalue,email_user,vp){
 
-        update(ref(database, "Users/"+ uid),{
+       await update(ref(database, "Users/"+ uid),{
             nome:novalue,
             cognome:cvalue,
             numero:nvalue,
@@ -391,9 +543,9 @@ export function saveData(uid){
             password:vp,
         })
         .catch((error)=>{
-            alert(error);
+            const errorMessage = error.message;
+            alert(errorMessage);        
         })
-        
         saveData(uid);
 
     }
@@ -404,28 +556,26 @@ export function saveData(uid){
         sendEmailVerification(user).then(() => {
             alert("Please verify your email!");
         })
+        .catch((error)=>{
+            sendEmail();            
+        })
+    }
+
+    export function encPass(){
+        var pass12 = CryptoJS.AES.encrypt(password.value, password.value);
+        //password and key we are providing 
+        return pass12.toString();
     }
 
 
-    export function delUser(){
-        const auth = getAuth();
-        const user = auth.currentUser;
-        const bool=window.confirm="Vuoi eliminare definitivamente l'account?";
-        if(bool){
-            const up={}
-            up['/Users/'+user.uid]=null;
-            update(ref(database),up);
-            deleteDoc(doc(fire,"users",user.uid));
-        deleteUser(user).then(() => {
-            alert("Delete User!");
-            
-            window.location="accesso.html";
-        }).catch((error) => {
-            alert(error);
-        });
+    export function decPass(dbpass){
+        var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
+        return pass12.toString(CryptoJS.enc.Utf8);
     }
 
+    
 
-    }
+
+    
     
 

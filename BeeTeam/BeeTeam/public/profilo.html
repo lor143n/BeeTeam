@@ -91,7 +91,7 @@
 				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 
 			// import * as func2 from "./js/func2.js";
-			   import {att,att2,att_sub,att_richiesta,getElem,createButton,getUser} from "./js/functions.js";
+			   import {att,att2,att_sub,att_richiesta,getElem,createButton,getUser,sign_Out} from "./js/functions.js";
 
 				const firebaseConfig = {
 				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -131,14 +131,6 @@
 			var storage=getStorage(app);
 
 			var CurrentUser=null;
-
-			function signout(){
-				sessionStorage.removeItem('user');
-				localStorage.removeItem('user');
-				localStorage.removeItem('KeepLog');
-				window.location="accesso.html";
-
-			};
 
 			var btnsub=null,c2=null,n2=null, num2=null,p2, edit_pass;
 
@@ -192,7 +184,7 @@
 
 			};
 
-			out.addEventListener('click',signout);
+			out.addEventListener('click',sign_Out);
 			info.addEventListener('click',openEdit);
 			edit.addEventListener('click',editPhoto);
 

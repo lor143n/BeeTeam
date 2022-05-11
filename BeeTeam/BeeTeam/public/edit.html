@@ -101,9 +101,9 @@
                 let del=document.getElementById("delete_user");
 
                 invia.addEventListener('click',saveInfo);
-                del.addEventListener('click',delUser);
+                del.addEventListener('click',function(){delUser(CurrentUser.user,CurrentUser.email)});
 
-                function saveInfo(){
+                async function saveInfo(){
                     var i=0;
                     var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
                     var vp=CurrentUser.password, email_user=CurrentUser.email;
@@ -129,9 +129,9 @@
                     }
 
                     if(i>0){
-                        updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
+                        await updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
                         alert("Modify!");
-                        //window.location="profilo.html";
+                        window.location="profilo.html";
                         i=0;
 
                         }
@@ -155,7 +155,6 @@
                     cognome.setAttribute("placeholder",CurrentUser.cognome);
                     numero.setAttribute("placeholder",CurrentUser.numero);
 					email.setAttribute("placeholder",CurrentUser.email);
-
 				}
             }
             </script>

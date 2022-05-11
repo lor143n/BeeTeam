@@ -141,7 +141,7 @@
            import { collection, query, where,getDoc, getDocs,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
            // import * as func2 from "./js/func2.js";
-           import {att, createElem} from "./js/functions.js";
+           import {att, createElem,getUser} from "./js/functions.js";
 
             const firebaseConfig = {
               apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -172,21 +172,12 @@
             let cerca_post=document.getElementById("cerca_post");
             let toSearch=document.getElementById("floatingSearch");
             let next=document.getElementById("next");
+
             var CurrentUser=null;
             let key=null;
 
-            function getUser(){
-                let keepLog=localStorage.getItem('KeepLog');
-
-                if(keepLog == "yes"){
-                      CurrentUser=JSON.parse(localStorage.getItem('user'));
-                 }
-                 else{
-                CurrentUser=JSON.parse(sessionStorage.getItem('user'));
-            }
-        }
-
-            function NewAttivity(){
+    
+            async function NewAttivity(){
                 let data=new Date().getTime();
                 const post=localStorage.getItem('post');
                 const Post=ref(database,"Attivity");
@@ -198,14 +189,14 @@
 
                 localStorage.setItem('post_totali',parseInt(localStorage.getItem('post_totali')+1));
                  
-                setDoc(doc(fire, "post", key), {
+                await setDoc(doc(fire, "post", key), {
                        sub:[" "],
                        sub_restanti: membri,
                        creator: CurrentUser.user,
                        category: type.value
                 });
                 
-                set(newpost,{
+                await set(newpost,{
 
                             anonymous: anonymous.checked,
                             member: membri,
@@ -217,16 +208,19 @@
                             complete: false,
                             
                 })
-                 updateDoc(doc(fire, "users", CurrentUser.user), {
+                 await updateDoc(doc(fire, "users", CurrentUser.user), {
                     creati: arrayUnion(key),
                     numero_creati: increment(1),
                 });
+                window.location.reload();
             }
            
             const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
             var i=0;
             sessionStorage.setItem("page",1);
+
             onChildAdded(commentsRef, (date) => {
+                sessionStorage.setItem("page",1);
                 const dR = doc(fire, "post",date.key);
 				getDoc(dR).then((item) =>{
                 if(i==3) {sessionStorage.setItem("last_position",date.val().id);}
@@ -305,7 +299,7 @@
 
 
             window.onload=function(){
-                getUser();
+                CurrentUser=getUser();
                 //Post nel db attualmente
                 var total_post=get(query(ref(database, "Attivity")));
                 total_post.then((item)=>{

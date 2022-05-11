@@ -94,158 +94,22 @@
 
         <script type="module">
             // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-            import { getDatabase, set, ref, update , get, child,orderByChild, equalTo,query } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-            import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
-            import { collection, where, getDocs,getFirestore,setDoc,doc,updateDoc, addDoc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
-            import {sendEmail} from "./js/functions.js";
+            import {sendEmail,LoginUser,Authentication,RegisterUser} from "./js/functions.js";
 
-            const firebaseConfig = {
-              apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
-              authDomain: "beeteam-2a5f7.firebaseapp.com",
-              databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
-              projectId: "beeteam-2a5f7",
-              storageBucket: "beeteam-2a5f7.appspot.com",
-              messagingSenderId: "223479016271",
-              appId: "1:223479016271:web:383e9319470cfaf4bd733a",
-              measurementId: "G-04ERX78GQJ"
-            };
-          
-            // Initialize Firebase
-           const app= initializeApp(firebaseConfig);
-           const database = getDatabase(app);
-           const auth=getAuth();
-           const fire=getFirestore(app);
-
-     //REGISTRATION 
             const nome=document.getElementById("nreg");
             const cognome=document.getElementById("creg");
             const numero=document.getElementById("numreg");
             const email=document.getElementById("ereg");
             const user=document.getElementById("user");
             const password=document.getElementById("preg");
-            const sub=document.getElementById("sub");
-
-            function RegisterUser(){
-                const db = ref(database);
-      
-
-           get(child(db,"Users/")).then((snapshot)=>{
-               var duplicato=false;
-
-                     snapshot.forEach((snapchild)=>{
-                        if(snapchild.val().user==user.value ){
-                             alert("Account already exists!");
-                             duplicato=true;
-                        }
-                     })
-
-                if(duplicato==false){
-                            setDoc(doc(fire, "users", user.value), {
-                                creati:[" "],
-                                aderiti:[" "],
-                                numero_creati: 0
-                            });
-                            
-             createUserWithEmailAndPassword(auth, email.value, password.value)
-                 .then((userCredential) => {
-
-                 const u = userCredential.user;
-                 let autentication=localStorage.setItem('auth',"false");
-
-                        set(ref(database, "Users/"+u.uid),{
-                            nome:nome.value,
-                            cognome: cognome.value,
-                            numero: numero.value,
-                            user:user.value,
-                            uid:u.uid,
-                            email:u.email,
-                            foto:"nofoto.jpg",
-                            password: password.value
-                        })
-                        sendEmail();
-                        window.location="accesso.html";
-
-                })
-
-                  .catch((error) => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  alert(errorMessage);
-              });
-
-            }
-           })
-        }
-           
-
-            //ENCRYPTION
-
-            function encPass(){
-                var pass12 = CryptoJS.AES.encrypt(password.value, password.value);
-                //password and key we are providing 
-                return pass12.toString();
-            }
-
-            // EVENT HENDLER
-            sub.addEventListener('click',RegisterUser);
-
-
-            //LOGIN!
-
-            //costant
             const userlog=document.getElementById("userlog");
             const passlog=document.getElementById("passlog");
+
             const login=document.getElementById("login");
+            login.addEventListener('click',function(){Authentication(userlog.value,passlog.value)});
 
-            //AUTHENTICATION
-            function Authentication(){
-                const db2=ref(database);
-                
-                signInWithEmailAndPassword(auth, userlog.value, passlog.value)
-                    .then((userCredential) => {
-                    // Signed in 
-                    const u = userCredential.user;
-                    if(u.emailVerified){
-                        get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
-                            LoginUser(snapshot.val());
-                        })
-                    }
-                    else{
-                        alert("Please verify your email");
-                    }
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert(errorMessage);
-                    window.location="accesso.html";
-                    });
-           }
-
-            function decPass(dbpass){
-                var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
-                return pass12.toString(CryptoJS.enc.Utf8);
-            }
-
-            function LoginUser(userinfo){
-                let keepLog=document.getElementById("stay").checked;
-
-                if(!keepLog){
-                    sessionStorage.setItem('user', JSON.stringify(userinfo));
-                    localStorage.setItem('KeepLog','no');
-                    window.location="profilo.html";
-                }
-                else{
-
-                    localStorage.setItem('KeepLog','yes');
-                    localStorage.setItem('user', JSON.stringify(userinfo));
-                    window.location="profilo.html";
-                }
-
-            }
-
-            login.addEventListener('click',Authentication);
+            const sub=document.getElementById("sub");
+            sub.addEventListener('click',function(){RegisterUser(user.value,email.value,password.value,nome.value,cognome.value,numero.value)});
         
           </script>
             
