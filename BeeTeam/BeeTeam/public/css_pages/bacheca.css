@@ -1,0 +1,95 @@
+.grid-bacheca {
+    display: grid;
+    grid-row: 2;
+    grid-auto-rows: 1fr;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 20%, rgba(255,255,255,0) 100%);
+  }
+
+.box-main-bacheca {
+    display: grid;
+    grid-column: 1/3;
+    grid-auto-columns: 30% 70%;
+    margin: 2%;
+    margin-bottom: 10%;
+  }
+
+  .box-main-bacheca label{
+    color: #ffbf00;
+    font-size: 0.9vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  .box-main-bacheca button{
+    color: #000000;
+    font-family:'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 0.9vw;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #ffbf00;
+    border-color: transparent;
+    padding: 1% 2% 1% 2%;
+  }
+  
+  .box-main-bacheca button:hover{
+    color: #ffbf00;
+    background-color:#000000;
+    border-color: #ffbf00;
+  }
+
+  .box-main-bacheca h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #ffbf00;
+    font-size: 1.75vw;
+  }
+
+  .box-main-bacheca h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    color:#000000;
+    font-size: 1.5vw;
+  }
+  
+  .box-leftside-down-bacheca {
+    position: sticky;
+    height:fit-content;
+    grid-column: 1;
+    background-color:#000000e1;
+    padding: 5% 10% 5% 10%;
+    border-radius: 20px;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
+    margin-top: 7.5%;
+    margin-right: 10%;
+  }
+  
+  .box-leftside-up-bacheca {
+    position: sticky;
+    height: fit-content;
+    grid-column: 1;
+    background-color:#000000e1;
+    padding: 5% 10% 5% 10%;
+    border-radius: 20px;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
+    margin-right: 10%;
+  }
+
+  .box-post-bacheca {
+    border-radius: 20px 20px 20px 20px;
+    background-color: #000000e1;
+    min-height: 90%;
+    height: fit-content;
+    outline: dashed;
+    outline-offset: 10px; 
+    outline-color: #ffbf00;
+    outline-width: thin;
+    padding: 5%;
+    grid-column: 2;
+  }
