@@ -90,7 +90,10 @@
 
 
             <script type="module">
-                import {getUser,saveData,updatePass,updateUser,update_email,sendEmail,delUser} from "./js/functions.js";
+                import {updatePass,updateUser,update_email,delUser,saveInfo} from "./js/function_edit.js";
+                import {getUser,sendEmail} from "./js/function_accesso.js";
+                import {saveData} from "./js/function_profile.js";
+
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
                 var CurrentUser=null,user=null;
@@ -105,51 +108,11 @@
                 let invia=document.getElementById("edit_page");
                 let del=document.getElementById("delete_user");
 
-                invia.addEventListener('click',saveInfo);
+                invia.addEventListener('click',function(){saveInfo(nome.value,cognome.value,numero.value,nuova.value,vecchia.value,email.value)});
                 del.addEventListener('click',function(){delUser(CurrentUser.user,CurrentUser.email)});
-
-                async function saveInfo(){
-                    var i=0;
-                    var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
-                    var vp=CurrentUser.password, email_user=CurrentUser.email;
-                    
-                    if(nome.value != novalue && nome.value != "") novalue=nome.value; i++;
-                    if(cognome.value != cvalue && cognome.value != "") cvalue=cognome.value; i++;
-                    if(numero.value != nvalue && numero.value != "") nvalue=numero.value; i++;
-                    if(nuova.value != vp && nuova.value != "") {
-                        i++;
-                        if(vp!=vecchia.value) {alert("La vecchia password non corrisponde!"); return;}
-                        else{
-                            if(nuova.value.length<6){ alert("password troppo corta"); return;}
-                            else {
-                                vp=nuova.value;
-                                updatePass(vp);
-                            }
-                        }
-                    }
-                    if(email.value != "") {
-                        if(email.value == email_user ){ alert("Same email!"); return;}
-                        email_user=email.value; i++;
-                        update_email(email_user);
-                    }
-
-                    if(i>0){
-                        await updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
-                        alert("Modify!");
-                        window.location="profilo.html";
-                        i=0;
-
-                        }
-                        else{
-                            alert("Nessuna modifica");
-                        }
-                    }
-                
 
                 window.onload=function() {
 			    CurrentUser=getUser();
-                const auth=getAuth();
-                user=auth.currentUser;
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
 					window.location="404.html";

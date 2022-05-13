@@ -27,13 +27,13 @@
 				</div>
 				<div class="box-header-right">
 					<a href="bacheca.html">
-					<button type="submit" id="logout" class="btn btn-light;"> Bacheca </button>
+					<button type="submit"  class="btn btn-light;"> Bacheca </button>
 					</a>
 					<a class="active" href="profilo.html">
-						<button type="submit" id="logout" class="btn btn-light;"> Profilo </button>
+						<button type="submit"  class="btn btn-light;"> Profilo </button>
 					</a>
 
-					<button type="submit" id="logout" class="btn btn-light; red-butt"> Sign Out </button>
+					<button type="submit" id="logout" class="btn btn-light; red-butt" > Sign Out </button>
 				</div>
 			</div>
 	
@@ -42,7 +42,7 @@
 					<div class="box-up-profile">
 						<div class="row">
 							<div class="col-sm">
-								<img name="FotoUtente" src="css_pages/images/nofoto.jpg" id="fotoprofilo" class="flex">
+								<img name="FotoUtente" src="./css_pages/images/nofoto.jpg" id="fotoprofilo" class="flex">
 								<input type="file" id="sourcefoto" width="100%" style="color: transparent; display: none;" accept=".jpg, .png, .jpeg">
 							</div>
 							<div class="col-sm" id="space_info">
@@ -66,7 +66,7 @@
 							</div>
 							<div class="col-sm" id="inviamodifica">
 								<a href="edit.html" id="editinfo"> 
-									<button id="editbutton" class="btn btn-light btn-sm"> Change Image</button>
+									<button id="editbutton" class="btn btn-light btn-sm"> Edit Info</button>
 								</a>
 							</div>
 						</div>
@@ -92,30 +92,8 @@
 		</div>
 		
 		<script type="module">
-				import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-				import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, orderByChild,limitToLast} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-				import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
-				import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-storage.js";
-				import { collection, query, where, getDoc,addDoc,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
-
-			// import * as func2 from "./js/func2.js";
-			   import {att,att2,att_sub,att_richiesta,getElem,createButton,getUser,sign_Out} from "./js/functions.js";
-
-				const firebaseConfig = {
-				apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
-				authDomain: "beeteam-2a5f7.firebaseapp.com",
-				databaseURL: "https://beeteam-2a5f7-default-rtdb.firebaseio.com",
-				projectId: "beeteam-2a5f7",
-				storageBucket: "beeteam-2a5f7.appspot.com",
-				messagingSenderId: "223479016271",
-				appId: "1:223479016271:web:383e9319470cfaf4bd733a",
-				measurementId: "G-04ERX78GQJ"
-				};
-			
-				// Initialize Firebase
-			export const app= initializeApp(firebaseConfig);
-			export const database = getDatabase(app);
-			const fire=getFirestore(app);
+			import {sign_Out,editPhoto} from "./js/function_profile.js";
+			import {getUser,openEdit} from "./js/function_accesso.js";
 
 			let nprof=document.getElementById("nprof");
 			let cprof=document.getElementById("cprof");
@@ -123,109 +101,26 @@
 			let numprof=document.getElementById("numprof");
 			let eprof=document.getElementById("eprof");
 			let foto=document.getElementById("fotoprofilo");
-
 			let inviamodifica=document.getElementById("inviamodifica");
 			let modifica_foto=document.getElementById("modifica_foto");
 			let space_info=document.getElementById("space_info");
 
-
 			const out=document.getElementById("logout");
 			const edit=document.getElementById("editbutton");
 			const sub=document.getElementById("subedit");
-			const info=document.getElementById("editinfo")
-			var percorso=null;
-			var up=null;
-			
-			var storage=getStorage(app);
-
-			var CurrentUser=null;
-
-			var btnsub=null,c2=null,n2=null, num2=null,p2, edit_pass;
-
-			function openEdit(){
-				window.location="edit.html";
-			}
-	
-			function editPhoto(){
-				btnsub=document.createElement("button");
-				btnsub.setAttribute("type","submit");
-				btnsub.setAttribute("class","btn btn-light btn-sm");
-				btnsub.innerHTML="Save";
-
-				modifica_foto.replaceChild(btnsub,edit);
-				btnsub.addEventListener('click',function(){updatePhoto(btnsub)});
-			}
-
-
-			function updatePhoto(btn){
-				const f=document.getElementById("sourcefoto").files[0];
-				
-				const metadata = {
-					contentType: 'image/'+f.type,
-				};
-				
-				var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
-				var uploadTask= uploadBytesResumable(storageRef,f,metadata)
-					alert("Update Succesfully");
-			
-
-				getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-				console.log('File available at', url);
-				const xhr = new XMLHttpRequest();
-				xhr.responseType = 'blob';
-				xhr.onload = (event) => {
-					const blob = xhr.response;
-				};
-				xhr.open('GET', url);
-				xhr.send();
-				foto.setAttribute("src",url);
-				update(ref(database, "Users/"+CurrentUser.uid),{
-							foto:url,
-				});
-				})
-				.catch((error)=>{
-					alert(error);
-				})
-
-				modifica_foto.replaceChild(edit,btn);
-				saveData(CurrentUser.uid);
-
-			};
+			const info=document.getElementById("editinfo");
 
 			out.addEventListener('click',sign_Out);
 			info.addEventListener('click',openEdit);
-			edit.addEventListener('click',editPhoto);
+			edit.addEventListener('click',function(){editPhoto(document.getElementById("sourcefoto"), edit,foto)});
 
-			let spazio_post=null;
 			const date2= new Date();
 
-			const commentsRef = query(ref(database, "Attivity"),orderByChild('data'));
-
-            onChildAdded(commentsRef, (date) => {
-                let c=null;
-                let dati_utente=date.val();
-				const docRef = doc(fire, "post",date.key);
-				const docSnap =  getDoc(docRef).then((item) =>{
-				const items=item.data();
-				if(items.creator==CurrentUser.user) {
-					spazio_post=document.getElementById("spazio_creati");
-					if(items.sub_restanti!=0) att2(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
-					else att_richiesta(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
-				}
-				else if(items.sub.includes(CurrentUser.email)){
-					spazio_post=document.getElementById("spazio_aderiti");
-					att_sub(date.key, spazio_post, c ,dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
-				}
-			}
-            );
-			});
-			
 			window.onload=function() {
-				CurrentUser=getUser();
+				const CurrentUser=getUser();
 				if(CurrentUser==null){
 					alert("Non hai effettuato l'accesso!");
-					window.location="404.html";
-
+					window.location="accesso.html";
 				}
 				else{
 					nprof.innerText= CurrentUser.nome +" "+ CurrentUser.cognome;
@@ -237,17 +132,9 @@
 					eprof.innerText= CurrentUser.email;
 					eprof.style="color: white";
 					if(CurrentUser.foto!=null) foto.setAttribute("src",CurrentUser.foto);
-					else foto.setAttribute("src","nofoto.jpg");
-					
-
+					else foto.setAttribute("src","./css_pages/images/nofoto.jpg");
 				}
 			}
-
-				
-
-				
-			
-		
 	</script>
 </body>
 </html>
