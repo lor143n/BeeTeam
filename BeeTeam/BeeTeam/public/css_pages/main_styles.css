@@ -1,4 +1,5 @@
 .flex {max-width: 100%;}
+
 body {
   height: 100%;
   align-items: center;
@@ -69,12 +70,26 @@ span {
   .box-header h1{
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
-    font-size: 2vw;
+    font-size: 100px;
     color: #ffbf00;
   }
 
+  .box-header span{
+    font-weight: 100; 
+    color: #ffbf00; 
+    font-size: 30px;
+    font-weight: 100;
+  }
+
+  .box-header span.title-bold{
+    font-weight: 800;
+  }
+
+
   .box-header img.image-logo{
-    width: 50%;
+    position: relative;
+    top: 50%;
+    width: 55%;
     height: auto;
   }
   
@@ -99,11 +114,31 @@ span {
     margin-right: 42%;
   }
 
+  @media only screen and (max-width: 1200px) {
+    .box-header-right {
+      margin-right: 30%;
+    }
+
+    .box-header-left {
+      margin-left: 30%;
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .box-header-right {
+      margin-right: 15%;
+    }
+
+    .box-header-left {
+      margin-left: 15%;
+    }
+  }
+
   .box-header button{
     color: #000000;
     font-family:'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 0.9vw;
+    font-size: 15px;
     text-decoration: none;
     border-radius: 20px;
     background-color: #ffbf00;
@@ -112,6 +147,12 @@ span {
   }
   
   .box-header button:hover{
+    color: #ffbf00;
+    background-color:#000000;
+    border-color: #ffbf00;
+  }
+
+  .box-header button:active{
     color: #ffbf00;
     background-color:#000000;
     border-color: #ffbf00;
