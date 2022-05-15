@@ -28,7 +28,7 @@
     color: #000000;
     font-family:'Poppins', sans-serif;
     font-weight: 400;
-    font-size: 0.9vw;
+    font-size: 15px;
     text-decoration: none;
     border-radius: 20px;
     background-color: #ffbf00;
@@ -52,5 +52,33 @@
     font-weight: 100;
     font-size: 2.2vw;
     color: #ffbf00;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .box-center-edit label{
+      font-size: 2vw;
+    }
+
+    .box-center-edit {
+      margin: 10% 10% 0% 10%;
+    }
+
+    .box-center-edit h1{
+      font-size: 3.2vw;
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .box-center-edit label{
+      font-size: 3vw;
+    }
+
+    .box-center-edit {
+      margin: 10% 2% 0% 2%;
+    }
+
+    .box-center-edit h1{
+      font-size: 4vw;
+    }
   }
   

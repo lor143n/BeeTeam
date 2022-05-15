@@ -36,6 +36,20 @@
   border-radius: 20px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .box-down-profile {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .box-down-profile {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}
+
 .box-down-left-profile{
   align-items: center;
   background-color: #000000;
@@ -53,7 +67,7 @@
 .box-main-profile h1{
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
-  color: black;
+  color: #ffbf00;
   font-size: 1.3vw;
 }
 
@@ -68,17 +82,38 @@
   color: #000000;
   font-family:'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 0.9vw;
+  font-size: 15px;
   text-decoration: none;
   border-radius: 20px;
   background-color: #ffbf00;
   border-color: transparent;
   padding: 1% 2% 1% 2%;
+  margin: 1%;
 }
 
 .box-main-profile button:hover{
   color: #ffbf00;
   background-color:#000000;
   border-color: #ffbf00;
+}
+
+@media only screen and (max-width: 1200px) {
+  .box-main-profile h1{
+    font-size: 2.3vw;
+  }
+
+  .box-main-profile span{
+    font-size: 3vw;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .box-main-profile h1{
+    font-size: 3.3vw;
+  }
+
+  .box-main-profile span{
+    font-size: 4.5vw;
+  }
 }
 
