@@ -143,7 +143,6 @@ import { saveData } from "./function_profile.js";
 
         if(i>0){
             await updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
-            alert("Modify!");
             window.location="profilo.html";
             i=0;
 

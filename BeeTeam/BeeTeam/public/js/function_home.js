@@ -27,13 +27,11 @@ import {att,createElem} from "./funzioni_post.js";
     const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
     const spazio_post=document.getElementById("post");
     var i=0;
-    sessionStorage.setItem("page",1);
 
     onChildAdded(commentsRef, (date) => {
-        sessionStorage.setItem("page",1);
         const dR = doc(fire, "post",date.key);
         getDoc(dR).then((item) =>{
-        if(i==3) {sessionStorage.setItem("last_position",date.val().id);}
+        if(i==3) { sessionStorage.setItem("last_position",date.val().id); alert(date.val().id)}
         let c=null;                 i++;
         let data=date.val();
         if(data.complete==false && i!=4) att(date.key, spazio_post, c ,data.type, data.member, data.anonymous,data.description,data.user,item.data().sub_restanti);
@@ -108,7 +106,7 @@ import {att,createElem} from "./funzioni_post.js";
     const last=sessionStorage.getItem('last_position');
     var page=parseInt(sessionStorage.getItem('page'));
     var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*page);
-    page++;
+    page+=1;
     sessionStorage.setItem('page',page);
     var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(4));
     get(q).then((item)=>{
@@ -117,18 +115,20 @@ import {att,createElem} from "./funzioni_post.js";
             spazio_post.removeChild(spazio_post.firstChild);
          }
         var i=0,k=0;
-        var limit= (total_size>3) ? 0 : 10;
+
+        var limit= (total_size >3 ) ? 0 : -1;
         item.forEach((ogg)=>{
             const c=null; 
             const post_data=ogg.val();
             if(i==limit) {sessionStorage.setItem("last_position",post_data.id); }
             else att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
             i++;
-            if(limit==10 && k!=1){
+            if(limit==-1 && k!=1){
                 alert("No more post!");
                 k=1;
                 next.disabled=true;
             }
+            if(i==total_size-1) return;
         })
     })
 
