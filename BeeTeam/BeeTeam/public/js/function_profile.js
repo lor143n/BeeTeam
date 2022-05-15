@@ -5,7 +5,7 @@ import { getStorage, ref as storef, uploadBytesResumable,getDownloadURL } from "
 import { query,getDoc,getFirestore,doc} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 
 import { getUser } from "./function_accesso.js";
-import {att2,att_sub,att_richiesta} from "./funzioni_post.js";
+import {post_creati,post_aderiti,att_richiesta} from "./funzioni_post.js";
 
 
 
@@ -38,12 +38,12 @@ import {att2,att_sub,att_richiesta} from "./funzioni_post.js";
         const items=item.data();
         if(items.creator==CurrentUser.user) {
             spazio_post=document.getElementById("spazio_creati");
-            if(items.sub_restanti!=0) att2(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+            if(items.sub_restanti!=0) post_creati(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
             else att_richiesta(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
         }
         else if(items.sub.includes(CurrentUser.email)){
             spazio_post=document.getElementById("spazio_aderiti");
-            att_sub(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
+            post_aderiti(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
         }
     }
     );

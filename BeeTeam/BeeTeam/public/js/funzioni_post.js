@@ -29,7 +29,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         parent.appendChild(cat);
         }
     //bacheca
-    export function att(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
+    export function post_bacheca(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
         c=document.createElement("div");
         c.setAttribute("id",id);
         c.setAttribute("class","box-activity");
@@ -37,7 +37,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
 
-        createElem("cat"+id,"<h1>"+ categoria +"</h1>",c);
+        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)
@@ -101,7 +101,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
 
         //post creati in profilo
 
-    export function att2(id,parent,categoria,numero_persone,descrizione,sub ){
+    export function post_creati(id,parent,categoria,numero_persone,descrizione,sub ){
         var c=document.createElement("div");
         c.setAttribute("id",id);
         c.setAttribute("class","box-activity");
@@ -142,7 +142,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         return c;   
     }
     //post aderiti in profilo
-    export function att_sub(id,parent,categoria,numero_persone,check,descrizione,user,sub){
+    export function post_aderiti(id,parent,categoria,numero_persone,check,descrizione,user,sub){
         var c=document.createElement("div");
         c.setAttribute("id",id);
         c.setAttribute("class","box-activity");
@@ -150,7 +150,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
 
-        createElem("cat"+id,"<h1>"+ categoria +"</h1>",c);
+        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)
@@ -228,7 +228,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         c.appendChild(space);
 
 
-        createElem("cat"+id,"<h3><b>Categoria:  </b>"+categoria+"</h3>",c);
+        createElem("cat"+id,"<h1><b>Categoria:  </b>"+categoria+"</h1>",c);
         c.appendChild(space);
         createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
         c.appendChild(space);

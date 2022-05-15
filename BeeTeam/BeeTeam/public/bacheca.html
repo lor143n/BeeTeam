@@ -145,7 +145,7 @@
         <script type="module">
            // import * as func2 from "./js/func2.js";
            import {getUser} from "./js/function_accesso.js";
-           import {att,createElem} from "./js/funzioni_post.js";
+           import {post_bacheca,createElem} from "./js/funzioni_post.js";
            import {NewAttivity,OnSearch,nextPage,getTotalPost} from "./js/function_home.js";
 
             let crea=document.getElementById("crea");
@@ -156,17 +156,16 @@
             let cerca_post=document.getElementById("cerca_post");
             let toSearch=document.getElementById("floatingSearch");
             let next=document.getElementById("next");
-            const spazio_post = document.getElementById("post");
 
-            cerca_post.addEventListener('click',function(){OnSearch(toSearch.value,spazio_post)});
+            cerca_post.addEventListener('click',function(){OnSearch(toSearch.value)});
             crea.addEventListener('click',function(){NewAttivity(member.valuetype.value,anonymous.checked,description.value)});
-            next.addEventListener('click',function(){nextPage(spazio_post)});
+            next.addEventListener('click',nextPage);
 
+            
             window.onload=function(){
                 const CurrentUser=getUser();
                 getTotalPost();
                 sessionStorage.setItem("page",1);
-
             }
 
         </script>
