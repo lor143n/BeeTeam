@@ -2,6 +2,7 @@
 import { getDoc,getFirestore,updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase, ref, update } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
+import { getUser } from "./function_accesso.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
@@ -61,38 +62,44 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         return c;   
     }
     //pressione del load e aggiornamento delle caselle relative a post e utente
-    function loadInfoSub(key){
+    async function loadInfoSub(key){
         var CurrentUser=getUser();
         var bool=false;
+        var value=true;
         try{
-            var value=true;
             const docRef=doc(fire,"post",key);
-            getDoc(docRef).then((snapref)=>{
+            await getDoc(docRef).then((snapref)=>{
                 if(snapref.data().sub_restanti==0) value=false;
+                else if(snapref.data().creator==CurrentUser.user){
+                    alert("Can't submit your own post");
+                    value=false;
+                }
                 else if(snapref.data().sub.includes(CurrentUser.user)){
                     value=false;
                     alert("Already subscribed!");
                 }
-            })
-        if(value){
-            const docRef = doc(fire, "post",key);
-            getDoc(docRef).then((item) =>{
-                var sub_restanti= item.data().sub_restanti;
-                if(sub_restanti-1==0)  bool=true;
 
             })
-        updateDoc(doc(fire, "users", CurrentUser.user), {
-            aderiti: arrayUnion(key),
-            complete:bool,
-        });
+            if(value!=false){
+                const docRef = doc(fire, "post",key);
+                getDoc(docRef).then((item) =>{
+                    var sub_restanti= item.data().sub_restanti;
+                    if(sub_restanti-1==0)  bool=true;
+                })
+                updateDoc(doc(fire, "users", CurrentUser.user), {
+                    aderiti: arrayUnion(key),
+                    complete:bool,
+                });
 
-        updateDoc(doc(fire, "post", key), {
-            sub_restanti: increment(-1),
-            sub: arrayUnion(CurrentUser.email)
-        });
-        alert("Success!");
-        };
-        }
+                updateDoc(doc(fire, "post", key), {
+                    sub_restanti: increment(-1),
+                    sub: arrayUnion(CurrentUser.email)
+                });
+                alert("Success!");
+
+                };
+
+            }
         catch(e){
             alert(e);
         }

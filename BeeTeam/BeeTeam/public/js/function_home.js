@@ -24,7 +24,7 @@ import {post_bacheca} from "./funzioni_post.js";
     const auth=getAuth();
     const CurrentUser=getUser();
     let spazio_post=null;
-    const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
+    const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(6));
 
     export function onload(spazio){
         var i=0;
@@ -34,7 +34,7 @@ import {post_bacheca} from "./funzioni_post.js";
             getDoc(dR).then((item) =>{
             if(i==2) { sessionStorage.setItem("last_position",date.val().id);}
             let data=date.val(); i++;
-            if(data.complete==false && i!=4) post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,item.data().sub_restanti);
+            if(item.data().sub_restanti>0  && i!=4) post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,item.data().sub_restanti);
         })
         }
         );
