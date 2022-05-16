@@ -89,7 +89,7 @@ span {
   .box-header img.image-logo{
     position: relative;
     top: 50%;
-    width: 55%;
+    width: 45%;
     height: auto;
   }
   
@@ -112,26 +112,6 @@ span {
     text-align: right;
     grid-column: 3;
     margin-right: 42%;
-  }
-
-  @media only screen and (max-width: 1200px) {
-    .box-header-right {
-      margin-right: 30%;
-    }
-
-    .box-header-left {
-      margin-left: 30%;
-    }
-  }
-  
-  @media only screen and (max-width: 700px) {
-    .box-header-right {
-      margin-right: 15%;
-    }
-
-    .box-header-left {
-      margin-left: 15%;
-    }
   }
 
   .box-header button{
@@ -170,6 +150,34 @@ span {
     border-radius: 20px;
   }
 
+  @media only screen and (max-width: 1200px) {
+    .box-header-right {
+      margin-right: 30%;
+    }
+
+    .box-header-left {
+      margin-left: 30%;
+    }
+
+    .box-header button{
+      font-size: 13px;
+    }
+  }
+  
+  @media only screen and (max-width: 700px) {
+    .box-header-right {
+      margin-right: 15%;
+    }
+
+    .box-header-left {
+      margin-left: 15%;
+    }
+
+    .box-header button{
+      font-size: 11px;
+    }
+  }
+
 /*Shared footer*/
 
 .box-footer {
@@ -183,56 +191,5 @@ span {
   font-weight: 200;
   font-size: small;
   color: #4d4d4d;
-}
-
-
-/*Shared activities*/
-
-.box-activity {
-  margin: 5%;
-  border-radius: 20px;
-  background-image: url('images/try.png');
-  background-size: cover;
-  background-color: #ffbf00;
-  padding: 5%;
-}
-
-.box-activity hr{
-  margin: 0%;
-  margin-left: 18%;
-  margin-right: 18%;
-  color: rgba(0, 0, 0, 0.721);
-}
-
-.box-activity h1{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 2vw;
-  color: #000000;
-}
-
-.box-activity h3{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 200;
-  font-size: 1vw;
-  color: #000000;
-}
-
-.box-activity a{
-  color: #ffbf00;
-  font-family:'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 1vw;
-  text-decoration: none;
-  border-radius: 20px;
-  background-color: #000000;
-  border-color: transparent;
-  padding: 1% 5% 1% 5%;
-}
-
-.box-activity a:hover{
-  color: #ffbf00;
-  background-color:#ffffff;
-  border-color: #ffbf00;
 }
 

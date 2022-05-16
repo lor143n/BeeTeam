@@ -43,8 +43,16 @@
     border-color: #ffbf00;
   }
   
+  .box-center-edit button.red-butt:hover{
+    border-color: red;
+  }
+
   .box-center-edit button.red-butt{
-    background-color: #ff0000;
+    background-color: transparent;
+    color: red;
+    border-color: transparent;
+    border-style: dashed;
+    border-radius: 20px;
   }
   
   .box-center-edit h1{

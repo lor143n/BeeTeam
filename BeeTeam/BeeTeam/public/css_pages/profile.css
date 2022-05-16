@@ -23,6 +23,10 @@
   width: 65%;
   height: auto;
   border-radius: 100px;
+  outline: dashed;
+  outline-offset: 10px; 
+  outline-color: #ffbf00;
+  outline-width: thin;
 }
 
 .box-down-profile {
@@ -52,14 +56,14 @@
 
 .box-down-left-profile{
   align-items: center;
-  background-color: #000000;
+  background-color: #000000c9;
   border-radius: 20px;
   margin: 4%;
 }
 
 .box-down-right-profile{
   align-items: center;
-  background-color: #000000;
+  background-color: #000000c9;
   border-radius: 20px;
   margin: 4%;
 }
@@ -113,6 +117,56 @@
 .box-main-profile button:hover{
   color: #ffbf00;
   background-color:#000000;
+  border-color: #ffbf00;
+}
+
+/*Shared activities*/
+
+.box-activity {
+  margin: 5%;
+  border-radius: 20px;
+  background-image: url('images/try.png');
+  background-size: cover;
+  background-color: #ffbf00;
+  padding: 5%;
+}
+
+.box-activity hr{
+  margin: 0%;
+  margin-left: 18%;
+  margin-right: 18%;
+  color: rgba(0, 0, 0, 0.721);
+}
+
+.box-activity h1{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 2vw;
+  color: #000000;
+}
+
+.box-activity h3{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: 1vw;
+  color: #000000;
+}
+
+.box-activity a{
+  color: #ffbf00;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1vw;
+  text-decoration: none;
+  border-radius: 20px;
+  background-color: #000000;
+  border-color: transparent;
+  padding: 1% 5% 1% 5%;
+}
+
+.box-activity a:hover{
+  color: #ffbf00;
+  background-color:#ffffff;
   border-color: #ffbf00;
 }
 

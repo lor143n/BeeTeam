@@ -100,16 +100,22 @@
     font-weight: 400;
   }
   .box-access-left button{
+    color: #000000;
     font-family:'Poppins', sans-serif;
+    font-weight: 400;
     font-size: 15px;
-    color: #191919;
+    text-decoration: none;
     border-radius: 20px;
     background-color: #ffbf00;
-    border-color: #ffbf00;
-    border: 0%;
-    margin: 10px;
+    border-color: transparent;
+    padding: 0.1em 0.7em 0.1em 0.7em;
   }
   
+  .box-access-left button:hover{
+    color: #ffbf00;
+    background-color:#000000;
+    border-color: #ffbf00;
+  }
   
   .box-access-right {
     grid-column: 2;
@@ -120,6 +126,55 @@
     background-size: cover;
     background-color: #ffbf00;
     border-radius: 0% 20px 20px 0%;
+  }
+  
+  .box-access-right table{
+    margin: auto;
+    position: relative;
+    top: 20%;
+  }
+  
+  .box-access-right h1{
+    font-size: 30px;
+    font-family:'Poppins', sans-serif;
+    font-weight: 700;
+    color: #000000;
+    padding: 10px;
+  }
+  .box-access-right h2{
+    font-size: 10px;
+    font-family:'Poppins', sans-serif;
+    font-weight: 300;
+    color: #000000;
+  }
+  .box-access-right h3{
+    font-size: 10px;
+    font-family:'Poppins', sans-serif;
+    color: #000000;
+  }
+
+  .box-access-right label{
+    font-family:'Poppins', sans-serif;
+    color: #000000;
+    font-weight: 400;
+  }
+
+  .box-access-right button{
+    color: #ffbf00;
+    font-family:'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 20px;
+    background-color: #000000;
+    border-color: transparent;
+    padding: 0.1em 0.7em 0.1em 0.7em;
+  }
+  
+  .box-access-right button:hover{
+    color: #000000;
+    background-color: transparent;
+    border-color: #000000;
   }
 
   @media only screen and (max-width: 1200px) {
@@ -140,46 +195,5 @@
     .box-access-left {
       margin: 5% 0% 5% 5%;
     }
-  }
-  
-  .box-access-right table{
-    margin: auto;
-    position: relative;
-    top: 20%;
-  }
-  
-  .box-access-right h1{
-    font-size: 30px;
-    font-family:'Poppins', sans-serif;
-    font-weight: 700;
-    color: #191919;
-    padding: 10px;
-  }
-  .box-access-right h2{
-    font-size: 10px;
-    font-family:'Poppins', sans-serif;
-    font-weight: 300;
-    color: #191919;
-  }
-  .box-access-right h3{
-    font-size: 10px;
-    font-family:'Poppins', sans-serif;
-    color: #191919;
-  }
-
-  .box-access-right label{
-    font-family:'Poppins', sans-serif;
-    color: #000000;
-    font-weight: 400;
-  }
-
-  .box-access-right button{
-    font-family:'Poppins', sans-serif;
-    font-size: 15px;
-    color: #ffbf00;
-    border-radius: 20px;
-    background-color: #191919;
-    border-color: #191919;
-    margin: 10px;
   }
   
