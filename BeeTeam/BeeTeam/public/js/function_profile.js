@@ -31,23 +31,25 @@ import {post_creati,post_aderiti,att_richiesta} from "./funzioni_post.js";
     const commentsRef = query(ref(database, "Attivity"),orderByChild('data'));
     var spazio_post=null;
 
-    onChildAdded(commentsRef, (date) => {
-        let dati_utente=date.val();
-        const docRef = doc(fire, "post",date.key);
-        getDoc(docRef).then((item) =>{
-        const items=item.data();
-        if(items.creator==CurrentUser.user) {
-            spazio_post=document.getElementById("spazio_creati");
-            if(items.sub_restanti!=0) post_creati(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
-            else att_richiesta(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+    export function onload(){
+        onChildAdded(commentsRef, (date) => {
+            let dati_utente=date.val();
+            const docRef = doc(fire, "post",date.key);
+            getDoc(docRef).then((item) =>{
+            const items=item.data();
+            if(items.creator==CurrentUser.user) {
+                spazio_post=document.getElementById("spazio_creati");
+                if(items.sub_restanti!=0) post_creati(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+                else att_richiesta(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+            }
+            else if(items.sub.includes(CurrentUser.email)){
+                spazio_post=document.getElementById("spazio_aderiti");
+                post_aderiti(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
+            }
         }
-        else if(items.sub.includes(CurrentUser.email)){
-            spazio_post=document.getElementById("spazio_aderiti");
-            post_aderiti(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
-        }
-    }
-    );
-    });
+        );
+        });
+}
 
     export function sign_Out(){
         sessionStorage.removeItem('user');

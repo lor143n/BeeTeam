@@ -23,21 +23,24 @@ import {post_bacheca} from "./funzioni_post.js";
     const database=getDatabase(app);
     const auth=getAuth();
     const CurrentUser=getUser();
-
+    let spazio_post=null;
     const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
-    const spazio_post=document.getElementById("post");
     var i=0;
 
+    export function onload(spazio){
+        spazio_post=spazio;
+        if(spazio_post!=null){
         onChildAdded(commentsRef, (date) => {
             const dR = doc(fire, "post",date.key);
             getDoc(dR).then((item) =>{
             if(i==3) { sessionStorage.setItem("last_position",date.val().id); }
-            let c=null;                 i++;
             let data=date.val();
-            if(data.complete==false && i!=4) post_bacheca(date.key, spazio_post,c ,data.type, data.member, data.anonymous,data.description,data.user,item.data().sub_restanti);
+            if(data.complete==false && i!=4) post_bacheca(date.key,spazio_post,data.type, data.member, data.anonymous,data.description,data.user,item.data().sub_restanti);
         })
         }
         );
+    }
+    }
 
         
 

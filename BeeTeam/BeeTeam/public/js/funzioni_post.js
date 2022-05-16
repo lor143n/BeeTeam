@@ -29,26 +29,25 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         parent.appendChild(cat);
         }
     //bacheca
-    export function post_bacheca(id,parent,c,categoria,numero_persone,check,descrizione,user,sub){
-        c=document.createElement("div");
+    export function post_bacheca(id,parent,categoria,numero_persone,check,descrizione,user,sub){
+        const c=document.createElement("div");
         c.setAttribute("id",id);
         c.setAttribute("class","box-activity");
 
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
 
-        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
+        createElem("cat"+id,"<h3><b>"+ categoria +"</b></h3>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)
         if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
         else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
         c.appendChild(space)
-        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
+        createElem("descrizione"+id, "<h4>"+descrizione+"</h4>", c);
         c.appendChild(space);
         //modifica anche qui
-        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
-        c.appendChild(space);
+        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h4>"+sub+" / "+numero_persone+"</h4>",c);
 
         var button=document.createElement("a");
         button.setAttribute("style","text-align:center");
@@ -120,23 +119,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
 
-        createElem("cat"+id,"<h1>"+ categoria +"</h1>",c);
+        createElem("cat"+id,"<h3>"+ categoria +"</h3>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)
-        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
+        createElem("descrizione"+id, "<h4>"+descrizione+"</h4>", c);
         c.appendChild(space);
         //modifica anche qui
-        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
+        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h4>"+sub+" / "+numero_persone+"</h4>",c);
         c.appendChild(space);
-
-        var sub_space=document.createElement("div");
-        sub_space.setAttribute("class","row");
-        sub_space.setAttribute("style","padding-bottom: 0.5px");
-        sub_space.innerHTML="<h3><b>Posti disponibili:  </b>"+sub+"</h3>";
-        c.appendChild(sub_space);
-
-
 
         parent.appendChild(c);
         return c;   
@@ -150,24 +141,18 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
 
-        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
+        createElem("cat"+id,"<h3><b>"+ categoria +"</b></h3>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)
         if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
         else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
         c.appendChild(space)
-        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
+        createElem("descrizione"+id, "<h4>"+descrizione+"</h4>", c);
         c.appendChild(space);
         //modifica anche qui
-        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
+        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h4>"+sub+" / "+numero_persone+"</h4>",c);
         c.appendChild(space);
-
-        var sub_space=document.createElement("div");
-        sub_space.setAttribute("class","row");
-        sub_space.setAttribute("style","padding-bottom: 0.5px");
-        sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+sub+"</h3>";
-        c.appendChild(sub_space);
 
         var button=document.createElement("a");
         button.setAttribute("style","text-align:center");
@@ -228,17 +213,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         c.appendChild(space);
 
 
-        createElem("cat"+id,"<h1><b>Categoria:  </b>"+categoria+"</h1>",c);
+        createElem("cat"+id,"<h3><b>Categoria:  </b>"+categoria+"</h3>",c);
         c.appendChild(space);
-        createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b>" + numero_persone+"</h3>",c);
+        createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b></h3>" + "<h4>"+numero_persone+"</h4>",c);
         c.appendChild(space);
-        createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+ "<h3>"+descrizione+"</h3>", c);
+        createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+ "<h4>"+descrizione+"</h4>", c);
         c.appendChild(space);
 
         var sub_space=document.createElement("div");
         sub_space.setAttribute("class","row");
         sub_space.setAttribute("style","padding-bottom: 0.5px");
-        sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+sub+"</h3>";
+        sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+"<h4>"+sub+"</h4>";
         c.appendChild(sub_space);
 
         var button=document.createElement("a");
