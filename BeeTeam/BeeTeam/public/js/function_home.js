@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-import { getDatabase, set, ref , get, child,push ,onChildAdded,orderByChild,endAt,limitToLast,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
+import { getDatabase, set, ref , get, child,push ,onChildAdded,orderByChild,endAt,endBefore,startAt,limitToLast,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { collection, query, where,getDoc, getDocs,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getAuth} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 import { getUser } from "./function_accesso.js";
@@ -25,21 +25,20 @@ import {post_bacheca} from "./funzioni_post.js";
     const CurrentUser=getUser();
     let spazio_post=null;
     const commentsRef = query(ref(database, "Attivity"),orderByChild('data'),limitToFirst(4));
-    var i=0;
 
     export function onload(spazio){
+        var i=0;
         spazio_post=spazio;
-        if(spazio_post!=null){
         onChildAdded(commentsRef, (date) => {
             const dR = doc(fire, "post",date.key);
             getDoc(dR).then((item) =>{
-            if(i==3) { sessionStorage.setItem("last_position",date.val().id); }
-            let data=date.val();
-            if(data.complete==false && i!=4) post_bacheca(date.key,spazio_post,data.type, data.member, data.anonymous,data.description,data.user,item.data().sub_restanti);
+            if(i==2) { sessionStorage.setItem("last_position",date.val().id);}
+            let data=date.val(); i++;
+            if(data.complete==false && i!=4) post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,item.data().sub_restanti);
         })
         }
         );
-    }
+
     }
 
         
@@ -97,7 +96,7 @@ import {post_bacheca} from "./funzioni_post.js";
                var post_data=snap.val();
                var l=spazio_post.childNodes.length;
                let c=null;
-               post_bacheca(data_key,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
+               post_bacheca(data_key,spazio_post,post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
             })
             
            })
@@ -107,6 +106,8 @@ import {post_bacheca} from "./funzioni_post.js";
    }
 
    export function nextPage(){
+    if(bk.disabled==true) bk.disabled=false;
+
     const last=sessionStorage.getItem('last_position');
     var page=parseInt(sessionStorage.getItem('page'));
     var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*page);
@@ -114,13 +115,15 @@ import {post_bacheca} from "./funzioni_post.js";
     while(spazio_post.hasChildNodes()){
         spazio_post.removeChild(spazio_post.firstChild);
      }
-    var q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last),limitToLast(4));
+     var q=null;
+    if(total_size >= 3) q=query(ref(database, "Attivity"),orderByChild('id'),endBefore(last),limitToLast(4));
+    else {q=query(ref(database, "Attivity"),orderByChild('id'),endAt(last));};
+
     get(q).then((item)=>{
         if(!item.exists()) {alert("Not Found"); return;}
         var i=0,k=0;
         var limit= (total_size >3 ) ? 0 : -1;
         item.forEach((ogg)=>{
-            const c=null; 
             const post_data=ogg.val();
             if(i==limit) {sessionStorage.setItem("last_position",post_data.id); }
            // else att(post_data.id,spazio_post,c,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
@@ -129,7 +132,45 @@ import {post_bacheca} from "./funzioni_post.js";
                 alert("No more post!"); k=1;
                 next.disabled=true;
             }
-            //if(i==total_size-1) return;
+        })
+    })
+
+}
+
+
+export function backPage(){
+    if(next.disabled==true) next.disabled=false;
+    const last=sessionStorage.getItem('last_position');
+
+    var page=parseInt(sessionStorage.getItem('page'));
+    var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*(page-1));
+    page-=1; sessionStorage.setItem('page',page);
+
+    while(spazio_post.hasChildNodes()){
+        spazio_post.removeChild(spazio_post.firstChild);
+     }
+     var q=null;
+    if(total_size >= 3) q=query(ref(database, "Attivity"),orderByChild('id'),startAt(last),limitToFirst(4));
+    else {q=query(ref(database, "Attivity"),orderByChild('id'),startAt(last));};
+
+    get(q).then((item)=>{
+        if(!item.exists()) {alert("Not Found"); return;}
+        var i=0,k=0;
+        var limit= (total_size >3 ) ? 2 : -1;
+        item.forEach((ogg)=>{
+            const dR = doc(fire, "post",ogg.key);
+            getDoc(dR).then((og) =>{
+
+            const post_data=ogg.val();
+            alert(post_data.id);
+            if(i==limit) {sessionStorage.setItem("last_position",post_data.id); alert("lasr "+post_data.id)}
+            else post_bacheca(post_data.id,spazio_post, post_data.type, post_data.member,post_data.anonymous,post_data.description,post_data.user,og.data().sub_restanti);
+            i++;
+            if(page==1 && k!=1){
+                k=1;
+                bk.disabled=true;
+            }
+        })
         })
     })
 

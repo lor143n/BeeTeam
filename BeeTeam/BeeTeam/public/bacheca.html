@@ -137,6 +137,8 @@
                         <div id="post">
     
                         </div>
+                        <button class=" btn-sm" id="bk">Back</button>
+
                         <button class=" btn-sm" id="next">Next</button>
                     </div>
                 </div>
@@ -152,7 +154,7 @@
            // import * as func2 from "./js/func2.js";
            import {getUser} from "./js/function_accesso.js";
            import {post_bacheca,createElem} from "./js/funzioni_post.js";
-           import {NewAttivity,OnSearch,nextPage,getTotalPost,onload} from "./js/function_home.js";
+           import {NewAttivity,OnSearch,nextPage,getTotalPost,onload,backPage} from "./js/function_home.js";
 
             let crea=document.getElementById("crea");
             let anonymous=document.getElementById("inlineRadio1");
@@ -162,6 +164,7 @@
             let cerca_post=document.getElementById("cerca_post");
             let toSearch=document.getElementById("floatingSearch");
             let next=document.getElementById("next");
+            let back=document.getElementById("bk");
 
             const spazio_post=document.getElementById("post");
 
@@ -169,6 +172,7 @@
             cerca_post.addEventListener('click',function(){OnSearch(toSearch.value)});
             crea.addEventListener('click',function(){NewAttivity(member.value,type.value,anonymous.checked,description.value)});
             next.addEventListener('click',nextPage);
+            //back.addEventListener('click',backPage);
 
             
             window.onload=function(){

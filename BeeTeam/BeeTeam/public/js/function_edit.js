@@ -2,8 +2,8 @@ import { getFirestore} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-f
 import { getDatabase,  ref, update } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import { getAuth,updatePassword, updateEmail} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
-import { getUser } from "./function_accesso.js";
-import { saveData } from "./function_profile.js";
+import { getUser,sendEmail } from "./function_accesso.js";
+import { saveData,sign_Out } from "./function_profile.js";
 
 
 
@@ -24,23 +24,27 @@ import { saveData } from "./function_profile.js";
     const auth=getAuth();
     const CurrentUser=getUser();
 
-    export function updatePass(vp){
+    export async function updatePass(vp){
         const user=auth.currentUser;
-            updatePassword(user, vp).then(() => {
-                
+            await updatePassword(user, vp).then(() => {
+                alert("Password modify");
             }).catch((error) => {
                 const errorMessage = error.message;
+                alert(errorMessage);
+                return;
             });
     }
 
-    export function update_email(new_email){
+    export async function update_email(new_email){
         const user=auth.currentUser;
-        updateEmail(user, new_email).then(() => {
+        await updateEmail(user, new_email).then(() => {
             sendEmail(user);
             user.emailVerified=false;
+            alert("Email modify");
         }).catch((error) => {
             const errorMessage = error.message;
-            alert(errorMessage);             
+            alert(errorMessage);  
+            return;           
         });
     }
 
@@ -116,17 +120,19 @@ import { saveData } from "./function_profile.js";
 
     }
     }
-    export async function saveInfo(nome,cognome,numero,nuova,vecchia,email){
+    export async function saveInfo(nomev,cognomev,numerov,nuovav,vecchiav,emailv){
         var i=0;
+        var just_info=true;
         var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
         var vp=CurrentUser.password, email_user=CurrentUser.email;
-        
+
+        var nome=nomev.value; var cognome=cognomev.value; var numero=numerov.value; var nuova=nuovav.value; var vecchia=vecchiav.value;var email=emailv.value;
         if(nome != novalue && nome != "") novalue=nome; i++;
         if(cognome != cvalue && cognome != "") cvalue=cognome; i++;
         if(numero != nvalue && numero != "") nvalue=numero; i++;
         if(nuova != vp && nuova != "") {
             i++;
-            if(vp!=vecchia) {alert("La vecchia password non corrisponde!"); return;}
+            if(vp!=vecchia) { alert("La vecchia password non corrisponde!"); return;}
             else{
                 if(nuova.length<6){ alert("password troppo corta"); return;}
                 else {
@@ -134,20 +140,32 @@ import { saveData } from "./function_profile.js";
                     updatePass(vp);
                 }
             }
+            just_info=false;
         }
         if(email != "") {
             if(email == email_user ){ alert("Same email!"); return;}
             email_user=email; i++;
             update_email(email_user);
+            just_info=false;
         }
 
         if(i>0){
             await updateUser(CurrentUser.uid,novalue,cvalue,nvalue,email_user,vp);
-            window.location="profilo.html";
             i=0;
-
+            if(just_info) {
+                alert("Info modify");
+                //window.location="profilo.html";
+            }
+            nomev.value= null;
+            cognomev.value=null;
+            emailv.value=null;
+            numerov.value=null;
+            vecchiav.value=null;
+            nuovav.value=null;
+            
             }
             else{
                 alert("Nessuna modifica");
             }
         }
+       

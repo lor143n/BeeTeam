@@ -119,7 +119,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase
         dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
 
-        createElem("cat"+id,"<h3>"+ categoria +"</h3>",c);
+        createElem("cat"+id,"<h3><b>"+ categoria +"</b></h3>",c);
         c.appendChild(space);
         createElem("hr"+id, "<hr>", c)
         c.appendChild(space)

@@ -75,13 +75,19 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 150;
   color: black;
-  font-size: 1.7vw;
+  font-size: 1.5vw;
 }
 .box-main-profile h4{
   font-family: 'Poppins', sans-serif;
-  font-weight: 100;
+  font-weight: 120;
   color:black;
   font-size: 1.5vw;
+}
+.box-main-profile h5{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 150;
+  color:#ffbf00;
+  font-size: 1.7vw;
 }
 
 .box-main-profile span{

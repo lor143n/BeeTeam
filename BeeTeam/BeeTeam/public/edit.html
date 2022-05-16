@@ -28,12 +28,12 @@
                     </div>
                     <div class="box-header-right">
                         <a href="bacheca.html">
-                            <button type="submit" id="logout" class="btn btn-light;"> Bacheca </button>
+                            <button type="submit" class="btn btn-light;"> Bacheca </button>
                         </a>
                         <a class="active" href="profilo.html">
-                             <button type="submit" id="logout" class="btn btn-light;"> Profilo </button>
+                             <button type="submit" class="btn btn-light;"> Profilo </button>
                         </a>
-                        <button type="submit" id="logout" class="btn btn-light; red-butt" > Sign Out </button>
+                        <button type="submit" id="logout_edit" class="btn btn-light; red-butt" > Sign Out </button>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
             <script type="module">
                 import {updatePass,updateUser,update_email,delUser,saveInfo} from "./js/function_edit.js";
                 import {getUser,sendEmail} from "./js/function_accesso.js";
-                import {saveData} from "./js/function_profile.js";
+                import {saveData,sign_Out} from "./js/function_profile.js";
 
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
@@ -110,8 +110,10 @@
 
                 let invia=document.getElementById("edit_page");
                 let del=document.getElementById("delete_user");
-
-                invia.addEventListener('click',function(){saveInfo(nome.value,cognome.value,numero.value,nuova.value,vecchia.value,email.value)});
+                let log_out=document.getElementById("logout_edit");
+                
+                log_out.addEventListener('click',sign_Out);
+                invia.addEventListener('click',function(){saveInfo(nome,cognome,numero,nuova,vecchia,email)});
                 del.addEventListener('click',function(){delUser(CurrentUser.user,CurrentUser.email)});
 
                 window.onload=function() {

@@ -126,10 +126,10 @@
 					window.location="accesso.html";
 				}
 				else{
-					nprof.innerHTML= "<h3>"+CurrentUser.nome +" "+ CurrentUser.cognome+"</h3>";
-					userprof.innerHTML= "<h3>"+CurrentUser.user+"</h3>";
-					numprof.innerHTML= "<h3>"+CurrentUser.numero +"<h3>";
-					eprof.innerHTML= "<h3>"+CurrentUser.email +"<h3>";
+					nprof.innerHTML= "<h5>"+CurrentUser.nome +" "+ CurrentUser.cognome+"</h5>";
+					userprof.innerHTML= "<h5>"+CurrentUser.user+"</h5>";
+					numprof.innerHTML= "<h5>"+CurrentUser.numero +"<h5>";
+					eprof.innerHTML= "<h5>"+CurrentUser.email +"<h5>";
 					if(CurrentUser.foto!=null) foto.setAttribute("src",CurrentUser.foto);
 					else foto.setAttribute("src","./css_pages/images/nofoto.jpg");
 					onload();
