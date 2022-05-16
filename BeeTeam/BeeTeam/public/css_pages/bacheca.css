@@ -38,17 +38,10 @@
     border-color: #ffbf00;
   }
 
-  .box-main-bacheca h1{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 100;
-    color: #ffbf00;
-    font-size: 1.5vw;
-  }
-
   .box-main-bacheca h2{
     font-family: 'Poppins', sans-serif;
-    font-weight: 200;
-    color:#000000;
+    font-weight: 100;
+    color:#ffbf00;
     font-size: 1.5vw;
   }
   
@@ -96,9 +89,6 @@
 
 
   @media only screen and (max-width: 1400px) {
-    .box-main-bacheca h1{
-      font-size: 2.5vw;
-    }
   
     .box-main-bacheca h2{
       font-size: 2.5vw;
@@ -116,10 +106,6 @@
       grid-auto-columns: auto;
     }
     
-    .box-main-bacheca h1{
-      font-size: 4vw;
-    }
-  
     .box-main-bacheca h2{
       font-size: 4vw;
     }
