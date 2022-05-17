@@ -40,20 +40,6 @@
   border-radius: 20px;
 }
 
-@media only screen and (max-width: 1200px) {
-  .box-down-profile {
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .box-down-profile {
-    margin-left: 0%;
-    margin-right: 0%;
-  }
-}
-
 .box-down-left-profile{
   align-items: center;
   background-color: #000000c9;
@@ -80,18 +66,6 @@
   font-weight: 150;
   color: black;
   font-size: 1.5vw;
-}
-.box-main-profile h4{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 120;
-  color:black;
-  font-size: 1.5vw;
-}
-.box-main-profile h5{
-  font-family: 'Poppins', sans-serif;
-  font-weight: 150;
-  color:#ffbf00;
-  font-size: 1.7vw;
 }
 
 .box-main-profile span{
@@ -145,6 +119,13 @@
   color: #000000;
 }
 
+.box-activity h2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.3vw;
+  color: #000000;
+}
+
 .box-activity h3{
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
@@ -152,25 +133,35 @@
   color: #000000;
 }
 
-.box-activity a{
-  color: #ffbf00;
+.box-activity button{
+  color: #000000;
   font-family:'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 1vw;
+  font-size: 15px;
   text-decoration: none;
   border-radius: 20px;
-  background-color: #000000;
+  background-color: #ffbf00;
   border-color: transparent;
-  padding: 1% 5% 1% 5%;
+  padding: 1% 2% 1% 2%;
 }
 
-.box-activity a:hover{
+.box-activity button:hover{
   color: #ffbf00;
-  background-color:#ffffff;
+  background-color:#000000;
   border-color: #ffbf00;
 }
 
 @media only screen and (max-width: 1200px) {
+  .box-down-profile {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .box-up-profile img{
+    width: 85%;
+    height: auto;
+  }
+
   .box-main-profile h2{
     font-size: 2.3vw;
   }
@@ -178,15 +169,56 @@
   .box-main-profile span{
     font-size: 3vw;
   }
+
+  .box-activity h1{
+    font-size: 3vw;
+  }
+  
+  .box-activity h2{
+    font-size: 2.3vw;
+  }
+  
+  .box-activity h3{
+    font-size: 2vw;
+  }
 }
 
 @media only screen and (max-width: 700px) {
+  .box-down-profile {
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+  
+  .box-up-profile img{
+    width: 85%;
+    height: auto;
+  }
+
   .box-main-profile h2{
     font-size: 3.3vw;
   }
 
   .box-main-profile span{
     font-size: 4.5vw;
+  }
+
+  .box-activity h1{
+    font-size: 4vw;
+  }
+  
+  .box-activity h2{
+    font-size: 3.3vw;
+  }
+  
+  .box-activity h3{
+    font-size: 3vw;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .box-up-profile img{
+    width: 60%;
+    height: auto;
   }
 }
 

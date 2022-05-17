@@ -128,21 +128,21 @@
   color: #000000;
 }
 
-.box-activity a{
-  color: #ffbf00;
+.box-activity button{
+  color: #000000;
   font-family:'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 1vw;
+  font-size: 15px;
   text-decoration: none;
   border-radius: 20px;
-  background-color: #000000;
+  background-color: #ffbf00;
   border-color: transparent;
-  padding: 1% 5% 1% 5%;
+  padding: 1% 2% 1% 2%;
 }
 
-.box-activity a:hover{
+.box-activity button:hover{
   color: #ffbf00;
-  background-color:#ffffff;
+  background-color:#000000;
   border-color: #ffbf00;
 }
 
@@ -161,6 +161,18 @@
 
     .box-main-bacheca label{
       font-size: 1.8vw;
+    }
+
+    .box-activity h1{
+      font-size: 3vw;
+    }
+    
+    .box-activity h2{
+      font-size: 2.3vw;
+    }
+    
+    .box-activity h3{
+      font-size: 2vw;
     }
   }
   
@@ -192,5 +204,17 @@
 
     .box-post-bacheca {
       grid-column: 1;
+    }
+
+    .box-activity h1{
+      font-size: 4vw;
+    }
+    
+    .box-activity h2{
+      font-size: 3.3vw;
+    }
+    
+    .box-activity h3{
+      font-size: 3vw;
     }
   }

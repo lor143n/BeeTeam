@@ -30,13 +30,13 @@
                 </div>
 				<div class="box-header-right">
 					<a href="bacheca.html">
-					<button type="submit"  class="btn btn-light;"> Bacheca </button>
+					<button type="submit"  class="btn btn-light btn-sm"> Bacheca </button>
 					</a>
 					<a class="active" href="profilo.html">
-						<button type="submit"  class="btn btn-light;"> Profilo </button>
+						<button type="submit"  class="btn btn-light btn-sm"> Profilo </button>
 					</a>
 
-					<button type="submit" id="logout" class="btn btn-light; red-butt" > Sign Out </button>
+					<button type="submit" id="logout" class="btn btn-light btn-sm; red-butt" > Sign Out </button>
 				</div>
 			</div>
 	
@@ -126,10 +126,10 @@
 					window.location="accesso.html";
 				}
 				else{
-					nprof.innerHTML= "<h5>"+CurrentUser.nome +" "+ CurrentUser.cognome+"</h5>";
-					userprof.innerHTML= "<h5>"+CurrentUser.user+"</h5>";
-					numprof.innerHTML= "<h5>"+CurrentUser.numero +"<h5>";
-					eprof.innerHTML= "<h5>"+CurrentUser.email +"<h5>";
+					nprof.innerHTML= "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome;
+					userprof.innerHTML= CurrentUser.user;
+					numprof.innerHTML= CurrentUser.numero;
+					eprof.innerHTML= CurrentUser.email;
 					if(CurrentUser.foto!=null) foto.setAttribute("src",CurrentUser.foto);
 					else foto.setAttribute("src","./css_pages/images/nofoto.jpg");
 					onload();

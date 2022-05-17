@@ -51,10 +51,9 @@ import { getUser } from "./function_accesso.js";
         //modifica anche qui
         createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
 
-        var button=document.createElement("a");
+        var button=document.createElement("button");
         button.setAttribute("style","text-align:center");
-        button.innerText="SUB";
-        button.setAttribute("style","color:white");
+        button.innerText="Sub";
         c.appendChild(button);
         
         button.addEventListener('click',function(){loadInfoSub(id)})
@@ -220,10 +219,9 @@ import { getUser } from "./function_accesso.js";
         createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
         c.appendChild(space);
 
-        var button=document.createElement("a");
+        var button=document.createElement("button");
         button.setAttribute("style","text-align:center");
-        button.setAttribute("style","color:white");
-        button.innerText="Remove sub";
+        button.innerText="Unsub";
 
         c.appendChild(button);
         button.addEventListener('click',function(){deleteSub(id,parent,c)});
@@ -292,9 +290,8 @@ import { getUser } from "./function_accesso.js";
         sub_space.innerHTML="<h3><b>Available Places: </b>"+"<h4>"+sub+"</h4>";
         c.appendChild(sub_space);
 
-        var button=document.createElement("a");
+        var button=document.createElement("button");
         button.setAttribute("style","text-align:center");
-        button.setAttribute("style","color:white");
         button.innerText="Show Contact";
         c.appendChild(button);
         
