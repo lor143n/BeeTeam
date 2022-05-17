@@ -58,9 +58,9 @@
                                               <option value="Videogame"> Videogame </option>
                                               <option value="Book"> Book </option>
                                               <option value="Journey"> Journey </option>
-                                              <option value="Journey"> Volunteering </option>
-                                              <option value="Journey"> Debate </option>
-                                              <option value="Journey"> Conference </option>
+                                              <option value="Volunteering"> Volunteering </option>
+                                              <option value="Debate"> Debate </option>
+                                              <option value="Conference"> Conference </option>
                                             </select>
                                         </div>
                                     </div>
@@ -177,6 +177,10 @@
             
             window.onload=function(){
                 const CurrentUser=getUser();
+				if(CurrentUser==null){
+					alert("Non hai effettuato l'accesso!");
+					window.location="accesso.html";
+				}
                 getTotalPost();
                 sessionStorage.setItem("page",1);
                 onload(spazio_post);

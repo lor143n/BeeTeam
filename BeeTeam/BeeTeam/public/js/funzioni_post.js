@@ -153,8 +153,9 @@ import { getUser } from "./function_accesso.js";
         c2.appendChild(space);
         var desc=document.createElement("input");
         desc.setAttribute("type","textarea");
-        desc.setAttribute("placeholder","descrizione");
-        desc.setAttribute("style","backgroung: black")
+        desc.setAttribute("placeholder",descrizione);
+        desc.setAttribute("style","background-color: transparent; border-color: transparent;");
+        desc.setAttribute("class","text-dark; text-center");
         c2.appendChild(desc);
         c2.appendChild(br);
 
@@ -162,6 +163,8 @@ import { getUser } from "./function_accesso.js";
         var numer_p=document.createElement("input");
         numer_p.setAttribute("type","number");
         numer_p.setAttribute("placeholder",numero_persone);
+        numer_p.setAttribute("style","background-color: transparent; border-color: transparent;");
+        numer_p.setAttribute("class","text-dark; text-center");
         c2.appendChild(numer_p);
 
         c2.appendChild(space);
@@ -268,11 +271,8 @@ import { getUser } from "./function_accesso.js";
 
         createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
         c.appendChild(space);
-        createElem("hr"+id, "<hr>", c)
-        c.appendChild(space)
-        if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
-        else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
-        c.appendChild(space)
+        createElem("hr"+id, "<hr>", c);
+        c.appendChild(space);
         createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
         c.appendChild(space);
         //modifica anche qui
