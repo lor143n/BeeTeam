@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "public",
-    "root":"intro.html",
+    "root": "intro.html",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -10,7 +10,9 @@
     ],
     "port": 5000,
     "host": "0.0.0.0"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
-
 }
-

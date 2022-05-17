@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import { getDatabase, set, ref , get, child,push ,onChildAdded,orderByChild,endAt,endBefore,startAt,limitToLast,limitToFirst} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
-import { collection, query, where,getDoc, getDocs,getFirestore, updateDoc,arrayUnion,doc ,setDoc, increment} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { collection, query, where,getDoc,orderBy, getDocs,getFirestore, updateDoc,arrayUnion,doc ,setDoc,limit, increment,startAt as st,endAt as et} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getAuth} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 import { getUser } from "./function_accesso.js";
 import {post_bacheca} from "./funzioni_post.js";
@@ -29,15 +29,23 @@ import {post_bacheca} from "./funzioni_post.js";
     export function onload(spazio){
         var i=0;
         spazio_post=spazio;
-        onChildAdded(commentsRef, (date) => {
-            const dR = doc(fire, "post",date.key);
-            getDoc(dR).then((item) =>{
-            if(i==2) { sessionStorage.setItem("last_position",date.val().id);}
-            let data=date.val(); i++;
-            if(item.data().sub_restanti>0  && i!=4) post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,item.data().sub_restanti);
+
+        const q=query(collection(fire,"post"),orderBy("sub_restanti"),orderBy("data"),where("sub_restanti",">", 0),limit(3));
+       
+        getDocs(q).then((item1) => {
+            item1.forEach((it)=>{
+            onChildAdded(ref(database,"Attivity"), (date) => {
+            if(date.val().id==it.id){
+                alert("id "+it.id+" i: "+i);
+                if(i==2) { sessionStorage.setItem("last_position",date.val().id) ; }
+                let data=date.val(); i++;
+                post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,it.data().sub_restanti);
+            }
         })
-        }
-        );
+       });
+
+   // })
+})
 
     }
 
@@ -51,14 +59,15 @@ import {post_bacheca} from "./funzioni_post.js";
         var newpost=push(Post);
         const key=newpost.key;
         var membri=parseInt(member);
-        
+        const new_data=data*(-1);
         localStorage.setItem('post_totali',parseInt(localStorage.getItem('post_totali')+1));
          
         await setDoc(doc(fire, "post", key), {
                sub:[" "],
                sub_restanti: membri,
                creator: CurrentUser.user,
-               category: type
+               category: type,
+               data: new_data
         });
         
         await set(newpost,{
@@ -69,8 +78,7 @@ import {post_bacheca} from "./funzioni_post.js";
                     description: description,
                     user: CurrentUser.user,
                     id: key,
-                    data : data* -1,
-                    complete: false,
+                    data: new_data
                     
         })
          await updateDoc(doc(fire, "users", CurrentUser.user), {
@@ -96,7 +104,7 @@ import {post_bacheca} from "./funzioni_post.js";
                var post_data=snap.val();
                var l=spazio_post.childNodes.length;
                let c=null;
-               post_bacheca(data_key,spazio_post,post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
+               post_bacheca(data_key,spazio_post, post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
             })
             
            })
@@ -105,9 +113,18 @@ import {post_bacheca} from "./funzioni_post.js";
 
    }
 
-   export function nextPage(){
-    if(bk.disabled==true) bk.disabled=false;
+   async function getTotal(){
+       var lh=0;
+        const q=query(collection(fire,"post"),where("sub_restanti",">", 0));
+       await getDocs(q).then((doc) => {
+        lh= doc.size;
+        })
+        return lh;
+   }
 
+   export async function nextPage(){
+    if(bk.disabled==true) bk.disabled=false;
+/*
     const last=sessionStorage.getItem('last_position');
     var page=parseInt(sessionStorage.getItem('page'));
     var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*page);
@@ -134,6 +151,43 @@ import {post_bacheca} from "./funzioni_post.js";
             }
         })
     })
+    */
+   getTotal();
+   const db2=ref(database);
+    const last=sessionStorage.getItem('last_position');
+    var page=parseInt(sessionStorage.getItem('page'));
+    var total_size=parseInt(getTotal)-(3*page);
+
+    page+=1; sessionStorage.setItem('page',page);
+
+    while(spazio_post.hasChildNodes()){
+        spazio_post.removeChild(spazio_post.firstChild);
+     }
+
+    const postsRef = collection(fire, "post");
+    const docSnap = await getDoc(doc(postsRef, last));
+    const q=query(postsRef,orderBy("sub_restanti"), orderBy("data"), st(docSnap),limit(3));
+    if(!docSnap.exists()) {return;}
+    getDocs(q).then((item)=>{
+        //if(!item.exists()) {alert("Not Found"); return;}
+        var i=0,k=0;
+        var limit= (total_size >3 ) ? 2 : -1;
+        item.forEach((ogg)=>{
+
+            get(child(db2,"Attivity/"+ogg.id)).then((snap)=>{
+               var post_data=snap.val();
+            alert(ogg.id);
+            if(i==limit) {sessionStorage.setItem("last_position",post_data.id); }
+            post_bacheca(post_data.id,spazio_post,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user);
+            i++;
+            if(limit==-1 && k!=1){
+                alert("No more post!"); k=1;
+                next.disabled=true;
+            }
+        })
+        })
+    })
+
 
 }
 

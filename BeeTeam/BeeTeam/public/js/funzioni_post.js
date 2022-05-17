@@ -20,6 +20,7 @@ import { getUser } from "./function_accesso.js";
     const fire=getFirestore(app);
     const database=getDatabase(app);
 
+    const br=document.createElement("br");
     //Post
     export function createElem(id,text,parent){
         var cat=document.createElement("div");
@@ -88,7 +89,6 @@ import { getUser } from "./function_accesso.js";
                 })
                 updateDoc(doc(fire, "users", CurrentUser.user), {
                     aderiti: arrayUnion(key),
-                    complete:bool,
                 });
 
                 updateDoc(doc(fire, "post", key), {
@@ -125,6 +125,11 @@ import { getUser } from "./function_accesso.js";
 
         dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
+        const modify =createButton("submit","modify","Edit");
+        c.append(modify);
+
+        modify.addEventListener('click',function(){modifyPost(id,parent,c,space,descrizione,categoria,numero_persone,sub)});
+
 
         createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
         c.appendChild(space);
@@ -139,6 +144,60 @@ import { getUser } from "./function_accesso.js";
         parent.appendChild(c);
         return c;   
     }
+
+    async function modifyPost(id,parent,c,space,descrizione,categoria,numero_persone,sub){
+        var c2=document.createElement("div");
+        c2.setAttribute("id",id);
+        c2.setAttribute("class","box-activity");
+        parent.replaceChild(c2,c);
+
+        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c2);
+        c2.appendChild(space);
+        var desc=document.createElement("input");
+        desc.setAttribute("type","textarea");
+        desc.setAttribute("placeholder","descrizione");
+        desc.setAttribute("style","backgroung: black")
+        c2.appendChild(desc);
+        c2.appendChild(br);
+
+        c2.appendChild(space);
+        var numer_p=document.createElement("input");
+        numer_p.setAttribute("type","number");
+        numer_p.setAttribute("placeholder",numero_persone);
+        c2.appendChild(numer_p);
+
+        c2.appendChild(space);
+
+        const save=createButton("submit","save_description","Save");
+        c2.appendChild(save);
+        save.addEventListener('click',function(){saveDescription(id,desc.value,c,c2,parent,numero_persone,numer_p.value,sub)});
+    }
+
+    async function saveDescription(id,desc,c,c2,parent,p_origin, p_mod,sub){
+        if(desc!="" || p_mod!=""){
+        if((p_origin-sub) > p_mod){
+        await update(ref(database, "Attivity/"+ id),{
+            descrizione: desc,
+            member: parseInt(p_mod)
+        })
+        .catch((error)=>{
+            const errorMessage = error.message;
+            alert(errorMessage);  
+            return;      
+        })
+        var inc=p_mod-p_origin;
+        await updateDoc(doc(fire, "post", id), {
+            sub_restanti: increment(inc),
+        });
+        }
+        else alert("Not possible, people already sub your post!");
+       }
+       else alert("Modify delete");
+        parent.replaceChild(c,c2);
+    
+    }
+
+
     //post aderiti in profilo
     export function post_aderiti(id,parent,categoria,numero_persone,check,descrizione,user,sub){
         var c=document.createElement("div");
@@ -174,7 +233,7 @@ import { getUser } from "./function_accesso.js";
     }
 
     function deleteSub(id,parent,c){
-    const richiesta= window.confirm("Sicuro di voler eliminare l'adesione");
+    const richiesta= window.confirm("Sure you want to unsubscribe?");
     if(richiesta){
         let keepLog=localStorage.getItem('KeepLog');
         var CurrentUser=null;
@@ -220,17 +279,17 @@ import { getUser } from "./function_accesso.js";
         c.appendChild(space);
 
 
-        createElem("cat"+id,"<h1><b>Categoria:  </b>"+categoria+"</h1>",c);
+        createElem("cat"+id,"<h1><b> Category:  </b>"+categoria+"</h1>",c);
         c.appendChild(space);
-        createElem("nump"+id, "<h3><b>Numero di membri richiesti:  </b></h3>" + "<h4>"+numero_persone+"</h4>",c);
+        createElem("nump"+id, "<h3><b>Number of member:  </b></h3>" + "<h4>"+numero_persone+"</h4>",c);
         c.appendChild(space);
-        createElem("descrizione"+id, "<h3><b>Descrizione: </b></h3><br>"+ "<h4>"+descrizione+"</h4>", c);
+        createElem("descrizione"+id, "<h3><b>Description: </b></h3><br>"+ "<h4>"+descrizione+"</h4>", c);
         c.appendChild(space);
 
         var sub_space=document.createElement("div");
         sub_space.setAttribute("class","row");
         sub_space.setAttribute("style","padding-bottom: 0.5px");
-        sub_space.innerHTML="<h3><b>Posti disponibili: </b>"+"<h4>"+sub+"</h4>";
+        sub_space.innerHTML="<h3><b>Available Places: </b>"+"<h4>"+sub+"</h4>";
         c.appendChild(sub_space);
 
         var button=document.createElement("a");

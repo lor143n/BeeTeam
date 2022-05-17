@@ -67,7 +67,7 @@ import { saveData,sign_Out } from "./function_profile.js";
     export async function delUser(us,email){
         const auth = getAuth();
         const user = auth.currentUser;
-        const bool=window.confirm="Vuoi eliminare definitivamente l'account?";
+        const bool=window.confirm="Sure you want permanently delete the account?";
         if(bool){
             try{
              getDoc(doc(fire,"users",us)).then((item)=>{
