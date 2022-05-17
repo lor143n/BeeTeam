@@ -105,6 +105,23 @@
   padding: 5%;
 }
 
+.box-activity-showsub{
+  margin: 5%;
+  border-radius: 20px;
+  color: #ffbf00;
+  border-style: dashed;
+  border-color: #ffbf00;
+  border-width: thin;
+  padding: 5%;
+}
+
+.box-activity-showsub h2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 2vw;
+  color: #ffbf00;
+}
+
 .box-activity hr{
   margin: 0%;
   margin-left: 18%;
@@ -134,21 +151,21 @@
 }
 
 .box-activity button{
-  color: #000000;
+  color: #ffbf00;
   font-family:'Poppins', sans-serif;
   font-weight: 400;
   font-size: 15px;
   text-decoration: none;
   border-radius: 20px;
-  background-color: #ffbf00;
+  background-color: #000000;
   border-color: transparent;
   padding: 1% 2% 1% 2%;
 }
 
 .box-activity button:hover{
-  color: #ffbf00;
-  background-color:#000000;
-  border-color: #ffbf00;
+  color: #000000;
+  background-color: transparent;
+  border-color: #000000;
 }
 
 @media only screen and (max-width: 1200px) {

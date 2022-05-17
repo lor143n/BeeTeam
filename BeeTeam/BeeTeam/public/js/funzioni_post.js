@@ -113,7 +113,17 @@ import { getUser } from "./function_accesso.js";
 
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
-        
+
+        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
+        c.appendChild(space);
+        createElem("hr"+id, "<hr>", c)
+        c.appendChild(space)
+        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
+        c.appendChild(space);
+        //modifica anche qui
+        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
+        c.appendChild(space);
+
         const dele =document.createElement("img");
         dele.setAttribute("width","5%");
         dele.setAttribute("style","border-radius:30%;");
@@ -128,17 +138,6 @@ import { getUser } from "./function_accesso.js";
         c.append(modify);
 
         modify.addEventListener('click',function(){modifyPost(id,parent,c,space,descrizione,categoria,numero_persone,sub)});
-
-
-        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
-        c.appendChild(space);
-        createElem("hr"+id, "<hr>", c)
-        c.appendChild(space)
-        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
-        c.appendChild(space);
-        //modifica anche qui
-        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
-        c.appendChild(space);
 
         parent.appendChild(c);
         return c;   
@@ -264,6 +263,20 @@ import { getUser } from "./function_accesso.js";
 
         const space=document.createElement("div");
         space.setAttribute("class","mb-1");
+        c.appendChild(space);
+
+
+        createElem("cat"+id,"<h1><b>"+ categoria +"</b></h1>",c);
+        c.appendChild(space);
+        createElem("hr"+id, "<hr>", c)
+        c.appendChild(space)
+        if(!check) createElem("user"+id," <h3><b> created by </b>"+ user +"</h3>",c);
+        else createElem("user"+id,"<h3><b> Anonymous </b></h3><br>",c);
+        c.appendChild(space)
+        createElem("descrizione"+id, "<h2>"+descrizione+"</h2>", c);
+        c.appendChild(space);
+        //modifica anche qui
+        createElem("nump"+id, "<h3><b>Available Places</b></h3>" + "<h2>"+sub+" / "+numero_persone+"</h2>",c);
 
         const dele =document.createElement("img");
         dele.setAttribute("width","5%");
@@ -271,24 +284,7 @@ import { getUser } from "./function_accesso.js";
         dele.setAttribute("src","./css_pages/images/rubbish.jpg");
         c.appendChild(dele);
         dele.addEventListener('click',function(){onDelete(id,parent,c)});
-
-
-        c.appendChild(space);
-        c.appendChild(space);
-
-
-        createElem("cat"+id,"<h1><b> Category:  </b>"+categoria+"</h1>",c);
-        c.appendChild(space);
-        createElem("nump"+id, "<h3><b>Number of member:  </b></h3>" + "<h4>"+numero_persone+"</h4>",c);
-        c.appendChild(space);
-        createElem("descrizione"+id, "<h3><b>Description: </b></h3><br>"+ "<h4>"+descrizione+"</h4>", c);
-        c.appendChild(space);
-
-        var sub_space=document.createElement("div");
-        sub_space.setAttribute("class","row");
-        sub_space.setAttribute("style","padding-bottom: 0.5px");
-        sub_space.innerHTML="<h3><b>Available Places: </b>"+"<h4>"+sub+"</h4>";
-        c.appendChild(sub_space);
+        c.appendChild(dele);
 
         var button=document.createElement("button");
         button.setAttribute("style","text-align:center");
@@ -306,7 +302,7 @@ import { getUser } from "./function_accesso.js";
 
     export function show_sub(id,parent,c){
         var child=document.createElement("box-post-bacheca");
-        var box=document.createElement("box-post");
+        var box=document.createElement("box-activity-showsub");
         child.appendChild(box);
         const docRef = doc(fire, "post",id);
         getDoc(docRef).then((item) =>{
@@ -316,7 +312,7 @@ import { getUser } from "./function_accesso.js";
             for(let elem of array_sub){
                 x=document.createElement("div");
                 x.setAttribute("class","row-mb-3");
-                x.innerText=elem;
+                x.innerText="<h2>"+elem+"</h2>";
                 box.appendChild(x);
                 x=null;
             }

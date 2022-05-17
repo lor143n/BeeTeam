@@ -121,6 +121,13 @@
   color: #000000;
 }
 
+.box-activity h2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.3vw;
+  color: #000000;
+}
+
 .box-activity h3{
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
@@ -129,21 +136,21 @@
 }
 
 .box-activity button{
-  color: #000000;
+  color: #ffbf00;
   font-family:'Poppins', sans-serif;
   font-weight: 400;
   font-size: 15px;
   text-decoration: none;
   border-radius: 20px;
-  background-color: #ffbf00;
+  background-color: #000000;
   border-color: transparent;
   padding: 1% 2% 1% 2%;
 }
 
 .box-activity button:hover{
-  color: #ffbf00;
-  background-color:#000000;
-  border-color: #ffbf00;
+  color: #000000;
+  background-color: transparent;
+  border-color: #000000;
 }
 
 /* Formatting */
