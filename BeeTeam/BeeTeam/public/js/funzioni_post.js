@@ -154,17 +154,18 @@ import { getUser } from "./function_accesso.js";
         var desc=document.createElement("input");
         desc.setAttribute("type","textarea");
         desc.setAttribute("placeholder",descrizione);
-        desc.setAttribute("style","background-color: transparent; border-color: transparent;");
+        desc.setAttribute("style","background-color: transparent; border-color: black;");
         desc.setAttribute("class","text-dark; text-center; border-1 rounded");
         c2.appendChild(desc);
-        c2.appendChild(br);
+        
+        c2.appendChild(space);
 
         c2.appendChild(space);
         var numer_p=document.createElement("input");
         numer_p.setAttribute("type","number");
         numer_p.setAttribute("placeholder",numero_persone);
-        numer_p.setAttribute("style","background-color: transparent; border-color: transparent;");
-        numer_p.setAttribute("class","text-dark; text-center;border-1 rounded");
+        numer_p.setAttribute("style","background-color: transparent; border-color: black;");
+        numer_p.setAttribute("class","text-dark; text-center; border-1 rounded");
         c2.appendChild(numer_p);
 
         c2.appendChild(space);
@@ -175,27 +176,50 @@ import { getUser } from "./function_accesso.js";
     }
 
     async function saveDescription(id,desc,c,c2,parent,p_origin, p_mod,sub){
-        if(desc!="" || p_mod!=""){
-        if((p_origin-sub) > p_mod){
-        await update(ref(database, "Attivity/"+ id),{
-            descrizione: desc,
-            member: parseInt(p_mod)
-        })
-        .catch((error)=>{
-            const errorMessage = error.message;
-            alert(errorMessage);  
-            return;      
-        })
-        var inc=p_mod-p_origin;
-        await updateDoc(doc(fire, "post", id), {
-            sub_restanti: increment(inc),
-        });
+        try{
+        if(desc!="" && p_mod!=""){
+        if(( p_origin-sub )  < p_mod){
+            await update(ref(database, "Attivity/"+ id),{
+                description: desc,
+                member: parseInt(p_mod)
+            })
+            var inc=p_mod-p_origin;
+            await updateDoc(doc(fire, "post", id), {
+                sub_restanti: increment(inc),
+            });
+            window.location.reload();
+            }
+            else alert("Not possible, people already sub your post!");
         }
-        else alert("Not possible, people already sub your post!");
+        else if(desc!="" && p_mod==""){
+            await update(ref(database, "Attivity/"+ id),{
+                description: desc,
+            })
+            window.location.reload();
+       }
+       else if (desc=="" && p_mod!=""){
+            if(( p_origin-sub )  < p_mod){
+                    await update(ref(database, "Attivity/"+ id),{
+                        member: parseInt(p_mod)
+                    })
+                    var inc=p_mod-p_origin;
+                    await updateDoc(doc(fire, "post", id), {
+                        sub_restanti: increment(inc),
+                    });
+                    window.location.reload();
+                }
+                else alert("Not possible, people already sub your post!");
        }
        else alert("Modify delete");
         parent.replaceChild(c,c2);
-    
+    }
+    catch(e){
+        const errorMessage = e.message;
+        alert(errorMessage);  
+        return;      
+    }
+
+
     }
 
 
