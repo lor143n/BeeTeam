@@ -155,7 +155,7 @@ import { getUser } from "./function_accesso.js";
         desc.setAttribute("type","textarea");
         desc.setAttribute("placeholder",descrizione);
         desc.setAttribute("style","background-color: transparent; border-color: transparent;");
-        desc.setAttribute("class","text-dark; text-center");
+        desc.setAttribute("class","text-dark; text-center; border-1 rounded");
         c2.appendChild(desc);
         c2.appendChild(br);
 
@@ -164,7 +164,7 @@ import { getUser } from "./function_accesso.js";
         numer_p.setAttribute("type","number");
         numer_p.setAttribute("placeholder",numero_persone);
         numer_p.setAttribute("style","background-color: transparent; border-color: transparent;");
-        numer_p.setAttribute("class","text-dark; text-center");
+        numer_p.setAttribute("class","text-dark; text-center;border-1 rounded");
         c2.appendChild(numer_p);
 
         c2.appendChild(space);
@@ -312,7 +312,7 @@ import { getUser } from "./function_accesso.js";
             for(let elem of array_sub){
                 x=document.createElement("div");
                 x.setAttribute("class","row-mb-3");
-                x.innerText="<h2>"+elem+"</h2>";
+                x.innerHTML="<h2>"+elem+"</h2>";
                 box.appendChild(x);
                 x=null;
             }

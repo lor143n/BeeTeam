@@ -34,9 +34,9 @@ import {post_bacheca} from "./funzioni_post.js";
             const docRef = doc(fire, "post",date.key);
             getDoc(docRef).then((it) =>{
                 let data=date.val(); 
-                if(it.data().sub_restanti>0 && i<3) {
-                    if(i==2) { sessionStorage.setItem("last_position",data.id) ; alert("last " +data.id)}
-                    post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,it.data().sub_restanti);
+                if(it.data().sub_restanti>0 && i<4) {
+                    if(i==3) { sessionStorage.setItem("last_position",data.data) ; alert("last " +data.id)}
+                    else post_bacheca(date.key, spazio_post, data.type, data.member, data.anonymous, data.description,data.user,it.data().sub_restanti);
                     i++;
                 }
 
@@ -122,7 +122,7 @@ import {post_bacheca} from "./funzioni_post.js";
 
    export async function nextPage(){
     if(bk.disabled==true) bk.disabled=false;
-    const last=sessionStorage.getItem('last_position');
+    const last=parseInt(sessionStorage.getItem('last_position'));
     var page=parseInt(sessionStorage.getItem('page'));
     var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*page);
     alert(total_size);
@@ -132,64 +132,70 @@ import {post_bacheca} from "./funzioni_post.js";
         spazio_post.removeChild(spazio_post.firstChild);
      }
 
-    var q=query(ref(database, "Attivity"),orderByChild('data'));
+    var q=query(ref(database, "Attivity"),orderByChild('data'),startAt(last));
     
     get(q).then((item)=>{
         if(!item.exists()) {alert("Not Found"); return;}
         var i=0,k=0;
+        var take=false;
         item.forEach((ogg)=>{
             const post_data=ogg.val();
             const docRef = doc(fire, "post",post_data.id);
             getDoc(docRef).then((it) =>{
+                if(it.data().sub_restanti>0){
+                    if((i<3 && i<total_size)){
+                    post_bacheca(post_data.id,spazio_post,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user,it.data().sub_restanti);
+                    i++;
+                    }
+                    else if(sessionStorage.getItem("last_position")==last || total_size < 3) {sessionStorage.setItem("last_position",post_data.data); alert(post_data.id)}
+                    if(total_size <3 && k!=1){
+                         k=1;
+                        next.disabled=true;
+                        }
         
-            if((post_data.id == last || (i>0 && i<3 && i<total_size)) && it.data().sub_restanti>0){
-            if(i==2) {sessionStorage.setItem("last_position",post_data.id); }
-            post_bacheca(post_data.id,spazio_post,post_data.type,post_data.member,post_data.anonymous,post_data.description,post_data.user,it.data().sub_restanti);
-            i++;
-            if(total_size <3 && k!=1){
-                 k=1;
-                next.disabled=true;
+                        }
+                    
+                    })
+                })
+            })
+            
             }
-        }
-        })
-    })
-})
-  
-}
 
 
 export function backPage(){
     if(next.disabled==true) next.disabled=false;
-    const last=sessionStorage.getItem('last_position');
+    const last=parseInt(sessionStorage.getItem('last_position'));
 
     var page=parseInt(sessionStorage.getItem('page'));
-    var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*(page-1));
     page-=1; sessionStorage.setItem('page',page);
+
+    var total_size=parseInt(sessionStorage.getItem('total_post'))-(3*(page));
 
     while(spazio_post.hasChildNodes()){
         spazio_post.removeChild(spazio_post.firstChild);
      }
-     var q=null;
-    if(total_size >= 3) q=query(ref(database, "Attivity"),orderByChild('id'),startAt(last),limitToFirst(4));
-    else {q=query(ref(database, "Attivity"),orderByChild('id'),startAt(last));};
-
+     var q=query(ref(database, "Attivity"),orderByChild('data'),endBefore(last));
     get(q).then((item)=>{
         if(!item.exists()) {alert("Not Found"); return;}
         var i=0,k=0;
-        var limit= (total_size >3 ) ? 2 : -1;
         item.forEach((ogg)=>{
             const dR = doc(fire, "post",ogg.key);
             getDoc(dR).then((og) =>{
-
             const post_data=ogg.val();
-            alert(post_data.id);
-            if(i==limit) {sessionStorage.setItem("last_position",post_data.id); alert("lasr "+post_data.id)}
-            else post_bacheca(post_data.id,spazio_post, post_data.type, post_data.member,post_data.anonymous,post_data.description,post_data.user,og.data().sub_restanti);
+
+            if(og.data().sub_restanti>0 ){
+
+                if(i<3 && i<total_size) {
+            post_bacheca(post_data.id,spazio_post, post_data.type, post_data.member,post_data.anonymous,post_data.description,post_data.user,og.data().sub_restanti);
             i++;
+            }
+            else if(sessionStorage.getItem("last_position")==last || total_size < 3) {sessionStorage.setItem("last_position",post_data.data); alert(post_data.id) }
             if(page==1 && k!=1){
                 k=1;
                 bk.disabled=true;
             }
+            
+        }
         })
         })
     })

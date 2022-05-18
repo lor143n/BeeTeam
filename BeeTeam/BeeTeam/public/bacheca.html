@@ -172,7 +172,8 @@
             cerca_post.addEventListener('click',function(){OnSearch(toSearch.value)});
             crea.addEventListener('click',function(){NewAttivity(member.value,type.value,anonymous.checked,description.value)});
             next.addEventListener('click',nextPage);
-            //back.addEventListener('click',backPage);
+            back.addEventListener('click',backPage);
+            back.disabled=true;
 
             
             window.onload=function(){
