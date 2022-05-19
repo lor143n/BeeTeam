@@ -74,9 +74,7 @@
                                 <input class="border-1 rounded" type="password" id="password_edit_nuova">
                             </div>
                             <div class="row; weigth:20px; text-center ; height:15px;" >
-                                <a href="profilo.html">
                                     <button type="submit" id="edit_page"  class="btn btn-light btn-sm;">Save</button>
-                                </a>
                             </div>
                             <br><br>
                             <div class="row; weigth:20px; text-right ; height:15px;" >
@@ -93,7 +91,7 @@
             </div>
             
 
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
             <script type="module">
                 import {updatePass,updateUser,update_email,delUser,saveInfo} from "./js/function_edit.js";
                 import {getUser,sendEmail} from "./js/function_accesso.js";
@@ -102,21 +100,20 @@
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
                 var CurrentUser=null,user=null;
-                let nome=document.getElementById("nome_edit");
-                let cognome=document.getElementById("cognome_edit");
+                let nome=$('#nome_edit');//document.getElementById("nome_edit");
+                let cognome=$('#cognome_edit');//document.getElementById("cognome_edit");
+                let numero= $('#numero_edit');//document.getElementById("numero_edit");
+                let email=$('#email_edit');//document.getElementById("email_edit");
+                let vecchia= $('#password_edit_vecchia');//document.getElementById("password_edit_vecchia");
+                let nuova= $('#password_edit_nuova');//document.getElementById("password_edit_nuova");
 
-                let numero=document.getElementById("numero_edit");
-                let email=document.getElementById("email_edit");
-                let vecchia=document.getElementById("password_edit_vecchia");
-                let nuova=document.getElementById("password_edit_nuova");
-
-                let invia=document.getElementById("edit_page");
-                let del=document.getElementById("delete_user");
-                let log_out=document.getElementById("logout_edit");
+                let invia= $('#edit_page');//document.getElementById("edit_page");
+                let del=$('#delete_user');//document.getElementById("delete_user");
+                let log_out=$('#logout_edit'); //document.getElementById("logout_edit");
                 
-                log_out.addEventListener('click',sign_Out);
-                invia.addEventListener('click',function(){saveInfo(nome,cognome,numero,nuova,vecchia,email)});
-                del.addEventListener('click',function(){delUser(CurrentUser.user,CurrentUser.email)});
+                log_out.click(sign_Out);
+                del.click(function(){delUser(CurrentUser.user,CurrentUser.email)});
+                invia.click(function(){saveInfo(nome ,cognome ,numero,nuova,vecchia,email)});
 
                 window.onload=function() {
 			    CurrentUser=getUser();
@@ -126,10 +123,10 @@
 
 				}
 				else{
-					nome.setAttribute("placeholder",CurrentUser.nome);
-                    cognome.setAttribute("placeholder",CurrentUser.cognome);
-                    numero.setAttribute("placeholder",CurrentUser.numero);
-					email.setAttribute("placeholder",CurrentUser.email);
+					nome.attr("placeholder", CurrentUser.nome);//setAttribute("placeholder",CurrentUser.nome);
+                    cognome.attr("placeholder",CurrentUser.cognome);
+                    numero.attr("placeholder",CurrentUser.numero);
+					email.attr("placeholder",CurrentUser.email);
 				}
             }
             </script>

@@ -210,7 +210,6 @@ import { getUser } from "./function_accesso.js";
                 }
                 else alert("Not possible, people already sub your post!");
        }
-       else alert("Modify delete");
         parent.replaceChild(c,c2);
     }
     catch(e){
