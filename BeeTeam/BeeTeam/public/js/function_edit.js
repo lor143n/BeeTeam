@@ -49,19 +49,18 @@ import { saveData,sign_Out } from "./function_profile.js";
     }
 
     export async function updateUser(uid,novalue,cvalue,nvalue,email_user,vp){
-
-    await update(ref(database, "Users/"+ uid),{
-            nome:novalue,
-            cognome:cvalue,
-            numero:nvalue,
-            email:email_user,
-            password:vp,
-        })
-        .catch((error)=>{
-            const errorMessage = error.message;
-            alert(errorMessage);        
-        })
-        saveData(uid);
+        await update(ref(database, "Users/"+ uid),{
+                nome:novalue,
+                cognome:cvalue,
+                numero:nvalue,
+                email:email_user,
+                password:vp,
+            })
+            .catch((error)=>{
+                const errorMessage = error.message;
+                alert(errorMessage);        
+            })
+            await saveData(uid);
 
     }
     export async function delUser(us,email){
@@ -114,7 +113,8 @@ import { saveData,sign_Out } from "./function_profile.js";
         }
         catch(error){
             const errorMessage = error.message;
-            alert(errorMessage);  
+            alert(errorMessage); 
+            return; 
         }
         sign_Out();
 
@@ -126,15 +126,16 @@ import { saveData,sign_Out } from "./function_profile.js";
         var novalue=CurrentUser.nome,  cvalue=CurrentUser.cognome,  nvalue=CurrentUser.numero; 
         var vp=CurrentUser.password, email_user=CurrentUser.email;
 
-        var nome=nomev.value; var cognome=cognomev.value; var numero=numerov.value; var nuova=nuovav.value; var vecchia=vecchiav.value;var email=emailv.value;
+        var nome=nomev.val(); var cognome=cognomev.val(); var numero=numerov.val(); var nuova=nuovav.val(); var vecchia=vecchiav.val();var email=emailv.val();
         if(nome != novalue && nome != "") novalue=nome; i++;
         if(cognome != cvalue && cognome != "") cvalue=cognome; i++;
         if(numero != nvalue && numero != "") nvalue=numero; i++;
-        if(nuova != vp && nuova != "") {
+        if(nuova != vp && nuova != "" ) {
             i++;
-            if(vp!=vecchia) { alert("La vecchia password non corrisponde!"); return;}
+            if(vecchia=="") alert("Missing old password")
+            else if(vp!=vecchia) { alert("Not match!"); return;}
             else{
-                if(nuova.length<6){ alert("password troppo corta"); return;}
+                if(nuova.length<6){ alert("Password Too short"); return;}
                 else {
                     vp=nuova;
                     updatePass(vp);
@@ -154,14 +155,14 @@ import { saveData,sign_Out } from "./function_profile.js";
             i=0;
             if(just_info) {
                 alert("Info modify");
-                //window.location="profilo.html";
+                window.location="profilo.html";
             }
-            nomev.value= null;
-            cognomev.value=null;
-            emailv.value=null;
-            numerov.value=null;
-            vecchiav.value=null;
-            nuovav.value=null;
+            nomev.attr('value',null); nomev.attr('placeholder',novalue);
+            cognomev.attr('value',null); cognomev.attr('placeholder',cvalue);
+            emailv.attr('value',null); emailv.attr('placeholder',email_user);
+            numerov.attr('value',null); numerov.attr('placeholder',nvalue);
+            vecchiav.attr('value',null); 
+            nuovav.attr('value',null); 
             
             }
             else{

@@ -2,7 +2,7 @@
     display: grid;
     grid-row: 2;
     grid-auto-rows: 1fr auto;
-    background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 70%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 20%, rgba(255,255,255,0) 100%);
   }
   
   .box-center-edit {

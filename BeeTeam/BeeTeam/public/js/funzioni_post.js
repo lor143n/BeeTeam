@@ -129,13 +129,11 @@ import { getUser } from "./function_accesso.js";
         dele.setAttribute("style","border-radius:30%;");
         dele.setAttribute("src","./css_pages/images/rubbish.jpg");
         c.appendChild(dele);
-        c.appendChild(space);
-        c.appendChild(space);
 
         dele.addEventListener('click',function(){onDelete(id,parent,c)});
 
         const modify =createButton("submit","modify","Edit");
-        c.append(modify);
+        c.appendChild(modify);
 
         modify.addEventListener('click',function(){modifyPost(id,parent,c,space,descrizione,categoria,numero_persone,sub)});
 
@@ -172,46 +170,49 @@ import { getUser } from "./function_accesso.js";
 
         const save=createButton("submit","save_description","Save");
         c2.appendChild(save);
-        save.addEventListener('click',function(){saveDescription(id,desc.value,c,c2,parent,numero_persone,numer_p.value,sub)});
+        save.addEventListener('click',function(){saveDescription(id,desc.value,c,c2,parent,numero_persone,numer_p.value,sub,categoria,descrizione)});
     }
-
-    async function saveDescription(id,desc,c,c2,parent,p_origin, p_mod,sub){
+//DA RIVEDERE
+    async function saveDescription(id,desc,c,c2,parent,p_origin, p_mod,sub,categoria,descrizione){
         try{
-        if(desc!="" && p_mod!=""){
-        if(( p_origin-sub )  < p_mod){
-            await update(ref(database, "Attivity/"+ id),{
-                description: desc,
-                member: parseInt(p_mod)
-            })
-            var inc=p_mod-p_origin;
-            await updateDoc(doc(fire, "post", id), {
-                sub_restanti: increment(inc),
-            });
-            window.location.reload();
-            }
-            else alert("Not possible, people already sub your post!");
-        }
-        else if(desc!="" && p_mod==""){
-            await update(ref(database, "Attivity/"+ id),{
-                description: desc,
-            })
-            window.location.reload();
-       }
-       else if (desc=="" && p_mod!=""){
-            if(( p_origin-sub )  < p_mod){
-                    await update(ref(database, "Attivity/"+ id),{
-                        member: parseInt(p_mod)
-                    })
-                    var inc=p_mod-p_origin;
-                    await updateDoc(doc(fire, "post", id), {
-                        sub_restanti: increment(inc),
-                    });
-                    window.location.reload();
+            var i=0;
+            if(desc!="" && p_mod!=""){
+            if((p_origin-sub) <= p_mod){
+                await update(ref(database, "Attivity/"+ id),{
+                    description: desc,
+                    member: parseInt(p_mod)
+                })
+                var inc=p_mod-p_origin;
+                await updateDoc(doc(fire, "post", id), {
+                    sub_restanti: increment(inc),
+                });
+                descrizione=desc; sub+=(p_mod-sub); p_origin=p_mod; i++;
                 }
-                else alert("Not possible, people already sub your post!");
-       }
-       else alert("Modify delete");
-        parent.replaceChild(c,c2);
+                else alert("Not possible!");
+            }
+            else if(desc!="" && p_mod==""){
+                await update(ref(database, "Attivity/"+ id),{
+                    description: desc,
+                })
+                descrizione=desc; i++;
+        }
+        else if (desc=="" && p_mod!=""){
+                if((p_origin-sub) <= p_mod ){
+                        await update(ref(database, "Attivity/"+ id),{
+                            member: parseInt(p_mod)
+                        })
+                        var inc=p_mod-p_origin;
+                        await updateDoc(doc(fire, "post", id), {
+                            sub_restanti: increment(inc),
+                        });
+                        sub+=(p_mod-sub); p_origin=p_mod; i++;
+                    }
+                    else alert("Not possible !");
+        }
+            if(i>0) {
+                c=post_creati(id,parent,categoria,p_origin,descrizione,sub)
+            }
+            parent.replaceChild(c,c2);
     }
     catch(e){
         const errorMessage = e.message;

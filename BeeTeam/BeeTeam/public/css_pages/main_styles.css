@@ -23,27 +23,27 @@ body::-webkit-scrollbar-thumb {
 }
 
 body.bg-access{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back3.jpg'); 
   background-size: cover;
 }
 
 body.bg-profile{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back4.jpg'); 
   background-size: cover;
 }
 
 body.bg-intro{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back1.jpg'); 
   background-size: cover;
 }
 
 body.bg-bacheca{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back1.jpg'); 
   background-size: cover;
 }
 
 body.bg-edit {
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back4.jpg'); 
   background-size: cover;
 }
 
@@ -136,7 +136,7 @@ span {
     text-decoration: none;
     border-radius: 20px;
     background-color: #ffbf00;
-    border-color: transparent;
+    border-color: #ffbf00;
     padding: 1% 2% 1% 2%;
   }
   
@@ -146,9 +146,15 @@ span {
     border-color: #ffbf00;
   }
 
-  .box-header button:active{
+  .box-header button.active{
     color: #ffbf00;
     background-color:#000000;
+    border-color: #ffbf00;
+  }
+
+  .box-header button.active:hover{
+    color: #000000;
+    background-color:#ffbf00;
     border-color: #ffbf00;
   }
 

@@ -32,8 +32,8 @@
 					<a href="bacheca.html">
 					<button type="submit"  class="btn btn-light btn-sm"> Bacheca </button>
 					</a>
-					<a class="active" href="profilo.html">
-						<button type="submit"  class="btn btn-light btn-sm"> Profilo </button>
+					<a href="profilo.html">
+						<button class="active" type="submit"  class="btn btn-light btn-sm"> Profilo </button>
 					</a>
 
 					<button type="submit" id="logout" class="btn btn-light btn-sm; red-butt" > Sign Out </button>
@@ -94,27 +94,31 @@
 
 		</div>
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script type="module">
 			import {sign_Out,editPhoto,onload} from "./js/function_profile.js";
 			import {getUser,openEdit} from "./js/function_accesso.js";
 
-			let nprof=document.getElementById("nprof");
-			let cprof=document.getElementById("cprof");
-			let userprof=document.getElementById("userprofil");
-			let numprof=document.getElementById("numprof");
-			let eprof=document.getElementById("eprof");
-			let foto=document.getElementById("fotoprofilo");
+		    let nprof=$('#nprof'); //document.getElementById("nprof");
+			let cprof= $('#cprof');//document.getElementById("cprof");
+			let userprof=$('#userprofil');//document.getElementById("userprofil");
+			let numprof=$('#numprof');//document.getElementById("numprof");
+			let eprof=$('#eprof');//document.getElementById("eprof");
 			let inviamodifica=document.getElementById("inviamodifica");
 			let modifica_foto=document.getElementById("modifica_foto");
 			let space_info=document.getElementById("space_info");
 
-			const out=document.getElementById("logout");
+			let foto=document.getElementById("fotoprofilo");
+
+			const out= $('#logout');//document.getElementById("logout");
 			const edit=document.getElementById("editbutton");
 			const sub=document.getElementById("subedit");
-			const info=document.getElementById("editinfo");
+			const info=$('#editinfo');//document.getElementById("editinfo");
 
-			out.addEventListener('click',sign_Out);
-			info.addEventListener('click',openEdit);
+			out.click(sign_Out);
+			info.click(openEdit);
+
+
 			edit.addEventListener('click',function(){editPhoto(document.getElementById("sourcefoto"), edit,foto)});
 
 			const date2= new Date();
@@ -126,10 +130,11 @@
 					window.location="accesso.html";
 				}
 				else{
-					nprof.innerHTML= "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome;
-					userprof.innerHTML= CurrentUser.user;
-					numprof.innerHTML= CurrentUser.numero;
-					eprof.innerHTML= CurrentUser.email;
+					nprof.html( "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome);
+					//nprof.innerHTML= "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome;
+					userprof.html( CurrentUser.user);
+					numprof.html(CurrentUser.numero);
+					eprof.html(CurrentUser.email);
 					if(CurrentUser.foto!=null) foto.setAttribute("src",CurrentUser.foto);
 					else foto.setAttribute("src","./css_pages/images/nofoto.jpg");
 					onload();

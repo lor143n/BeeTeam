@@ -2,7 +2,7 @@
     display: grid;
     grid-row: 2;
     grid-auto-rows: 1fr;
-    background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 70%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 2%, rgba(0, 0, 0, 0.648) 20%, rgba(255,255,255,0) 100%);
 }
 
 .box-main-profile {
@@ -43,6 +43,7 @@
 .box-down-left-profile{
   align-items: center;
   background-color: #000000c9;
+  background-image: url("images/sfondos.png");
   border-radius: 20px;
   margin: 4%;
 }
@@ -50,6 +51,7 @@
 .box-down-right-profile{
   align-items: center;
   background-color: #000000c9;
+  background-image: url("images/sfondos.png");
   border-radius: 20px;
   margin: 4%;
 }
@@ -102,7 +104,10 @@
   background-image: url('images/try.png');
   background-size: cover;
   background-color: #ffbf00;
-  padding: 5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .box-activity-showsub{
@@ -132,20 +137,20 @@
 .box-activity h1{
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 2vw;
+  font-size: 1.6vw;
   color: #000000;
 }
 
 .box-activity h2{
   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 1.3vw;
+  font-weight: 200;
+  font-size: 1.2vw;
   color: #000000;
 }
 
 .box-activity h3{
   font-family: 'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 1vw;
   color: #000000;
 }
@@ -188,11 +193,11 @@
   }
 
   .box-activity h1{
-    font-size: 3vw;
+    font-size: 2.6vw;
   }
   
   .box-activity h2{
-    font-size: 2.3vw;
+    font-size: 2.2vw;
   }
   
   .box-activity h3{
@@ -212,19 +217,20 @@
   }
 
   .box-main-profile h2{
-    font-size: 3.3vw;
+    font-size: 2.5vw;
   }
 
   .box-main-profile span{
-    font-size: 4.5vw;
+    font-size: 3.8vw;
+    margin: 2%;
   }
 
   .box-activity h1{
-    font-size: 4vw;
+    font-size: 3.6vw;
   }
   
   .box-activity h2{
-    font-size: 3.3vw;
+    font-size: 3.2vw;
   }
   
   .box-activity h3{
@@ -232,7 +238,12 @@
   }
 }
 
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 576px) {
+
+  .box-down-profile {
+    margin-top: 5%;
+  }
+
   .box-up-profile img{
     width: 60%;
     height: auto;

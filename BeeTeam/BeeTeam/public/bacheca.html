@@ -29,12 +29,12 @@
                 </div>
                 <div class="box-header-right">
                     <a href="bacheca.html">
-                        <button type="submit" id="logout" class="btn btn-light btn-sm"> Bacheca </button>
+                        <button class="active" type="submit" class="btn btn-light btn-sm"> Bacheca </button>
                     </a>
                     <a class="active" href="profilo.html">
-                        <button type="submit" id="logout" class="btn btn-light btn-sm"> Profilo </button>
+                        <button type="submit" class="btn btn-light btn-sm"> Profilo </button>
                     </a>
-                    <button type="submit" id="logout" class="btn btn-light btn-sm; red-butt" > Sign Out </button>
+                    <button type="submit" id="log_" class="btn btn-light btn-sm; red-butt" > Sign Out </button>
                 </div>
             </div>
     
@@ -149,39 +149,49 @@
             </div>
         </div>
 
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="module">
            // import * as func2 from "./js/func2.js";
+           import {sign_Out} from "./js/function_profile.js";
            import {getUser} from "./js/function_accesso.js";
            import {post_bacheca,createElem} from "./js/funzioni_post.js";
            import {NewAttivity,OnSearch,nextPage,getTotalPost,onload,backPage} from "./js/function_home.js";
 
-            let crea=document.getElementById("crea");
-            let anonymous=document.getElementById("inlineRadio1");
-            let description=document.getElementById("description-area");
-            let member =document.getElementById("floatingSelect2");
-            let type=document.getElementById("floatingSelect");
-            let cerca_post=document.getElementById("cerca_post");
-            let toSearch=document.getElementById("floatingSearch");
-            let next=document.getElementById("next");
-            let back=document.getElementById("bk");
+            //let crea=document.getElementById("crea");
+            //let anonymous=document.getElementById("inlineRadio1");
+           // let description= $(#description-area)//document.getElementById("description-area");
+            //let member =document.getElementById("floatingSelect2");
+           // let type=document.getElementById("floatingSelect");
+           // let toSearch=document.getElementById("floatingSearch");
+            //let next=document.getElementById("next");
+            //let back=document.getElementById("bk");
 
             const spazio_post=document.getElementById("post");
 
+            const next=$('#next');
+            const back=$('#bk').prop('disabled',true);
+            const crea=$('#crea');
+            const log_=$('#log_');
+            let cerca_post=$('#cerca_post'); //document.getElementById("cerca_post");
 
-            cerca_post.addEventListener('click',function(){OnSearch(toSearch.value)});
-            crea.addEventListener('click',function(){NewAttivity(member.value,type.value,anonymous.checked,description.value)});
-            next.addEventListener('click',nextPage);
-            back.addEventListener('click',backPage);
-            back.disabled=true;
+            next.click(nextPage);
+            back.click(backPage);
+            crea.click(function(){NewAttivity ($('#floatingSelect2').val() ,$('#floatingSelect').val(),$('#inlineRadio1').prop('checked'), $('#description-area').val())});
+            cerca_post.click(function(){OnSearch($('#floatingSearch').val())});
+            log_.click(sign_Out);
 
+            //crea.addEventListener('click',function(){NewAttivity ($('#floatingSelect2').val() ,$('#floatingSelect').val(),anonymous.checked, $('#description-area').val())});
+            //next.addEventListener('click',nextPage);
+            //back.addEventListener('click',backPage);
+
+           // back.disabled=true;
             
             window.onload=function(){
                 const CurrentUser=getUser();
-				if(CurrentUser==null){
-					alert("Non hai effettuato l'accesso!");
-					window.location="accesso.html";
-				}
+                if(CurrentUser==null){
+                    alert("Non hai effettuato l'accesso!");
+                    window.location="accesso.html";
+                }
                 getTotalPost();
                 sessionStorage.setItem("page",1);
                 onload(spazio_post);
@@ -190,3 +200,6 @@
         </script>
     </body>
 </html>
+
+
+
