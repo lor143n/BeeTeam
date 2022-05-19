@@ -122,7 +122,7 @@ span {
     text-decoration: none;
     border-radius: 20px;
     background-color: #ffbf00;
-    border-color: transparent;
+    border-color: #ffbf00;
     padding: 1% 2% 1% 2%;
   }
   
@@ -132,9 +132,15 @@ span {
     border-color: #ffbf00;
   }
 
-  .box-header button:active{
+  .box-header button.active{
     color: #ffbf00;
     background-color:#000000;
+    border-color: #ffbf00;
+  }
+
+  .box-header button.active:hover{
+    color: #000000;
+    background-color:#ffbf00;
     border-color: #ffbf00;
   }
 
