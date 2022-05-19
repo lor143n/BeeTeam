@@ -9,27 +9,27 @@ body {
 }
 
 body.bg-access{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back3.jpg'); 
   background-size: cover;
 }
 
 body.bg-profile{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back4.jpg'); 
   background-size: cover;
 }
 
 body.bg-intro{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back1.jpg'); 
   background-size: cover;
 }
 
 body.bg-bacheca{
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back1.jpg'); 
   background-size: cover;
 }
 
 body.bg-edit {
-  background-image: url('images/intro_image.jpg'); 
+  background-image: url('images/back4.jpg'); 
   background-size: cover;
 }
 
