@@ -115,8 +115,10 @@ import {post_bacheca} from "./funzioni_post.js";
 
     export function getTotalPost(){
         var total_post=get(query(ref(database, "Attivity")));
+        var next=document.getElementById('next');
         total_post.then((item)=>{
             sessionStorage.setItem('total_post',item.size);
+            if(item.size <= 3) next.disabled=true;
         })
     }
 
