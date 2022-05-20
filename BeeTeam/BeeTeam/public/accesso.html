@@ -59,6 +59,8 @@
                                     <div class="mb-1"></div>
                                     <input type="password" class="form-control;text-center; border-1 rounded" name="password" id="preg" placeholder="Password" style="width: 40%;text-align: center;" required>
                                     <div class="mb-1"></div>
+                                    <input type="password" class="form-control;text-center; border-1 rounded" name="password_verifica" id="preg_verifica" placeholder=" Verify Password" style="width: 40%;text-align: center;" required>
+                                    <div class="mb-1"></div>
                                     <button type="submit" class="btn btn-light btn-sm" id="sub"> let's start! </button>
                                 </td>
                             </tr>
@@ -113,7 +115,7 @@
             login.click(function(){Authentication($('#userlog').val(),$('#passlog').val())});
             
             const sub=$('#sub');
-            sub.click(function(){RegisterUser($('#user').val(),$('#ereg').val(),$('#preg').val(),$('#nreg').val(),$('#creg').val(),$('#numreg').val())});
+            sub.click(function(){RegisterUser( $('#user').val(), $('#ereg').val(), $('#preg').val(), $('#nreg').val(), $('#creg').val(), $('#numreg').val(), $('#preg_verifica').val())});
         
           </script>
             

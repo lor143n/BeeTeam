@@ -39,8 +39,9 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
     }
 
     //Accesso
-    export async function RegisterUser(user,email,password,nome,cognome,numero){
+    export async function RegisterUser(user,email,password,nome,cognome,numero, password_verifica){
         const db = ref(database);
+        if(password==password_verifica){
         await get(child(db,"Users/")).then((snapshot)=>{
             var duplicato=false;
             snapshot.forEach((snapchild)=>{
@@ -82,6 +83,9 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
             }
             else alert("Please change user");
         })
+    }
+    else alert("Different value of password, please retry");
+
     }
 
     export async function Authentication(email,password){

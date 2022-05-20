@@ -1,7 +1,7 @@
-import { getFirestore} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
+import { getDoc,getFirestore,updateDoc,arrayUnion,doc , increment,deleteDoc,arrayRemove} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-firestore.js";
 import { getDatabase,  ref, update } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
-import { getAuth,updatePassword, updateEmail} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
+import { getAuth,updatePassword, updateEmail,deleteUser} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 import { getUser,sendEmail } from "./function_accesso.js";
 import { saveData,sign_Out } from "./function_profile.js";
 
@@ -22,6 +22,7 @@ import { saveData,sign_Out } from "./function_profile.js";
     const app= initializeApp(firebaseConfig);
     const database=getDatabase(app);
     const auth=getAuth();
+    const fire=getFirestore();
     const CurrentUser=getUser();
 
     export async function updatePass(vp){
@@ -36,11 +37,31 @@ import { saveData,sign_Out } from "./function_profile.js";
     }
 
     export async function update_email(new_email){
+        const CurrentUser=getUser();
         const user=auth.currentUser;
+        const email=CurrentUser.email;
         await updateEmail(user, new_email).then(() => {
             sendEmail(user);
             user.emailVerified=false;
-            alert("Email modify");
+            alert("Email modify"); //DA VERIFICARE SE FUNZIONA
+
+            getDoc(doc(fire,"users",CurrentUser.user)).then((item)=>{
+                const dt=item.data();
+                const aderiti=dt.aderiti;
+                if(aderiti.length!=1){
+                    aderiti.forEach((post)=>{
+                        if(post!=" "){
+                             updateDoc(doc(fire,"post",post),{
+                                sub: arrayRemove(email)
+                            })
+                             updateDoc(doc(fire,"post",post),{
+                                sub: arrayUnion(new_email)
+                            })
+                    }
+                    })
+                }
+            });
+
         }).catch((error) => {
             const errorMessage = error.message;
             alert(errorMessage);  
