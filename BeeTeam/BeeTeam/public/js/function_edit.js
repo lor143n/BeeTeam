@@ -43,7 +43,7 @@ import { saveData,sign_Out } from "./function_profile.js";
         await updateEmail(user, new_email).then(() => {
             sendEmail(user);
             user.emailVerified=false;
-            alert("Email modify"); //DA VERIFICARE SE FUNZIONA
+            alert("Email modify"); 
 
             getDoc(doc(fire,"users",CurrentUser.user)).then((item)=>{
                 const dt=item.data();
@@ -126,7 +126,6 @@ import { saveData,sign_Out } from "./function_profile.js";
 
             await deleteUser(user).then(() => {
                 alert("Delete User!");
-            // window.location="accesso.html";
             }).catch((error) => {
                 const errorMessage = error.message;
                 alert(errorMessage);              

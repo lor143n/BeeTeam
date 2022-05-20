@@ -99,21 +99,21 @@
 			import {sign_Out,editPhoto,onload} from "./js/function_profile.js";
 			import {getUser,openEdit} from "./js/function_accesso.js";
 
-		    let nprof=$('#nprof'); //document.getElementById("nprof");
-			let cprof= $('#cprof');//document.getElementById("cprof");
-			let userprof=$('#userprofil');//document.getElementById("userprofil");
-			let numprof=$('#numprof');//document.getElementById("numprof");
-			let eprof=$('#eprof');//document.getElementById("eprof");
+		    let nprof=$('#nprof'); 
+			let cprof= $('#cprof');
+			let userprof=$('#userprofil');
+			let numprof=$('#numprof');
+			let eprof=$('#eprof');
 			let inviamodifica=document.getElementById("inviamodifica");
 			let modifica_foto=document.getElementById("modifica_foto");
 			let space_info=document.getElementById("space_info");
 
 			let foto=document.getElementById("fotoprofilo");
 
-			const out= $('#logout');//document.getElementById("logout");
+			const out= $('#logout');
 			const edit=document.getElementById("editbutton");
 			const sub=document.getElementById("subedit");
-			const info=$('#editinfo');//document.getElementById("editinfo");
+			const info=$('#editinfo');
 
 			out.click(sign_Out);
 			info.click(openEdit);
@@ -131,7 +131,6 @@
 				}
 				else{
 					nprof.html( "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome);
-					//nprof.innerHTML= "<b>"+CurrentUser.nome +"</b> "+ CurrentUser.cognome;
 					userprof.html( CurrentUser.user);
 					numprof.html(CurrentUser.numero);
 					eprof.html(CurrentUser.email);

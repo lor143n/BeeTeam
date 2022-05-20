@@ -157,22 +157,13 @@
            import {post_bacheca,createElem} from "./js/funzioni_post.js";
            import {NewAttivity,OnSearch,nextPage,getTotalPost,onload,backPage} from "./js/function_home.js";
 
-            //let crea=document.getElementById("crea");
-            //let anonymous=document.getElementById("inlineRadio1");
-           // let description= $(#description-area)//document.getElementById("description-area");
-            //let member =document.getElementById("floatingSelect2");
-           // let type=document.getElementById("floatingSelect");
-           // let toSearch=document.getElementById("floatingSearch");
-            //let next=document.getElementById("next");
-            //let back=document.getElementById("bk");
-
             const spazio_post=document.getElementById("post");
 
             const next=$('#next');
             const back=$('#bk').prop('disabled',true);
             const crea=$('#crea');
             const log_=$('#log_');
-            let cerca_post=$('#cerca_post'); //document.getElementById("cerca_post");
+            let cerca_post=$('#cerca_post'); 
 
             next.click(nextPage);
             back.click(backPage);
@@ -180,11 +171,6 @@
             cerca_post.click(function(){OnSearch($('#floatingSearch').val())});
             log_.click(sign_Out);
 
-            //crea.addEventListener('click',function(){NewAttivity ($('#floatingSelect2').val() ,$('#floatingSelect').val(),anonymous.checked, $('#description-area').val())});
-            //next.addEventListener('click',nextPage);
-            //back.addEventListener('click',backPage);
-
-           // back.disabled=true;
             
             window.onload=function(){
                 const CurrentUser=getUser();

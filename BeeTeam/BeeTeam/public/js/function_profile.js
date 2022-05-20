@@ -33,21 +33,19 @@ import {post_creati,post_aderiti,att_richiesta} from "./funzioni_post.js";
 
     export function onload(){
         onChildAdded(commentsRef, (date) => {
-            let dati_utente=date.val();
             const docRef = doc(fire, "post",date.key);
             getDoc(docRef).then((item) =>{
-            const items=item.data();
-            if(items.creator==CurrentUser.user) {
-                spazio_post=document.getElementById("spazio_creati");
-                if(items.sub_restanti!=0) post_creati(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
-                else att_richiesta(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
-            }
-            else if(items.sub.includes(CurrentUser.email)){
-                spazio_post=document.getElementById("spazio_aderiti");
-                post_aderiti(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
-            }
-        }
-        );
+                const items=item.data();  let dati_utente=date.val();
+                if(items.creator==CurrentUser.user) {
+                    spazio_post=document.getElementById("spazio_creati");
+                    if(items.sub_restanti!=0) post_creati(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+                    else att_richiesta(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.description, items.sub_restanti);
+                }
+                else if(items.sub.includes(CurrentUser.email)){
+                    spazio_post=document.getElementById("spazio_aderiti");
+                    post_aderiti(date.key, spazio_post, dati_utente.type, dati_utente.member, dati_utente.anonymous,dati_utente.description, dati_utente.user,items.sub_restanti );
+                }
+            });
         });
 }
 
@@ -87,25 +85,20 @@ import {post_creati,post_aderiti,att_richiesta} from "./funzioni_post.js";
 
     function updatePhoto(btn,f2,edit,foto){
         const f=f2.files[0];
+        if(f==null){
+            modifica_foto.replaceChild(edit,btn);
+            return;
+        }
         const CurrentUser=getUser();
         const metadata = {
             contentType: 'image/'+f.type,
         };
         
         var storageRef= storef(storage, "FotoProfilo/"+ CurrentUser.user);
-        var uploadTask= uploadBytesResumable(storageRef,f,metadata)
-            alert("Update Succesfully");
+        uploadBytesResumable(storageRef,f,metadata);
 
-
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        getDownloadURL(storageRef).then((url) => {
         console.log('File available at', url);
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {
-            const blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();
         foto.setAttribute("src",url);
         update(ref(database, "Users/"+CurrentUser.uid),{
                     foto:url,

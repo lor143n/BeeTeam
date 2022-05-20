@@ -100,16 +100,16 @@
                 import { getAuth,updatePassword, updateEmail, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged , sendEmailVerification} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
                 var CurrentUser=null,user=null;
-                let nome=$('#nome_edit');//document.getElementById("nome_edit");
-                let cognome=$('#cognome_edit');//document.getElementById("cognome_edit");
-                let numero= $('#numero_edit');//document.getElementById("numero_edit");
-                let email=$('#email_edit');//document.getElementById("email_edit");
-                let vecchia= $('#password_edit_vecchia');//document.getElementById("password_edit_vecchia");
-                let nuova= $('#password_edit_nuova');//document.getElementById("password_edit_nuova");
+                let nome=$('#nome_edit');
+                let cognome=$('#cognome_edit');
+                let numero= $('#numero_edit');
+                let email=$('#email_edit');
+                let vecchia= $('#password_edit_vecchia');
+                let nuova= $('#password_edit_nuova');
 
-                let invia= $('#edit_page');//document.getElementById("edit_page");
-                let del=$('#delete_user');//document.getElementById("delete_user");
-                let log_out=$('#logout_edit'); //document.getElementById("logout_edit");
+                let invia= $('#edit_page');
+                let del=$('#delete_user');
+                let log_out=$('#logout_edit');
                 
                 log_out.click(sign_Out);
                 del.click(function(){delUser(CurrentUser.user,CurrentUser.email)});
@@ -123,7 +123,7 @@
 
 				}
 				else{
-					nome.attr("placeholder", CurrentUser.nome);//setAttribute("placeholder",CurrentUser.nome);
+					nome.attr("placeholder", CurrentUser.nome);
                     cognome.attr("placeholder",CurrentUser.cognome);
                     numero.attr("placeholder",CurrentUser.numero);
 					email.attr("placeholder",CurrentUser.email);

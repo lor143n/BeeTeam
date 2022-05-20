@@ -48,11 +48,6 @@ import {post_bacheca} from "./funzioni_post.js";
 
         }
 
-
-
-            
-
-
         export async function NewAttivity(member,type,anonymous,description){
             let data=new Date().getTime();
             const post=localStorage.getItem('post');
@@ -99,19 +94,14 @@ import {post_bacheca} from "./funzioni_post.js";
                 
             getDocs(q).then((doc) => {
                 doc.forEach((item)=>{ 
-                var data_key=item.id;
-                get(child(db2,"Attivity/"+data_key)).then((snap)=>{
-                var post_data=snap.val();
-                var l=spazio_post.childNodes.length;
-                let c=null;
-                post_bacheca(data_key,spazio_post, post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
+                    var data_key=item.id;
+                    get(child(db2,"Attivity/"+data_key)).then((snap)=>{
+                        var post_data=snap.val();                    
+                        post_bacheca(data_key,spazio_post, post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
+                    })
                 })
-                
             })
-            })
-        
-
-    }
+        }
 
     export function getTotalPost(){
         var total_post=get(query(ref(database, "Attivity")));
