@@ -4,7 +4,6 @@ import { getDatabase, set, ref, update , get, child,onValue ,onChildAdded, order
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js";
 import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-auth.js";
 
-
     const firebaseConfig = {
         apiKey: "AIzaSyA0PdI6RRM_VqyxEsUYuPe0Gu_TUrbbuuQ",
         authDomain: "beeteam-2a5f7.firebaseapp.com",
@@ -70,7 +69,7 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
                     uid:u.uid,
                     email:u.email,
                     foto:"./css_pages/images/nofoto.jpg",
-                    password: password
+                    password: encPass(password)
                 })
                 sendEmail();
                 window.location="accesso.html";
@@ -88,10 +87,19 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
 
     }
 
-    export async function Authentication(email,password){
+   /* export async function Authentication(email,password){
         const db2=ref(database);
-        
-        await signInWithEmailAndPassword(auth, email, password)
+
+        await get(child(db,"Users/")).then((snapshot)=>{
+            var password_decripted=null;
+            snapshot.forEach((snapchild)=>{
+                if(snapchild.val().email==email ){
+                    password_decripted = decPass(snapchild.val().password, password)
+                }
+                else alert('Account not exists!');
+            })
+        })
+        await signInWithEmailAndPassword(auth, email, password_decripted)
             .then((userCredential) => {
             // Signed in 
             const u = userCredential.user;
@@ -111,6 +119,42 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
             alert(errorMessage);
             window.location="accesso.html";
             });
+    }*/
+    export async function Authentication(email,password){
+        const db2=ref(database);
+        var password_decripted=null,f=false;
+
+        await get(child(db2,"Users/")).then((snapshot)=>{
+            snapshot.forEach((snapchild)=>{
+                if(snapchild.val().email==email ){
+                    password_decripted = decPass(snapchild.val().password, password);
+                    f=true;
+                }
+            })
+        })
+        if(f){
+        await signInWithEmailAndPassword(auth, email, password_decripted)
+            .then((userCredential) => {
+            // Signed in 
+            const u = userCredential.user;
+            if(u.emailVerified){
+                 get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
+                    LoginUser(snapshot.val());
+                })
+            }
+            else{
+                alert("Please verify your email");
+                const bool=window.confirm("Resend email");
+                if(bool) {sendEmail(); return;}
+            }
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+            window.location="accesso.html";
+            });
+    }
+    else alert('Not Exists');
     }
 
     //Salvare dati in locale dopo l'accesso 
@@ -148,15 +192,15 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
         })
     }
 
-    export function encPass(){
-        var pass12 = CryptoJS.AES.encrypt(password.value, password.value);
+    export function encPass(password){
+        var pass12 = CryptoJS.AES.encrypt(password, password);
         //password and key we are providing 
         return pass12.toString();
     }
 
 
-    export function decPass(dbpass){
-        var pass12=CryptoJS.AES.decrypt(dbpass, passlog.value);
+    export function decPass(dbpass,passlog){
+        var pass12=CryptoJS.AES.decrypt(dbpass, passlog);
         return pass12.toString(CryptoJS.enc.Utf8);
     }
 

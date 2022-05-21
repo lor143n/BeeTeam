@@ -100,6 +100,7 @@ import {post_creati,post_aderiti,att_richiesta} from "./funzioni_post.js";
         getDownloadURL(storageRef).then((url) => {
         console.log('File available at', url);
         foto.setAttribute("src",url);
+        
         update(ref(database, "Users/"+CurrentUser.uid),{
                     foto:url,
         });

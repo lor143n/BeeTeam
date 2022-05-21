@@ -56,13 +56,13 @@ import { getUser } from "./function_accesso.js";
         button.innerText="Sub";
         c.appendChild(button);
         
-        button.addEventListener('click',function(){loadInfoSub(id)})
+        button.addEventListener('click',function(){loadInfoSub(id,c,categoria,numero_persone,check,descrizione,user,sub,parent)})
 
         parent.appendChild(c);
         return c;   
     }
     //pressione del load e aggiornamento delle caselle relative a post e utente
-    async function loadInfoSub(key){
+    async function loadInfoSub(key,c,categoria,numero_persone,check,descrizione,user,sub,parent){
         var CurrentUser=getUser();
         var bool=false;
         var value=true;
@@ -70,11 +70,11 @@ import { getUser } from "./function_accesso.js";
             const docRef=doc(fire,"post",key);
             await getDoc(docRef).then((snapref)=>{
                 if(snapref.data().sub_restanti==0) value=false;
-                else if(snapref.data().creator==CurrentUser.user){
+                if(snapref.data().creator==CurrentUser.user){
                     alert("Can't submit your own post");
                     value=false;
                 }
-                else if(snapref.data().sub.includes(CurrentUser.user)){
+                else if(snapref.data().sub.includes(CurrentUser.email)){
                     value=false;
                     alert("Already subscribed!");
                 }
@@ -95,12 +95,14 @@ import { getUser } from "./function_accesso.js";
                     sub: arrayUnion(CurrentUser.email)
                 });
                 alert("Success!");
-
+                window.location.reload();
+               
                 };
 
             }
         catch(e){
             alert(e);
+            return;
         }
         }
 
