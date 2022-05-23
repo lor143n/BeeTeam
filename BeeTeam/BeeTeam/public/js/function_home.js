@@ -97,7 +97,7 @@ import {post_bacheca} from "./funzioni_post.js";
                     var data_key=item.id;
                     get(child(db2,"Attivity/"+data_key)).then((snap)=>{
                         var post_data=snap.val();                    
-                        post_bacheca(data_key,spazio_post, post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user);
+                        post_bacheca(data_key,spazio_post, post_data.type, post_data.member, post_data.anonymous, post_data.description, post_data.user,item.data().sub_restanti);
                     })
                 })
             })

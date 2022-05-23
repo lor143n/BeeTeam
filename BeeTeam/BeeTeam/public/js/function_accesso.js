@@ -87,39 +87,6 @@ import { getAuth,updatePassword, deleteUser, updateEmail,sendEmailVerification,s
 
     }
 
-   /* export async function Authentication(email,password){
-        const db2=ref(database);
-
-        await get(child(db,"Users/")).then((snapshot)=>{
-            var password_decripted=null;
-            snapshot.forEach((snapchild)=>{
-                if(snapchild.val().email==email ){
-                    password_decripted = decPass(snapchild.val().password, password)
-                }
-                else alert('Account not exists!');
-            })
-        })
-        await signInWithEmailAndPassword(auth, email, password_decripted)
-            .then((userCredential) => {
-            // Signed in 
-            const u = userCredential.user;
-            if(u.emailVerified){
-                 get(child(db2,"Users/"+ u.uid )).then((snapshot)=>{
-                    LoginUser(snapshot.val());
-                })
-            }
-            else{
-                alert("Please verify your email");
-                const bool=window.confirm("Resend email");
-                if(bool) {sendEmail(); return;}
-            }
-        })
-        .catch((error) => {
-            const errorMessage = error.message;
-            alert(errorMessage);
-            window.location="accesso.html";
-            });
-    }*/
     export async function Authentication(email,password){
         const db2=ref(database);
         var password_decripted=null,f=false;
