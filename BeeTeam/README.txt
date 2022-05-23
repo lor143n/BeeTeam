@@ -1,6 +1,3 @@
-# BeeTeam
-"BeeTeam" is a web app project for LTW course.
-
 Istruzioni 
 
 La web app può essere provata utilizzando il seguente link.

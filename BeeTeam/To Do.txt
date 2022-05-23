@@ -1,5 +1,0 @@
-Riunione: Lunedì la mattina
-
- - Login e registrazione (Ale)
- - Creare un po' di assets (compreso logo) (Lo)
- - Studiare Vue.js
